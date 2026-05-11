@@ -1,46 +1,25 @@
-name: Build and Deploy
+name: Deploy to Server
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+    environment: production
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Deploy to server via SSH
+        uses: appleboy/ssh-action@v1.0.3
         with:
-          node-version: '20'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build
-        run: npm run build
-
-      - name: Deploy to GitHub Pages
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-
-          # Create new orphan gh-pages branch
-          git branch -D gh-pages 2>/dev/null || true
-          git checkout --orphan gh-pages
-          git rm -rf . 2>/dev/null || true
-
-          # Copy built files
-          cp -r "${{ github.workspace }}/dist/"* .
-
-          # Commit and push
-          git add -A
-          git commit -m "deploy: auto-build from ${{ github.sha }}"
-          git push -f origin gh-pages
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd ${{ secrets.SSH_DEPLOY_PATH }}
+            git pull origin main
+            docker compose -f docker-compose.prod.yml up -d --build --remove-orphans
