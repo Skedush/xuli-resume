@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import PageTransition from '../components/PageTransition'
 
 const stats = [
@@ -39,8 +40,8 @@ export default function About() {
                   <InfoRow label="姓名" value="徐力" />
                   <InfoRow label="年龄" value="31岁" />
                   <InfoRow label="性别" value="男" />
-                  <InfoRow label="电话" value="15857878755" />
-                  <InfoRow label="邮箱" value="Letshowmecode@gmail.com" />
+                  <SensitiveRow label="电话" hidden="158****8755" actual="15857878755" />
+                  <SensitiveRow label="邮箱" hidden="L****@gmail.com" actual="Letshowmecode@gmail.com" />
                   <InfoRow label="职位" value="前端负责人 / 软件开发工程师" />
                 </div>
               </div>
@@ -105,6 +106,32 @@ function InfoRow({ label, value }: { label: string; value: string }) {
     <div className="flex items-center gap-4">
       <span className="text-gray-500 text-sm w-16 flex-shrink-0">{label}</span>
       <span className="text-white font-medium">{value}</span>
+    </div>
+  )
+}
+
+function SensitiveRow({ label, hidden, actual }: { label: string; hidden: string; actual: string }) {
+  const [revealed, setRevealed] = useState(false)
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(actual)
+    setRevealed(true)
+    setTimeout(() => setRevealed(false), 2000)
+  }
+
+  return (
+    <div className="flex items-center gap-2">
+      <span className="text-gray-500 text-sm w-16 flex-shrink-0">{label}</span>
+      <span className="text-white font-medium">
+        {revealed ? actual : hidden}
+      </span>
+      <button
+        onClick={copyToClipboard}
+        className="text-xs text-neon-cyan hover:text-neon-purple transition-colors px-2 py-1 rounded bg-dark-surface/50 hover:bg-dark-surface"
+        title="点击复制"
+      >
+        {revealed ? '已复制' : '复制'}
+      </button>
     </div>
   )
 }
