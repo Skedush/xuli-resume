@@ -31,13 +31,16 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          rm -rf /tmp/gh-pages-deploy
-          git clone --branch gh-pages --depth 1 https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git /tmp/gh-pages-deploy 2>/dev/null || git clone --depth 1 https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git /tmp/gh-pages-deploy
-          cd /tmp/gh-pages-deploy
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git config user.name "github-actions[bot]"
-          git rm -rf . --quiet 2>/dev/null || true
+
+          # Create new orphan gh-pages branch
+          git branch -D gh-pages 2>/dev/null || true
+          git checkout --orphan gh-pages
+          git rm -rf . 2>/dev/null || true
+
+          # Copy built files
           cp -r "${{ github.workspace }}/dist/"* .
+
+          # Commit and push
           git add -A
-          git commit -m "deploy: auto-build from ${{ github.sha }}" --allow-empty
+          git commit -m "deploy: auto-build from ${{ github.sha }}"
           git push -f origin gh-pages
