@@ -1,0 +1,123 @@
+import { useState, useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import { motion, AnimatePresence } from 'framer-motion'
+
+const navItems = [
+  { path: '/', label: '首页', en: 'Home' },
+  { path: '/about', label: '关于', en: 'About' },
+  { path: '/skills', label: '技能', en: 'Skills' },
+  { path: '/experience', label: '经历', en: 'Experience' },
+  { path: '/projects', label: '项目', en: 'Projects' },
+  { path: '/education', label: '教育', en: 'Education' },
+  { path: '/ai-philosophy', label: 'AI哲学', en: 'AI Philosophy' },
+]
+
+export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const location = useLocation()
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50)
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    setIsOpen(false)
+  }, [location])
+
+  return (
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled ? 'bg-dark-bg/90 backdrop-blur-md shadow-lg shadow-neon-cyan/5' : ''
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20">
+          <Link to="/" className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-neon-cyan to-neon-purple flex items-center justify-center">
+              <span className="font-display font-bold text-dark-bg text-xl">X</span>
+            </div>
+            <span className="font-display text-lg font-semibold text-white hidden sm:block">
+              徐力<span className="text-neon-cyan">.</span>dev
+            </span>
+          </Link>
+
+          <div className="hidden lg:flex items-center gap-1">
+            {navItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={`relative px-4 py-2 group transition-colors duration-300 ${
+                  location.pathname === item.path ? 'text-neon-cyan' : 'text-gray-300 hover:text-white'
+                }`}
+              >
+                <span className="font-body text-sm tracking-wide">{item.label}</span>
+                <span className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-gradient-to-r from-neon-cyan to-neon-purple transition-all duration-300 ${
+                  location.pathname === item.path ? 'w-full' : 'w-0 group-hover:w-full'
+                }`} />
+              </Link>
+            ))}
+          </div>
+
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="lg:hidden relative w-10 h-10 flex items-center justify-center"
+          >
+            <div className="flex flex-col gap-1.5">
+              <motion.span
+                animate={isOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
+                className="w-6 h-0.5 bg-white block"
+              />
+              <motion.span
+                animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
+                className="w-6 h-0.5 bg-white block"
+              />
+              <motion.span
+                animate={isOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
+                className="w-6 h-0.5 bg-white block"
+              />
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="lg:hidden bg-dark-surface/95 backdrop-blur-md border-t border-neon-cyan/10"
+          >
+            <div className="px-4 py-6 space-y-2">
+              {navItems.map((item, i) => (
+                <motion.div
+                  key={item.path}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05 }}
+                >
+                  <Link
+                    to={item.path}
+                    className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 ${
+                      location.pathname === item.path
+                        ? 'bg-neon-cyan/10 text-neon-cyan'
+                        : 'text-gray-300 hover:bg-white/5 hover:text-white'
+                    }`}
+                  >
+                    <span className="font-body">{item.label}</span>
+                    <span className="text-xs text-gray-500 font-mono">{item.en}</span>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.nav>
+  )
+}
