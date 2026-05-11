@@ -67,6 +67,58 @@ const tools = [
   { name: 'BackgroundEffects', category: '组件', color: 'text-neon-purple' },
 ]
 
+const humanContributions = [
+  {
+    number: '01',
+    title: '需求定义',
+    description: '发起请求，明确表达需求（提取 PDF、AI 简历网站、多页面、AI 模块）',
+    gradient: 'from-neon-cyan/20 to-green-500/20',
+    icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2',
+  },
+  {
+    number: '02',
+    title: '决策拍板',
+    description: 'AI 提出多个方案时，做出最终选择（设计风格、技术栈）',
+    gradient: 'from-green-500/20 to-blue-500/20',
+    icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
+  },
+  {
+    number: '03',
+    title: '代码审查',
+    description: '审核 AI 生成的代码，确认是否符合预期',
+    gradient: 'from-blue-500/20 to-neon-purple/20',
+    icon: 'M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z',
+  },
+  {
+    number: '04',
+    title: '问题反馈',
+    description: '发现问题后描述问题（导航错位、动画卡顿、链接错误）',
+    gradient: 'from-neon-purple/20 to-neon-pink/20',
+    icon: 'M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z',
+  },
+  {
+    number: '05',
+    title: '迭代优化',
+    description: '对 AI 的输出提出修改意见，持续迭代直到满意',
+    gradient: 'from-neon-pink/20 to-orange-500/20',
+    icon: 'M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15',
+  },
+  {
+    number: '06',
+    title: '最终部署',
+    description: '服务器配置、DNS 解析、Nginx 反向代理、SSL 证书',
+    gradient: 'from-orange-500/20 to-green-500/20',
+    icon: 'M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01',
+  },
+  {
+    number: '07',
+    title: '内容提供',
+    description: '提供 PDF 简历、13 篇 AI 文章、GitHub 链接等素材',
+    gradient: 'from-green-500/20 to-neon-cyan/20',
+    icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
+  },
+]
+
 export default function DevelopmentLog() {
   return (
     <>
@@ -168,6 +220,43 @@ export default function DevelopmentLog() {
                     <div className={`text-sm font-mono ${tool.color}`}>{tool.name}</div>
                     <div className="text-xs text-gray-500 mt-1">{tool.category}</div>
                   </div>
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="bg-gradient-to-r from-green-500/10 via-neon-cyan/10 to-blue-500/10 rounded-2xl p-8 border border-green-500/20"
+            >
+              <h2 className="font-display text-2xl text-white mb-6 text-center">人类贡献</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {humanContributions.map((item, index) => (
+                  <motion.div
+                    key={item.number}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                    className="bg-dark-card/60 rounded-xl p-4 border border-green-500/20 hover:border-green-500/40 transition-colors group"
+                  >
+                    <div className="flex items-start gap-3">
+                      <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${item.gradient} flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform`}>
+                        <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={item.icon} />
+                        </svg>
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="font-mono text-xs text-green-400/60">{item.number}</span>
+                          <h3 className="font-display text-lg text-white">{item.title}</h3>
+                        </div>
+                        <p className="text-gray-400 text-sm leading-relaxed">{item.description}</p>
+                      </div>
+                    </div>
+                  </motion.div>
                 ))}
               </div>
             </motion.div>
