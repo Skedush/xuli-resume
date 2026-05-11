@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import PageTransition from '../components/PageTransition'
 
 const floatingWords = ['React', 'TypeScript', 'Vite', 'AI', 'Node']
@@ -41,6 +42,38 @@ export default function Home() {
               工作经历
             </Link>
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.9 }}
+            className="max-w-2xl mx-auto mb-12"
+          >
+            <div className="bg-dark-card/50 rounded-xl p-6 border border-neon-cyan/20">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-neon-cyan/20 to-neon-purple/20 flex items-center justify-center flex-shrink-0">
+                  <svg className="w-5 h-5 text-neon-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-white font-display text-lg mb-2">关于这个网站</h3>
+                  <p className="text-gray-400 text-sm mb-4">
+                    这是一个由 AI Agent 工作流辅助开发的个人简历网站。开发过程中使用了 OpenCode、oh-my-openagent 等 AI 工具，以及 Sisyphus、Metis、Momus 等 Agent 进行任务规划、代码审查与优化。
+                  </p>
+                  <Link
+                    to="/development-log"
+                    className="inline-flex items-center gap-2 text-neon-cyan text-sm font-medium hover:text-neon-purple transition-colors"
+                  >
+                    了解更多开发过程
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </motion.div>
 
           <div className="flex flex-wrap justify-center gap-3 text-sm font-mono animate-fade-in" style={{ animationDelay: '1s' }}>
             {floatingWords.map((word, i) => (

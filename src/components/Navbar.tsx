@@ -10,6 +10,7 @@ const navItems = [
   { path: '/projects', label: '项目', en: 'Projects' },
   { path: '/education', label: '教育', en: 'Education' },
   { path: '/ai-philosophy', label: 'AI哲学', en: 'AI Philosophy' },
+  { path: '/development-log', label: '工程实录', en: 'Dev Log' },
 ]
 
 export default function Navbar() {
