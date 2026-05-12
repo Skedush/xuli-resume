@@ -18,78 +18,83 @@ const navLinks = [
 
 export default function Footer() {
   return (
-    <footer className="relative z-10 bg-dark-surface/50 border-t border-neon-cyan/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-neon-cyan to-neon-purple flex items-center justify-center">
-                <span className="font-display font-bold text-dark-bg text-xl">X</span>
-              </div>
-              <span className="font-display text-lg font-semibold text-white">
-                徐力<span className="text-neon-cyan">.</span>dev
-              </span>
-            </div>
-            <p className="text-gray-400 font-body text-sm leading-relaxed">
-              8年经验的前端工程师，专注于现代化前端技术栈与AI驱动开发。
-            </p>
-          </div>
-
-          <div>
-            <h4 className="font-display text-sm text-white mb-4 tracking-wider">导航</h4>
-            <div className="grid grid-cols-2 gap-2">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className="text-gray-400 hover:text-neon-cyan transition-colors duration-300 text-sm font-body"
-                >
-                  {link.label}
-                </Link>
-              ))}
+    <footer className="relative z-10 bg-[#0B0F14] border-t border-[#2A3441]/50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-4">
+            <NeuralLogo />
+            <div>
+              <p className="text-[#E2E8F0] font-body font-semibold">ResumeAI</p>
+              <p className="text-[#64748B] text-sm">软件开发工程师</p>
             </div>
           </div>
 
-          <div>
-            <h4 className="font-display text-sm text-white mb-4 tracking-wider">联系方式</h4>
-            <div className="space-y-3">
-              <a href="mailto:Letshowmecode@gmail.com" className="flex items-center gap-2 text-gray-400 hover:text-neon-cyan transition-colors duration-300 text-sm font-body">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-                Letshowmecode@gmail.com
-              </a>
-              <a href="tel:15857878755" className="flex items-center gap-2 text-gray-400 hover:text-neon-cyan transition-colors duration-300 text-sm font-body">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                </svg>
-                15857878755
-              </a>
-            </div>
-            <div className="flex gap-4 mt-4">
-              {socialLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg bg-dark-card border border-neon-cyan/20 flex items-center justify-center text-gray-400 hover:text-neon-cyan hover:border-neon-cyan/50 transition-all duration-300"
+          <nav className="flex flex-wrap justify-center gap-6">
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className="text-[#64748B] hover:text-[#94A3B8] transition-colors duration-200 text-sm"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-4">
+            {socialLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#64748B] hover:text-[#22D3EE] transition-colors duration-200"
+                aria-label={link.label}
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={1.5}
                 >
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d={link.icon} />
-                  </svg>
-                </a>
-              ))}
-            </div>
+                  <path strokeLinecap="round" strokeLinejoin="round" d={link.icon} />
+                </svg>
+              </a>
+            ))}
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-white/5 text-center">
-          <p className="text-gray-500 text-sm font-body">
-            © 2024 徐力. 用热爱与代码构建数字世界。
+        <div className="mt-8 pt-6 border-t border-[#1E2530] text-center">
+          <p className="text-[#64748B] text-xs">
+            © {new Date().getFullYear()} ResumeAI. Built with React + TypeScript.
           </p>
         </div>
       </div>
     </footer>
+  )
+}
+
+function NeuralLogo() {
+  return (
+    <div className="w-9 h-9 rounded-lg bg-[#151A23] border border-[#2A3441] flex items-center justify-center">
+      <svg className="w-5 h-5" viewBox="0 0 100 100">
+        <defs>
+          <linearGradient id="footerAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#22D3EE" />
+            <stop offset="100%" stopColor="#06B6D4" />
+          </linearGradient>
+        </defs>
+        <circle cx="50" cy="25" r="8" fill="url(#footerAccent)"/>
+        <circle cx="25" cy="50" r="6" fill="url(#footerAccent)" opacity="0.9"/>
+        <circle cx="75" cy="50" r="6" fill="url(#footerAccent)" opacity="0.9"/>
+        <circle cx="35" cy="75" r="6" fill="url(#footerAccent)" opacity="0.9"/>
+        <circle cx="65" cy="75" r="6" fill="url(#footerAccent)" opacity="0.9"/>
+        <line x1="50" y1="25" x2="25" y2="50" stroke="url(#footerAccent)" strokeWidth="3" opacity="0.7"/>
+        <line x1="50" y1="25" x2="75" y2="50" stroke="url(#footerAccent)" strokeWidth="3" opacity="0.7"/>
+        <line x1="25" y1="50" x2="35" y2="75" stroke="url(#footerAccent)" strokeWidth="3" opacity="0.7"/>
+        <line x1="75" y1="50" x2="65" y2="75" stroke="url(#footerAccent)" strokeWidth="3" opacity="0.7"/>
+      </svg>
+    </div>
   )
 }

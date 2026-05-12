@@ -7,105 +7,133 @@ const floatingWords = ['React', 'TypeScript', 'Vite', 'AI', 'Node']
 export default function Home() {
   return (
     <PageTransition>
-      <div className="min-h-screen flex items-center justify-center relative overflow-hidden">
-        <BackgroundScene />
+      <div className="min-h-screen flex items-center justify-center ambient-bg">
+        <SubtleBackground />
 
-        <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
-          <div className="mb-6 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            <span className="inline-block px-4 py-1.5 rounded-full border border-neon-cyan/30 bg-neon-cyan/5 text-neon-cyan text-sm font-mono tracking-wider">
-              AVAILABLE_FOR_WORK
-            </span>
-          </div>
-
-          <h1 className="font-display text-5xl sm:text-7xl lg:text-8xl font-bold mb-6 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            <span className="text-white">你好，</span>
+        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto py-20">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-[#E2E8F0]"
+          >
+            Senior Frontend Engineer
             <br />
-            <span className="text-gradient">我是徐力</span>
-          </h1>
+            <span className="text-[#22D3EE]">AI-Driven Development</span>
+          </motion.h1>
 
-          <p className="text-xl sm:text-2xl text-gray-400 font-body mb-8 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.6s' }}>
-            8年经验的前端工程师 · 专注于现代化技术栈与AI驱动开发
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-4 mb-12 animate-fade-in" style={{ animationDelay: '0.8s' }}>
-            <Link
-              to="/about"
-              className="group relative px-8 py-4 bg-gradient-to-r from-neon-cyan to-neon-purple text-white font-display font-semibold rounded-lg overflow-hidden transition-all duration-300 hover:scale-105"
-            >
-              <span className="relative z-10">探索更多</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-neon-purple to-neon-pink opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </Link>
-            <Link
-              to="/experience"
-              className="px-8 py-4 border border-white/20 text-white font-display font-semibold rounded-lg hover:bg-white/5 transition-all duration-300"
-            >
-              工作经历
-            </Link>
-          </div>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-lg sm:text-xl text-[#94A3B8] font-body mb-10 max-w-xl mx-auto"
+          >
+            8年经验 · 专注现代化前端技术栈 · AI驱动开发实践
+          </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.9 }}
-            className="max-w-2xl mx-auto mb-12"
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="mb-8"
           >
-            <div className="bg-dark-card/50 rounded-xl p-6 border border-neon-cyan/20">
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-neon-cyan/20 to-neon-purple/20 flex items-center justify-center flex-shrink-0">
-                  <svg className="w-5 h-5 text-neon-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-white font-display text-lg mb-2">关于这个网站</h3>
-                  <p className="text-gray-400 text-sm mb-4">
-                    这是一个由 AI Agent 工作流辅助开发的个人简历网站。开发过程中使用了 OpenCode、oh-my-openagent 等 AI 工具，以及 Sisyphus、Metis、Momus 等 Agent 进行任务规划、代码审查与优化。
-                  </p>
-                  <Link
-                    to="/development-log"
-                    className="inline-flex items-center gap-2 text-neon-cyan text-sm font-medium hover:text-neon-purple transition-colors"
-                  >
-                    了解更多开发过程
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </Link>
-                </div>
-              </div>
-            </div>
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#2A3441] bg-[#151A23] text-[#94A3B8] text-sm font-mono">
+              <span className="w-2 h-2 rounded-full bg-[#4ADE80] animate-subtle-pulse" />
+              待业中 · 寻找机会
+            </span>
           </motion.div>
 
-          <div className="flex flex-wrap justify-center gap-3 text-sm font-mono animate-fade-in" style={{ animationDelay: '1s' }}>
-            {floatingWords.map((word, i) => (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="flex flex-wrap justify-center gap-4 mb-16"
+          >
+            <Link
+              to="/about"
+              className="btn btn-primary"
+            >
+              探索更多
+            </Link>
+            <Link
+              to="/experience"
+              className="btn btn-outline"
+            >
+              工作经历
+            </Link>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="max-w-lg mx-auto"
+          >
+            <Link to="/ai-philosophy" className="block bg-[#1C2431] border border-[#2A3441] rounded-xl p-6 text-left hover:border-[#22D3EE]/30 transition-colors">
+              <h3 className="text-[#E2E8F0] font-display text-base mb-3">AI 时代的软件开发</h3>
+              <div className="text-[#94A3B8] text-sm space-y-3 leading-relaxed">
+                <p>
+                  <span className="text-[#64748B]">近期变化：</span>认知能力自增强——AI 帮助开发 AI → 帮助优化 workflow → 帮助生成 agent。软件开发速度进入自增强循环。
+                </p>
+                <p>
+                  <span className="text-[#64748B]">核心转变：</span>从"程序"到"认知系统"。function/class/API → memory/reasoning/planning/orchestration。软件开始拥有认知属性。
+                </p>
+                <p>
+                  <span className="text-[#64748B]">长期思考：</span>AI 可以越来越擅长"如何做到"，但未必知道"为什么做"和"应该做到什么程度"。稀缺的不是实现能力，而是 <span className="text-[#22D3EE]">Goal Definition</span>（定义方向）和 <span className="text-[#22D3EE]">Governance</span>（治理复杂系统）。
+                </p>
+                <p className="text-[#64748B]">
+                  永恒的：定义方向、治理复杂系统、协调现实世界——这些是人类不可替代的价值。
+                </p>
+              </div>
+            </Link>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="max-w-lg mx-auto mt-8"
+          >
+            <Link to="/development-log" className="block bg-[#1C2431] border border-[#2A3441] rounded-xl p-6 text-left hover:border-[#22D3EE]/30 transition-colors">
+              <h3 className="text-[#E2E8F0] font-display text-base mb-2">关于这个网站</h3>
+              <p className="text-[#94A3B8] text-sm mb-4">
+                这是一个由 AI Agent 工作流辅助开发的个人简历网站。开发过程中使用了 OpenCode、oh-my-openagent 等 AI 工具，以及 Sisyphus、Metis、Momus 等 Agent 进行任务规划、代码审查与优化。
+              </p>
+              <span className="inline-flex items-center gap-2 text-[#22D3EE] text-sm font-medium">
+                了解更多开发过程
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </span>
+            </Link>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.7 }}
+            className="flex flex-wrap justify-center gap-4 text-sm font-mono mt-12"
+          >
+            {floatingWords.map((word) => (
               <span
                 key={word}
-                className={`${['text-cyan-400', 'text-blue-400', 'text-purple-400', 'text-pink-400', 'text-green-400'][i]} opacity-60 hover:opacity-100 transition-opacity cursor-default`}
+                className="text-[#64748B]"
               >
                 {word}
               </span>
             ))}
-          </div>
-        </div>
-
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-neon-cyan/30 rounded-full flex justify-center">
-            <div className="w-1.5 h-1.5 bg-neon-cyan rounded-full mt-2" />
-          </div>
+          </motion.div>
         </div>
       </div>
     </PageTransition>
   )
 }
 
-function BackgroundScene() {
+function SubtleBackground() {
   return (
-    <div className="absolute inset-0 overflow-hidden">
-      <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-neon-cyan rounded-full animate-pulse" />
-      <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-neon-purple rounded-full animate-pulse" style={{ animationDelay: '0.5s' }} />
-      <div className="absolute bottom-1/4 right-1/4 w-1.5 h-1.5 bg-neon-pink rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
-
-      <div className="absolute top-1/4 left-1/4 w-64 h-64 border border-neon-cyan/10 rotate-hexagon animate-spin-slow" />
-      <div className="absolute bottom-1/4 right-1/4 w-48 h-48 border border-neon-purple/10 rounded-full animate-spin-slow-reverse" />
+    <div className="fixed inset-0 pointer-events-none overflow-hidden">
+      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[#22D3EE]/[0.02] rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-[#22D3EE]/[0.02] rounded-full blur-3xl" />
     </div>
   )
 }
