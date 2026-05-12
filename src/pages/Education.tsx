@@ -1,4 +1,5 @@
 import PageTransition from '../components/PageTransition'
+import PageHeader from '../components/PageHeader'
 
 const education = {
   school: '宁波财经学院',
@@ -39,14 +40,7 @@ export default function Education() {
     <PageTransition>
       <div className="min-h-screen bg-[#0B0F14]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="text-center mb-16">
-            <h1 className="font-display text-4xl sm:text-5xl font-bold text-[#E2E8F0] mb-4">
-              教育<span className="text-[#22D3EE]">背景</span>
-            </h1>
-            <p className="text-[#94A3B8] text-lg max-w-2xl mx-auto">
-              扎实的基础，持续的学习
-            </p>
-          </div>
+          <PageHeader title="教育" subtitle="扎实的基础，持续的学习" highlightWord="背景" />
 
           <div className="space-y-6 mb-16">
             <div className="bg-[#1C2431] rounded-lg p-8 border border-white/5">

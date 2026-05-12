@@ -1,4 +1,5 @@
 import PageTransition from '../components/PageTransition'
+import PageHeader from '../components/PageHeader'
 
 const experiences = [
   {
@@ -40,14 +41,7 @@ export default function Experience() {
     <PageTransition>
       <div className="min-h-screen bg-[#0B0F14]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="text-center mb-16">
-            <h1 className="font-display text-4xl sm:text-5xl font-bold text-[#E2E8F0] mb-4">
-              工作<span className="text-[#22D3EE]">经历</span>
-            </h1>
-            <p className="text-[#94A3B8] text-lg max-w-2xl mx-auto">
-              8年深耕前端，从初入职场到技术负责人
-            </p>
-          </div>
+          <PageHeader title="工作" subtitle="8年深耕前端，从初入职场到技术负责人" highlightWord="经历" />
 
           <div className="space-y-8">
             {experiences.map((exp) => (

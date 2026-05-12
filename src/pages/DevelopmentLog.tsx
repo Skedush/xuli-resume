@@ -1,4 +1,5 @@
 import PageTransition from '../components/PageTransition'
+import PageHeader from '../components/PageHeader'
 
 const developmentStages = [
   {
@@ -106,14 +107,7 @@ export default function DevelopmentLog() {
     <PageTransition>
       <div className="min-h-screen bg-[#0B0F14]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="text-center mb-16">
-            <h1 className="font-display text-4xl sm:text-5xl font-bold text-[#E2E8F0] mb-4">
-              AI 工程<span className="text-[#22D3EE]">实录</span>
-            </h1>
-            <p className="text-[#94A3B8] text-lg max-w-2xl mx-auto">
-              从需求解析到部署上线，完整记录 AI 驱动的简历网站开发流程
-            </p>
-          </div>
+          <PageHeader title="AI 工程" subtitle="从需求解析到部署上线，完整记录 AI 驱动的简历网站开发流程" highlightWord="实录" />
 
           <div className="bg-[#1C2431]/70 rounded-lg p-4 mb-8 border border-[#22D3EE]/20">
             <p className="text-[#94A3B8] text-sm text-center font-body leading-relaxed">

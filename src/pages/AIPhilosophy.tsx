@@ -1,4 +1,5 @@
 import PageTransition from '../components/PageTransition'
+import PageHeader from '../components/PageHeader'
 
 const BLOG_BASE_URL = 'https://blog.zzzxc.com/生存/Ai'
 
@@ -134,14 +135,7 @@ export default function AIPhilosophy() {
     <PageTransition>
       <div className="min-h-screen bg-[#0B0F14]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="text-center mb-8">
-            <h1 className="font-display text-4xl sm:text-5xl font-bold text-[#E2E8F0] mb-4">
-              AI<span className="text-[#22D3EE]">哲学</span>
-            </h1>
-            <p className="text-[#94A3B8] text-lg max-w-3xl mx-auto">
-              15篇文章的精华凝练 · 探索AI与人类协同的未来
-            </p>
-          </div>
+          <PageHeader title="AI" subtitle="15篇文章的精华凝练 · 探索AI与人类协同的未来" highlightWord="哲学" />
 
           <div className="bg-[#1C2431] rounded-lg p-4 mb-12 border border-[#F59E0B]/30">
             <p className="text-[#F59E0B] text-sm text-center font-medium">

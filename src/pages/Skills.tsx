@@ -1,4 +1,5 @@
 import PageTransition from '../components/PageTransition'
+import PageHeader from '../components/PageHeader'
 
 const skillCategories = [
   {
@@ -72,14 +73,7 @@ export default function Skills() {
     <PageTransition>
       <div className="min-h-screen bg-[#0B0F14]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="text-center mb-8">
-            <h1 className="font-display text-4xl sm:text-5xl font-bold text-[#E2E8F0] mb-4">
-              技术<span className="text-[#22D3EE]">栈</span>
-            </h1>
-            <p className="text-[#94A3B8] text-lg max-w-2xl mx-auto">
-              掌握现代化前端技术体系，持续学习AI驱动开发
-            </p>
-          </div>
+          <PageHeader title="技术" subtitle="掌握现代化前端技术体系，持续学习AI驱动开发" highlightWord="栈" />
 
           <div className="bg-[#1C2431] rounded-lg p-4 mb-12 border border-[#22D3EE]/30">
             <p className="text-[#22D3EE] text-sm text-center font-medium">

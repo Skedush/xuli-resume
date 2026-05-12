@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
+import Logo from './Logo'
 
 const navItems = [
   { path: '/', label: '首页', en: 'Home' },
@@ -39,7 +40,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center gap-3">
-            <NeuralLogo />
+            <Logo />
             <span className="font-display text-lg font-semibold text-[#E2E8F0] hidden sm:block">
               Resume<span className="text-[#22D3EE]">AI</span>
             </span>
@@ -118,29 +119,5 @@ export default function Navbar() {
         )}
       </AnimatePresence>
     </motion.nav>
-  )
-}
-
-function NeuralLogo() {
-  return (
-    <div className="w-9 h-9 rounded-lg bg-[#151A23] border border-[#2A3441] flex items-center justify-center">
-      <svg className="w-5 h-5" viewBox="0 0 100 100">
-        <defs>
-          <linearGradient id="navbarAccent" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#22D3EE" />
-            <stop offset="100%" stopColor="#06B6D4" />
-          </linearGradient>
-        </defs>
-        <circle cx="50" cy="25" r="8" fill="url(#navbarAccent)"/>
-        <circle cx="25" cy="50" r="6" fill="url(#navbarAccent)" opacity="0.9"/>
-        <circle cx="75" cy="50" r="6" fill="url(#navbarAccent)" opacity="0.9"/>
-        <circle cx="35" cy="75" r="6" fill="url(#navbarAccent)" opacity="0.9"/>
-        <circle cx="65" cy="75" r="6" fill="url(#navbarAccent)" opacity="0.9"/>
-        <line x1="50" y1="25" x2="25" y2="50" stroke="url(#navbarAccent)" strokeWidth="3" opacity="0.7"/>
-        <line x1="50" y1="25" x2="75" y2="50" stroke="url(#navbarAccent)" strokeWidth="3" opacity="0.7"/>
-        <line x1="25" y1="50" x2="35" y2="75" stroke="url(#navbarAccent)" strokeWidth="3" opacity="0.7"/>
-        <line x1="75" y1="50" x2="65" y2="75" stroke="url(#navbarAccent)" strokeWidth="3" opacity="0.7"/>
-      </svg>
-    </div>
   )
 }

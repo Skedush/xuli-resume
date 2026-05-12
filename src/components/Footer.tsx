@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import Logo from './Logo'
 
 const socialLinks = [
   { href: 'https://blog.zzzxc.com/', label: '博客', icon: 'M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z' },
@@ -22,7 +23,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4">
-            <NeuralLogo />
+            <Logo />
             <div>
               <p className="text-[#E2E8F0] font-body font-semibold">ResumeAI</p>
               <p className="text-[#64748B] text-sm">软件开发工程师</p>
@@ -72,29 +73,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
-}
-
-function NeuralLogo() {
-  return (
-    <div className="w-9 h-9 rounded-lg bg-[#151A23] border border-[#2A3441] flex items-center justify-center">
-      <svg className="w-5 h-5" viewBox="0 0 100 100">
-        <defs>
-          <linearGradient id="footerAccent" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#22D3EE" />
-            <stop offset="100%" stopColor="#06B6D4" />
-          </linearGradient>
-        </defs>
-        <circle cx="50" cy="25" r="8" fill="url(#footerAccent)"/>
-        <circle cx="25" cy="50" r="6" fill="url(#footerAccent)" opacity="0.9"/>
-        <circle cx="75" cy="50" r="6" fill="url(#footerAccent)" opacity="0.9"/>
-        <circle cx="35" cy="75" r="6" fill="url(#footerAccent)" opacity="0.9"/>
-        <circle cx="65" cy="75" r="6" fill="url(#footerAccent)" opacity="0.9"/>
-        <line x1="50" y1="25" x2="25" y2="50" stroke="url(#footerAccent)" strokeWidth="3" opacity="0.7"/>
-        <line x1="50" y1="25" x2="75" y2="50" stroke="url(#footerAccent)" strokeWidth="3" opacity="0.7"/>
-        <line x1="25" y1="50" x2="35" y2="75" stroke="url(#footerAccent)" strokeWidth="3" opacity="0.7"/>
-        <line x1="75" y1="50" x2="65" y2="75" stroke="url(#footerAccent)" strokeWidth="3" opacity="0.7"/>
-      </svg>
-    </div>
   )
 }
