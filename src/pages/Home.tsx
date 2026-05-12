@@ -53,7 +53,7 @@ export default function Home() {
               to="/about"
               className="btn btn-primary"
             >
-              探索更多
+              个人介绍
             </Link>
             <Link
               to="/experience"

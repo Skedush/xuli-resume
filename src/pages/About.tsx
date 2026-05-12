@@ -37,13 +37,18 @@ export default function About() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
             <div className="bg-[#1C2431] rounded-lg p-8 border border-white/5">
               <h2 className="font-display text-2xl text-[#E2E8F0] mb-6">基本信息</h2>
-              <div className="space-y-4">
-                <InfoRow label="姓名" value="徐力" />
+              <div className="flex flex-col items-center text-center mb-8">
+                <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-[#22D3EE]/30 mb-4">
+                  <img src="/ai-photo.jpg" alt="徐力" className="w-full h-full object-cover" />
+                </div>
+                <p className="text-[#E2E8F0] font-display text-2xl mb-1">徐力</p>
+                <p className="text-[#64748B] text-sm">软件开发工程师</p>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
                 <InfoRow label="年龄" value="31岁" />
                 <InfoRow label="性别" value="男" />
                 <InfoRow label="电话" value="158****8755" />
                 <InfoRow label="邮箱" value="L****@gmail.com" />
-                <InfoRow label="职位" value="前端负责人 / 软件开发工程师" />
               </div>
             </div>
 
