@@ -7,29 +7,19 @@ export default {
   theme: {
     extend: {
       colors: {
-        /* Refined slate palette */
-        'bg': '#0B0F14',
-        'surface': '#151A23',
-        'card': '#1C2431',
-        'border': '#2A3441',
-        'border-subtle': '#1E2530',
-        /* Muted teal accent */
-        'accent': '#22D3EE',
-        'accent-hover': '#06B6D4',
-        /* Text hierarchy */
-        'text-primary': '#E2E8F0',
-        'text-secondary': '#94A3B8',
-        'text-tertiary': '#64748B',
-        /* Code accents */
-        'cyan': '#67E8F9',
-        'purple': '#A78BFA',
-        'green': '#4ADE80',
-        'orange': '#FB923C',
+        'bg': 'var(--xuli-bg-primary)',
+        'surface': 'var(--xuli-bg-secondary)',
+        'card': 'var(--xuli-bg-tertiary)',
+        'accent': 'var(--xuli-accent)',
+        'accent-hover': 'var(--xuli-accent-hover)',
+        'text-primary': 'var(--xuli-text-primary)',
+        'text-secondary': 'var(--xuli-text-secondary)',
+        'text-tertiary': 'var(--xuli-text-tertiary)',
       },
       fontFamily: {
-        'display': ['Orbitron', 'sans-serif'],
-        'body': ['Rajdhani', 'sans-serif'],
-        'mono': ['JetBrains Mono', 'monospace'],
+        'display': ['var(--xuli-font-display)'],
+        'body': ['var(--xuli-font-body)'],
+        'mono': ['var(--xuli-font-mono)'],
       },
       animation: {
         'fade-in': 'fade-in 0.5s ease-out forwards',
