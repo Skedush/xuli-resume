@@ -21,7 +21,8 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd ${{ secrets.SSH_DEPLOY_PATH }}
-            git config --global http.timeout 600
+            # 使用 SSH 方式拉取代码，避免 HTTPS 不稳定问题
+            git remote set-url origin git@github.com:Skedush/xuli-resume.git
             for i in 1 2 3; do
               git pull origin main && break
               echo "Pull failed, retry $i..."
