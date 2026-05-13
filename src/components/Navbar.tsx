@@ -34,15 +34,15 @@ export default function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'backdrop-blur-xl bg-[#0B0F14]/40 shadow-xl shadow-black/30' : ''
+        scrolled ? 'backdrop-blur-xl bg-bg/40 shadow-xl shadow-black/30' : ''
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center gap-3">
             <Logo />
-            <span className="font-display text-lg font-semibold text-[#E2E8F0] hidden sm:block">
-              Resume<span className="text-[#22D3EE]">AI</span>
+            <span className="font-display text-lg font-semibold text-primary hidden sm:block">
+              Resume<span className="text-accent">AI</span>
             </span>
           </Link>
 
@@ -52,11 +52,11 @@ export default function Navbar() {
                 key={item.path}
                 to={item.path}
                 className={`relative px-3 py-2 group transition-colors duration-200 ${
-                  location.pathname === item.path ? 'text-[#22D3EE]' : 'text-[#94A3B8] hover:text-[#E2E8F0]'
+                  location.pathname === item.path ? 'text-accent' : 'text-secondary hover:text-primary'
                 }`}
               >
                 <span className="font-body text-sm tracking-wide">{item.label}</span>
-                <span className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-[#22D3EE] transition-all duration-200 ${
+                <span className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-accent transition-all duration-200 ${
                   location.pathname === item.path ? 'w-full' : 'w-0 group-hover:w-full'
                 }`} />
               </Link>
@@ -70,15 +70,15 @@ export default function Navbar() {
             <div className="flex flex-col gap-1.5">
               <motion.span
                 animate={isOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
-                className="w-6 h-0.5 bg-[#E2E8F0] block"
+                className="w-6 h-0.5 bg-primary block"
               />
               <motion.span
                 animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
-                className="w-6 h-0.5 bg-[#E2E8F0] block"
+                className="w-6 h-0.5 bg-primary block"
               />
               <motion.span
                 animate={isOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
-                className="w-6 h-0.5 bg-[#E2E8F0] block"
+                className="w-6 h-0.5 bg-primary block"
               />
             </div>
           </button>
@@ -91,7 +91,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-[#151A23]/95 backdrop-blur-md border-t border-[#2A3441]/50"
+            className="lg:hidden bg-surface/95 backdrop-blur-md border-t border-[#2A3441]/50"
           >
             <div className="px-4 py-4 space-y-1">
               {navItems.map((item, i) => (
@@ -105,12 +105,12 @@ export default function Navbar() {
                     to={item.path}
                     className={`flex items-center justify-between px-4 py-3 rounded-lg transition-all duration-200 ${
                       location.pathname === item.path
-                        ? 'bg-[#22D3EE]/10 text-[#22D3EE]'
-                        : 'text-[#94A3B8] hover:bg-[#1C2431] hover:text-[#E2E8F0]'
+                        ? 'bg-accent/10 text-accent'
+                        : 'text-secondary hover:bg-card hover:text-primary'
                     }`}
                   >
                     <span className="font-body">{item.label}</span>
-                    <span className="text-xs text-[#64748B] font-mono">{item.en}</span>
+                    <span className="text-xs text-tertiary font-mono">{item.en}</span>
                   </Link>
                 </motion.div>
               ))}

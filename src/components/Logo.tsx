@@ -1,6 +1,6 @@
 export default function Logo() {
   return (
-    <div className="w-9 h-9 rounded-lg bg-[#151A23] border border-[#2A3441] flex items-center justify-center">
+    <div className="w-9 h-9 rounded-lg bg-surface border border-border flex items-center justify-center">
       <svg className="w-5 h-5" viewBox="0 0 100 100">
         <defs>
           <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
