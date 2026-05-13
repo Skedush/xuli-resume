@@ -95,12 +95,21 @@ export default function Home() {
             className="max-w-lg mx-auto mt-8"
           >
             <Link to="/development-log" className="block bg-[#1C2431] border border-[#2A3441] rounded-xl p-6 text-left hover:border-[#22D3EE]/30 transition-colors">
-              <h3 className="text-[#E2E8F0] font-display text-base mb-2">关于这个网站</h3>
+              <div className="flex items-center gap-3 mb-3">
+                <h3 className="text-[#E2E8F0] font-display text-base">关于这个网站</h3>
+                <span className="px-2 py-0.5 bg-[#22D3EE]/10 text-[#22D3EE] text-xs font-mono rounded">
+                  ~1小时完成
+                </span>
+              </div>
               <p className="text-[#94A3B8] text-sm mb-4">
-                这是一个由 AI Agent 工作流辅助开发的个人简历网站。开发过程中使用了 OpenCode、oh-my-openagent 等 AI 工具，以及 Sisyphus、Metis、Momus 等 Agent 进行任务规划、代码审查与优化。
+                <span className="text-[#22D3EE] font-semibold">01:09 开始对话</span> →
+                <span className="text-[#4ADE80] font-semibold">02:xx 已部署上线</span>
+              </p>
+              <p className="text-[#64748B] text-xs mb-4">
+                OpenCode + Sisyphus 工作流 + Metis/Momus 审查 · 8个页面并行构建
               </p>
               <span className="inline-flex items-center gap-2 text-[#22D3EE] text-sm font-medium">
-                了解更多开发过程
+                查看完整开发过程
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
