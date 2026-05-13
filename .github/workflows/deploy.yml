@@ -21,5 +21,10 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd ${{ secrets.SSH_DEPLOY_PATH }}
-            git pull origin main
+            git config --global http.timeout 600
+            for i in 1 2 3; do
+              git pull origin main && break
+              echo "Pull failed, retry $i..."
+              sleep 5
+            done
             docker compose -f docker-compose.prod.yml up -d --build --remove-orphans
