@@ -19,14 +19,14 @@ const navLinks = [
 
 export default function Footer() {
   return (
-    <footer className="relative z-10 bg-[#0B0F14] border-t border-[#2A3441]/50">
+    <footer className="relative z-10 bg-bg border-t border-[var(--xuli-border)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4">
             <Logo />
             <div>
-              <p className="text-[#E2E8F0] font-body font-semibold">ResumeAI</p>
-              <p className="text-[#64748B] text-sm">软件开发工程师</p>
+              <p className="text-primary font-body font-semibold">ResumeAI</p>
+              <p className="text-tertiary text-sm">软件开发工程师</p>
             </div>
           </div>
 
@@ -35,7 +35,7 @@ export default function Footer() {
               <Link
                 key={link.path}
                 to={link.path}
-                className="text-[#64748B] hover:text-[#94A3B8] transition-colors duration-200 text-sm"
+                className="text-tertiary hover:text-secondary transition-colors duration-200 text-sm"
               >
                 {link.label}
               </Link>
@@ -49,7 +49,7 @@ export default function Footer() {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#64748B] hover:text-[#22D3EE] transition-colors duration-200"
+                className="text-tertiary hover:text-accent transition-colors duration-200"
                 aria-label={link.label}
               >
                 <svg
@@ -67,7 +67,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 pt-6 border-t border-[#1E2530] text-center">
-          <p className="text-[#64748B] text-xs">
+          <p className="text-tertiary text-xs">
             © {new Date().getFullYear()} ResumeAI. Built with React + TypeScript.
           </p>
         </div>
