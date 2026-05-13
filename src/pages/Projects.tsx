@@ -63,12 +63,12 @@ const projects = [
 export default function Projects() {
   return (
     <PageTransition>
-      <div className="min-h-screen bg-[#0B0F14]">
+      <div className="min-h-screen">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <PageHeader title="项目" subtitle="从企业级平台到个人项目，代码创造价值" highlightWord="展示" />
 
-          <div className="bg-[#1C2431] rounded-lg p-4 mb-12 border border-[#22D3EE]/30">
-            <p className="text-[#64748B] text-sm text-center">
+          <div className="bg-[var(--xuli-bg-tertiary)] rounded-lg p-4 mb-12 border border-[var(--xuli-accent)]/30">
+            <p className="text-[var(--xuli-text-tertiary)] text-sm text-center">
               以下皆为业务之作，技止此耳，唯手熟尔，不足挂齿
             </p>
           </div>
@@ -77,23 +77,23 @@ export default function Projects() {
             {projects.map((project) => (
               <div
                 key={project.name}
-                className="bg-[#1C2431] rounded-lg overflow-hidden border border-white/5"
+                className="bg-[var(--xuli-bg-tertiary)] rounded-lg overflow-hidden border border-subtle"
               >
                 <div className="p-6">
                   <div className="flex flex-wrap items-center gap-2 mb-4">
-                    <span className="px-3 py-1 bg-[#151A23] text-[#22D3EE] text-xs font-mono rounded">
+                    <span className="px-3 py-1 bg-[var(--xuli-bg-secondary)] text-[var(--xuli-accent)] text-xs font-mono rounded">
                       {project.period}
                     </span>
-                    <span className="px-3 py-1 bg-[#151A23] text-[#64748B] text-xs font-mono rounded">
+                    <span className="px-3 py-1 bg-[var(--xuli-bg-secondary)] text-[var(--xuli-text-tertiary)] text-xs font-mono rounded">
                       {project.role}
                     </span>
                   </div>
 
-                  <h3 className="font-display text-2xl text-[#E2E8F0] mb-3">
+                  <h3 className="font-display text-2xl text-[var(--xuli-text-primary)] mb-3">
                     {project.name}
                   </h3>
 
-                  <p className="text-[#64748B] text-sm mb-4 leading-relaxed">
+                  <p className="text-[var(--xuli-text-tertiary)] text-sm mb-4 leading-relaxed">
                     {project.description}
                   </p>
 
@@ -101,7 +101,7 @@ export default function Projects() {
                     {project.tech.map((tech) => (
                       <span
                         key={tech}
-                        className="px-2 py-1 bg-[#151A23] text-[#94A3B8] text-xs font-mono rounded border border-white/5"
+                        className="px-2 py-1 bg-[var(--xuli-bg-secondary)] text-[var(--xuli-text-secondary)] text-xs font-mono rounded border border-subtle"
                       >
                         {tech}
                       </span>
@@ -112,7 +112,7 @@ export default function Projects() {
                     {project.highlights.map((highlight) => (
                       <span
                         key={highlight}
-                        className="px-2 py-1 bg-[#151A23]/50 text-[#64748B] text-xs rounded"
+                        className="px-2 py-1 bg-[var(--xuli-bg-secondary)]/50 text-[var(--xuli-text-tertiary)] text-xs rounded"
                       >
                         {highlight}
                       </span>

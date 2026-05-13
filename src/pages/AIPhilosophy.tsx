@@ -1,5 +1,7 @@
+import React from 'react'
 import PageTransition from '../components/PageTransition'
 import PageHeader from '../components/PageHeader'
+import { useScrollAnimation } from '../hooks/useScrollAnimation'
 
 const BLOG_BASE_URL = 'https://blog.zzzxc.com/生存/Ai'
 
@@ -130,66 +132,124 @@ const futureVision = {
   blogPath: 'Ai自驱动效率与准确率',
 }
 
+// 莫比乌斯环 SVG path
+function MobiusRing() {
+  return (
+    <div className="absolute top-0 right-0 w-[18vw] h-[18vw] max-w-[180px] max-h-[180px] opacity-20 pointer-events-none">
+      <svg viewBox="0 0 100 100" className="w-full h-full">
+        <defs>
+          <linearGradient id="mobius-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="var(--xuli-accent)" stopOpacity="0.8" />
+            <stop offset="50%" stopColor="var(--xuli-accent)" stopOpacity="0.4" />
+            <stop offset="100%" stopColor="var(--xuli-accent)" stopOpacity="0.1" />
+          </linearGradient>
+        </defs>
+        <ellipse cx="50" cy="50" rx="40" ry="20" fill="none" stroke="url(#mobius-gradient)" strokeWidth="0.5" className="animate-pulse" />
+        <ellipse cx="50" cy="50" rx="40" ry="20" fill="none" stroke="url(#mobius-gradient)" strokeWidth="0.5" transform="rotate(60 50 50)" className="animate-pulse" style={{ animationDelay: '0.5s' }} />
+        <ellipse cx="50" cy="50" rx="40" ry="20" fill="none" stroke="url(#mobius-gradient)" strokeWidth="0.5" transform="rotate(120 50 50)" className="animate-pulse" style={{ animationDelay: '1s' }} />
+        <circle cx="50" cy="50" r="3" fill="var(--xuli-accent)" opacity="0.6" />
+      </svg>
+    </div>
+  )
+}
+
+// 单个主题卡片 - 带 scroll 动画
+function ThemeCard({ theme, index }: { theme: typeof aiThemes[0]; index: number }) {
+  const [cardRef, isVisible] = useScrollAnimation<HTMLAnchorElement>({ threshold: 0.1 })
+
+  return (
+    <a
+      ref={cardRef as React.RefObject<HTMLAnchorElement>}
+      href={`${BLOG_BASE_URL}/${encodeURIComponent(theme.blogPath)}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`
+        block h-full bg-[var(--xuli-bg-tertiary)] rounded-lg p-6
+        border border-white/5 hover:border-white/10 transition-all duration-500
+        ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}
+      `}
+      style={{ transitionDelay: `${index * 80}ms` }}
+    >
+      <div className="w-12 h-12 rounded-lg bg-[var(--xuli-bg-secondary)] flex items-center justify-center mb-4">
+        <svg className="w-6 h-6 text-[var(--xuli-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={theme.icon} />
+        </svg>
+      </div>
+
+      <span className="text-xs text-[var(--xuli-text-tertiary)] font-mono uppercase tracking-wider">{theme.subtitle}</span>
+      <h3 className="font-display text-xl text-[var(--xuli-text-primary)] mt-1 mb-3">{theme.title}</h3>
+
+      <p className="text-[var(--xuli-text-tertiary)] text-sm leading-relaxed mb-4">{theme.description}</p>
+
+      <div className="space-y-2">
+        {theme.keyPoints.map((point, i) => (
+          <div key={i} className="flex items-start gap-2">
+            <svg className="w-4 h-4 text-[var(--xuli-accent)] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+            </svg>
+            <span className="text-[var(--xuli-text-secondary)] text-sm">{point}</span>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-4 text-sm text-[var(--xuli-accent)]">
+        阅读完整文章 →
+      </div>
+    </a>
+  )
+}
+
+// 卡片间连接线 SVG
+function CardConnections() {
+  return (
+    <svg className="absolute inset-0 w-full h-full pointer-events-none hidden lg:block" style={{ zIndex: -1 }}>
+      <defs>
+        <linearGradient id="line-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="var(--xuli-accent)" stopOpacity="0.15" />
+          <stop offset="50%" stopColor="var(--xuli-accent)" stopOpacity="0.08" />
+          <stop offset="100%" stopColor="var(--xuli-accent)" stopOpacity="0.15" />
+        </linearGradient>
+      </defs>
+      <line x1="33.33%" y1="12%" x2="66.66%" y2="12%" stroke="url(#line-gradient)" strokeWidth="1" />
+      <line x1="66.66%" y1="12%" x2="66.66%" y2="50%" stroke="url(#line-gradient)" strokeWidth="1" />
+      <line x1="33.33%" y1="50%" x2="66.66%" y2="50%" stroke="url(#line-gradient)" strokeWidth="1" />
+      <line x1="33.33%" y1="50%" x2="33.33%" y2="88%" stroke="url(#line-gradient)" strokeWidth="1" />
+      <line x1="33.33%" y1="88%" x2="66.66%" y2="88%" stroke="url(#line-gradient)" strokeWidth="1" />
+    </svg>
+  )
+}
+
 export default function AIPhilosophy() {
   return (
     <PageTransition>
-      <div className="min-h-screen bg-[#0B0F14]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="min-h-screen relative overflow-hidden">
+        <MobiusRing />
+        <CardConnections />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
           <PageHeader title="AI" subtitle="15篇文章的精华凝练 · 探索AI与人类协同的未来" highlightWord="哲学" />
 
-          <div className="bg-[#1C2431] rounded-lg p-4 mb-12 border border-[#F59E0B]/30">
-            <p className="text-[#F59E0B] text-sm text-center font-medium">
+          <div className="bg-[var(--xuli-bg-tertiary)] rounded-lg p-4 mb-12 border border-[var(--xuli-accent)]/30">
+            <p className="text-[var(--xuli-accent)] text-sm text-center font-medium">
               ⚠️ 以下均为本人与 AI 对话后的思考总结，涉及前沿领域，尚无定论，请勿视为权威结论
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-            {aiThemes.map((theme) => (
-              <a
-                key={theme.id}
-                href={`${BLOG_BASE_URL}/${encodeURIComponent(theme.blogPath)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block h-full bg-[#1C2431] rounded-lg p-6 border border-white/5 hover:border-white/10 transition-colors"
-              >
-                <div className="w-12 h-12 rounded-lg bg-[#151A23] flex items-center justify-center mb-4">
-                  <svg className="w-6 h-6 text-[#22D3EE]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={theme.icon} />
-                  </svg>
-                </div>
-
-                <span className="text-xs text-[#64748B] font-mono uppercase tracking-wider">{theme.subtitle}</span>
-                <h3 className="font-display text-xl text-[#E2E8F0] mt-1 mb-3">{theme.title}</h3>
-
-                <p className="text-[#64748B] text-sm leading-relaxed mb-4">{theme.description}</p>
-
-                <div className="space-y-2">
-                  {theme.keyPoints.map((point, i) => (
-                    <div key={i} className="flex items-start gap-2">
-                      <svg className="w-4 h-4 text-[#22D3EE] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                      <span className="text-[#94A3B8] text-sm">{point}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mt-4 text-sm text-[#22D3EE]">
-                  阅读完整文章 →
-                </div>
-              </a>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 relative">
+            {aiThemes.map((theme, index) => (
+              <ThemeCard key={theme.id} theme={theme} index={index} />
             ))}
           </div>
 
-          <div className="bg-[#1C2431] rounded-lg p-10 border border-white/5">
+          <div className="bg-[var(--xuli-bg-tertiary)] rounded-lg p-10 border border-white/5">
             <div className="max-w-4xl mx-auto text-center">
-              <h3 className="font-display text-3xl text-[#E2E8F0] mb-6">{futureVision.title}</h3>
+              <h3 className="font-display text-3xl text-[var(--xuli-text-primary)] mb-6">{futureVision.title}</h3>
 
               <blockquote className="mb-8">
-                <p className="text-xl text-[#94A3B8] italic leading-relaxed mb-4">
+                <p className="text-xl text-[var(--xuli-text-secondary)] italic leading-relaxed mb-4">
                   "{futureVision.quote}"
                 </p>
-                <p className="text-lg text-[#64748B] leading-relaxed">
+                <p className="text-lg text-[var(--xuli-text-tertiary)] leading-relaxed">
                   {futureVision.perspective}
                 </p>
               </blockquote>
@@ -206,7 +266,7 @@ export default function AIPhilosophy() {
                     href={`${BLOG_BASE_URL}/${encodeURIComponent(item.path)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-2 bg-[#151A23] text-[#94A3B8] text-sm font-mono rounded border border-white/5 hover:border-[#22D3EE]/30 hover:text-[#22D3EE] transition-colors"
+                    className="px-4 py-2 bg-[var(--xuli-bg-secondary)] text-[var(--xuli-text-secondary)] text-sm font-mono rounded border border-white/5 hover:border-[var(--xuli-accent)]/30 hover:text-[var(--xuli-accent)] transition-colors"
                   >
                     {item.tag}
                   </a>
@@ -217,7 +277,7 @@ export default function AIPhilosophy() {
                 href={`${BLOG_BASE_URL}/${encodeURIComponent(futureVision.blogPath)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-8 inline-flex items-center gap-2 px-6 py-3 bg-[#151A23] rounded text-[#22D3EE] hover:bg-[#1C2431] transition-colors border border-white/5"
+                className="mt-8 inline-flex items-center gap-2 px-6 py-3 bg-[var(--xuli-bg-secondary)] rounded text-[var(--xuli-accent)] hover:bg-[var(--xuli-bg-tertiary)] transition-colors border border-white/5"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
@@ -228,7 +288,7 @@ export default function AIPhilosophy() {
           </div>
 
           <div className="mt-12 text-center">
-            <p className="text-[#64748B] text-sm">
+            <p className="text-[var(--xuli-text-tertiary)] text-sm">
               所有内容基于个人实践与独立思考，欢迎探讨交流
             </p>
           </div>

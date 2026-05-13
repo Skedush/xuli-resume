@@ -41,20 +41,20 @@ const developmentStages = [
 ]
 
 const tools = [
-  { name: 'OpenCode', category: '主环境' },
+  { name: 'OpenCode', category: '主环境', url: 'https://opencode.ai' },
   { name: 'oh-my-openagent', category: 'Agent框架' },
   { name: 'Sisyphus', category: '任务执行' },
   { name: 'Metis', category: '审查' },
   { name: 'Momus', category: '审查' },
-  { name: 'React', category: '框架' },
-  { name: 'TypeScript', category: '语言' },
-  { name: 'Vite', category: '构建' },
-  { name: 'Tailwind CSS', category: '样式' },
-  { name: 'Framer Motion', category: '动画' },
-  { name: 'React Router', category: '路由' },
-  { name: 'Docker', category: '容器' },
-  { name: 'GitHub Actions', category: 'CI/CD' },
-  { name: 'Nginx', category: '部署' },
+  { name: 'React', category: '框架', url: 'https://react.dev' },
+  { name: 'TypeScript', category: '语言', url: 'https://www.typescriptlang.org' },
+  { name: 'Vite', category: '构建', url: 'https://vitejs.dev' },
+  { name: 'Tailwind CSS', category: '样式', url: 'https://tailwindcss.com' },
+  { name: 'Framer Motion', category: '动画', url: 'https://www.framer.com/motion' },
+  { name: 'React Router', category: '路由', url: 'https://reactrouter.com' },
+  { name: 'Docker', category: '容器', url: 'https://www.docker.com' },
+  { name: 'GitHub Actions', category: 'CI/CD', url: 'https://docs.github.com/en/actions' },
+  { name: 'Nginx', category: '部署', url: 'https://nginx.org' },
 ]
 
 const humanContributions = [
@@ -105,12 +105,12 @@ const humanContributions = [
 export default function DevelopmentLog() {
   return (
     <PageTransition>
-      <div className="min-h-screen bg-[#0B0F14]">
+      <div className="min-h-screen">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <PageHeader title="AI 工程" subtitle="从需求解析到部署上线，完整记录 AI 驱动的简历网站开发流程" highlightWord="实录" />
 
-          <div className="bg-[#1C2431]/70 rounded-lg p-4 mb-8 border border-[#22D3EE]/20">
-            <p className="text-[#94A3B8] text-sm text-center font-body leading-relaxed">
+          <div className="bg-[var(--color-card)]/70 rounded-lg p-4 mb-8 border border-[var(--xuli-accent)]/20">
+            <p className="text-[var(--xuli-text-secondary)] text-sm text-center font-body leading-relaxed">
               余于 AI 工程，实乃初探，皆在摸索之中。愿与同道者共研同进，或有所得，亦未可知。
             </p>
           </div>
@@ -128,9 +128,9 @@ export default function DevelopmentLog() {
                 { time: '02:35', event: '新增 DevelopmentLog 页面' },
               ].map((item, index) => (
                 <div key={index} className="flex flex-col items-center min-w-[140px]">
-                  <div className="w-3 h-3 bg-[#22D3EE] rounded-full mb-3" />
-                  <span className="text-[#22D3EE] text-xs font-mono mb-1">05.12 {item.time}</span>
-                  <span className="text-[#64748B] text-xs text-center leading-tight">{item.event}</span>
+                  <div className="w-3 h-3 bg-[var(--xuli-accent)] rounded-full mb-3" />
+                  <span className="text-[var(--xuli-accent)] text-xs font-mono mb-1">05.12 {item.time}</span>
+                  <span className="text-[var(--xuli-text-tertiary)] text-xs text-center leading-tight">{item.event}</span>
                 </div>
               ))}
             </div>
@@ -141,61 +141,70 @@ export default function DevelopmentLog() {
               {developmentStages.map((stage) => (
                 <div
                   key={stage.number}
-                  className="bg-[#1C2431] rounded-lg p-6 border border-white/5"
+                  className="bg-[var(--color-card)] rounded-lg p-6 border border-white/5"
                 >
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-lg bg-[#151A23] flex items-center justify-center flex-shrink-0">
-                      <svg className="w-6 h-6 text-[#22D3EE]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="w-12 h-12 rounded-lg bg-[var(--color-bg-secondary)] flex items-center justify-center flex-shrink-0">
+                      <svg className="w-6 h-6 text-[var(--xuli-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={stage.icon} />
                       </svg>
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
-                        <span className="font-mono text-xs text-[#64748B]">{stage.number}</span>
-                        <h3 className="font-display text-lg text-[#E2E8F0]">{stage.title}</h3>
+                        <span className="font-mono text-xs text-[var(--xuli-text-tertiary)]">{stage.number}</span>
+                        <h3 className="font-display text-lg text-[var(--xuli-text-primary)]">{stage.title}</h3>
                       </div>
-                      <p className="text-[#64748B] text-sm leading-relaxed">{stage.description}</p>
+                      <p className="text-[var(--xuli-text-tertiary)] text-sm leading-relaxed">{stage.description}</p>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="bg-[#1C2431] rounded-lg p-8 border border-white/5 mb-8">
-              <h2 className="font-display text-2xl text-[#E2E8F0] mb-6 text-center">工具清单</h2>
+            <div className="bg-[var(--color-card)] rounded-lg p-8 border border-white/5 mb-8">
+              <h2 className="font-display text-2xl text-[var(--xuli-text-primary)] mb-6 text-center">工具清单</h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3">
                 {tools.map((tool) => (
                   <div
                     key={tool.name}
-                    className="px-3 py-3 bg-[#151A23] rounded-lg border border-white/5 text-center"
+                    className="px-3 py-3 bg-[var(--color-bg-secondary)] rounded-lg border border-white/5 text-center hover:border-[var(--xuli-accent)]/30 transition-colors"
                   >
-                    <div className="text-sm font-mono text-[#22D3EE]">{tool.name}</div>
-                    <div className="text-xs text-[#64748B] mt-1">{tool.category}</div>
+                    {tool.url ? (
+                      <a href={tool.url} target="_blank" rel="noopener noreferrer" className="block">
+                        <div className="text-sm font-mono text-[var(--xuli-accent)] hover:underline">{tool.name}</div>
+                        <div className="text-xs text-[var(--color-text-tertiary)] mt-1">{tool.category}</div>
+                      </a>
+                    ) : (
+                      <>
+                        <div className="text-sm font-mono text-[var(--color-text-secondary)]">{tool.name}</div>
+                        <div className="text-xs text-[var(--color-text-tertiary)] mt-1">{tool.category}</div>
+                      </>
+                    )}
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="bg-[#1C2431] rounded-lg p-8 border border-white/5">
-              <h2 className="font-display text-2xl text-[#E2E8F0] mb-6 text-center">人类贡献</h2>
+            <div className="bg-[var(--color-card)] rounded-lg p-8 border border-white/5">
+              <h2 className="font-display text-2xl text-[var(--xuli-text-primary)] mb-6 text-center">人类贡献</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {humanContributions.map((item) => (
                   <div
                     key={item.number}
-                    className="bg-[#151A23] rounded-lg p-4 border border-white/5"
+                    className="bg-[var(--color-bg-secondary)] rounded-lg p-4 border border-white/5"
                   >
                     <div className="flex items-start gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-[#1C2431] flex items-center justify-center flex-shrink-0">
-                        <svg className="w-5 h-5 text-[#22D3EE]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <div className="w-10 h-10 rounded-lg bg-[var(--color-card)] flex items-center justify-center flex-shrink-0">
+                        <svg className="w-5 h-5 text-[var(--xuli-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={item.icon} />
                         </svg>
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
-                          <span className="font-mono text-xs text-[#64748B]">{item.number}</span>
-                          <h3 className="font-display text-base text-[#E2E8F0]">{item.title}</h3>
+                          <span className="font-mono text-xs text-[var(--xuli-text-tertiary)]">{item.number}</span>
+                          <h3 className="font-display text-base text-[var(--xuli-text-primary)]">{item.title}</h3>
                         </div>
-                        <p className="text-[#64748B] text-sm leading-relaxed">{item.description}</p>
+                        <p className="text-[var(--xuli-text-tertiary)] text-sm leading-relaxed">{item.description}</p>
                       </div>
                     </div>
                   </div>
@@ -204,10 +213,10 @@ export default function DevelopmentLog() {
             </div>
 
             <div className="mt-16 text-center">
-              <div className="inline-flex items-center gap-2 px-6 py-3 bg-[#1C2431] rounded-full border border-white/5">
-                <span className="w-2 h-2 rounded-full bg-[#22D3EE]" />
-                <span className="text-[#64748B] text-sm">
-                  全程由 <span className="text-[#22D3EE]">AI Agents</span> 驱动开发
+              <div className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--color-card)] rounded-full border border-white/5">
+                <span className="w-2 h-2 rounded-full bg-[var(--xuli-accent)]" />
+                <span className="text-[var(--xuli-text-tertiary)] text-sm">
+                  全程由 <span className="text-[var(--xuli-accent)]">AI Agents</span> 驱动开发
                 </span>
               </div>
             </div>

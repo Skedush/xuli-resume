@@ -14,9 +14,9 @@ const highlights: { icon: string; title: string; desc: string | React.ReactNode 
   { icon: 'M13 10V3L4 14h7v7l9-11h-7z', title: 'AI集成', desc: 'LLM、RAG、Agent工作流深度应用' },
   { icon: 'M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z', title: '开源贡献', desc: (
     <>
-      <a href="https://github.com/alibaba/x-render/commits?author=hsuliss" target="_blank" rel="noopener noreferrer" className="text-[#22D3EE] hover:underline">阿里 xrender</a>
+      <a href="https://github.com/alibaba/x-render/commits?author=hsuliss" target="_blank" rel="noopener noreferrer" className="text-[var(--xuli-accent)] hover:underline">阿里 xrender</a>
       {'、'}
-      <a href="https://github.com/jdf2e/nutui-react/commits?author=Skedush" target="_blank" rel="noopener noreferrer" className="text-[#22D3EE] hover:underline">京东 nutui-react-taro</a>
+      <a href="https://github.com/jdf2e/nutui-react/commits?author=Skedush" target="_blank" rel="noopener noreferrer" className="text-[var(--xuli-accent)] hover:underline">京东 nutui-react-taro</a>
     </>
   ) },
 ]
@@ -24,19 +24,19 @@ const highlights: { icon: string; title: string; desc: string | React.ReactNode 
 export default function About() {
   return (
     <PageTransition>
-      <div className="min-h-screen bg-[#0B0F14]">
+      <div className="min-h-screen">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <PageHeader title="关于" subtitle="热爱技术，追求卓越，在代码中寻找美感" highlightWord="我" />
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
-            <div className="bg-[#1C2431] rounded-lg p-8 border border-white/5">
-              <h2 className="font-display text-2xl text-[#E2E8F0] mb-6">基本信息</h2>
+            <div className="bg-[var(--xuli-bg-tertiary)] rounded-lg p-8 border border-white/5">
+              <h2 className="font-display text-2xl text-[var(--xuli-text-primary)] mb-6">基本信息</h2>
               <div className="flex flex-col items-center text-center mb-8">
-                <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-[#22D3EE]/30 mb-4">
+                <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-[var(--xuli-accent)]/30 mb-4">
                   <img src="/ai-photo.jpg" alt="徐力" className="w-full h-full object-cover" />
                 </div>
-                <p className="text-[#E2E8F0] font-display text-2xl mb-1">徐力</p>
-                <p className="text-[#64748B] text-sm">软件开发工程师</p>
+                <p className="text-[var(--xuli-text-primary)] font-display text-2xl mb-1">徐力</p>
+                <p className="text-[var(--xuli-text-tertiary)] text-sm">软件开发工程师</p>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <InfoRow label="年龄" value="31岁" />
@@ -46,19 +46,19 @@ export default function About() {
               </div>
             </div>
 
-            <div className="bg-[#1C2431] rounded-lg p-8 border border-white/5">
-              <h2 className="font-display text-2xl text-[#E2E8F0] mb-6">核心优势</h2>
+            <div className="bg-[var(--xuli-bg-tertiary)] rounded-lg p-8 border border-white/5">
+              <h2 className="font-display text-2xl text-[var(--xuli-text-primary)] mb-6">核心优势</h2>
               <div className="space-y-4">
                 {highlights.map((item, i) => (
                   <div key={i} className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-[#151A23] flex items-center justify-center flex-shrink-0">
-                      <svg className="w-5 h-5 text-[#22D3EE]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="w-10 h-10 rounded-lg bg-[var(--xuli-bg-secondary)] flex items-center justify-center flex-shrink-0">
+                      <svg className="w-5 h-5 text-[var(--xuli-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={item.icon} />
                       </svg>
                     </div>
                     <div>
-                      <h3 className="text-[#E2E8F0] font-semibold mb-1">{item.title}</h3>
-                      <p className="text-[#64748B] text-sm">{item.desc}</p>
+                      <h3 className="text-[var(--xuli-text-primary)] font-semibold mb-1">{item.title}</h3>
+                      <p className="text-[var(--xuli-text-tertiary)] text-sm">{item.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -70,10 +70,10 @@ export default function About() {
             {stats.map((stat, i) => (
               <div
                 key={i}
-                className="bg-[#1C2431] rounded-lg p-6 text-center border border-white/5"
+                className="bg-[var(--xuli-bg-tertiary)] rounded-lg p-6 text-center border border-white/5"
               >
-                <div className="font-display text-3xl font-bold text-[#22D3EE] mb-2">{stat.value}</div>
-                <div className="text-[#64748B] text-sm">{stat.label}</div>
+                <div className="font-display text-3xl font-bold text-[var(--xuli-accent)] mb-2">{stat.value}</div>
+                <div className="text-[var(--xuli-text-tertiary)] text-sm">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -86,8 +86,8 @@ export default function About() {
 function InfoRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-center gap-4">
-      <span className="text-[#64748B] text-sm w-16 flex-shrink-0">{label}</span>
-      <span className="text-[#E2E8F0] font-medium">{value}</span>
+      <span className="text-[var(--xuli-text-tertiary)] text-sm w-16 flex-shrink-0">{label}</span>
+      <span className="text-[var(--xuli-text-primary)] font-medium">{value}</span>
     </div>
   )
 }
