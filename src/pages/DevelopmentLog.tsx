@@ -124,8 +124,8 @@ export default function DevelopmentLog() {
                 { time: '01:43', event: 'Skills 页面性能优化' },
                 { time: '01:49', event: '全项目动画性能优化' },
                 { time: '01:57', event: 'GitHub 仓库创建 xuli-resume' },
-                { time: '02:xx', event: 'Docker 配置与服务器部署' },
-                { time: 'xx:xx', event: '新增 DevelopmentLog 页面' },
+                { time: '02:15', event: 'Docker 配置与服务器部署' },
+                { time: '02:35', event: '新增 DevelopmentLog 页面' },
               ].map((item, index) => (
                 <div key={index} className="flex flex-col items-center min-w-[140px]">
                   <div className="w-3 h-3 bg-[#22D3EE] rounded-full mb-3" />

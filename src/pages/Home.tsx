@@ -103,7 +103,7 @@ export default function Home() {
               </div>
               <p className="text-[#94A3B8] text-sm mb-4">
                 <span className="text-[#22D3EE] font-semibold">01:09 开始对话</span> →
-                <span className="text-[#4ADE80] font-semibold">02:xx 已部署上线</span>
+                <span className="text-[#4ADE80] font-semibold">02:15 已部署上线</span>
               </p>
               <p className="text-[#64748B] text-xs mb-4">
                 OpenCode + Sisyphus 工作流 + Metis/Momus 审查 · 8个页面并行构建
