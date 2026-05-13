@@ -21,7 +21,9 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd ${{ secrets.SSH_DEPLOY_PATH }}
-            # 使用 SSH 方式拉取代码，避免 HTTPS 不稳定问题
+            # 添加 GitHub host key
+            ssh-keyscan github.com >> ~/.ssh/known_hosts 2>/dev/null
+            # 使用 SSH 方式拉取代码
             git remote set-url origin git@github.com:Skedush/xuli-resume.git
             for i in 1 2 3; do
               git pull origin main && break
