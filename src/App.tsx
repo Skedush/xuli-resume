@@ -3,6 +3,7 @@ import { AnimatePresence } from 'framer-motion'
 import { useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import BackgroundEffects from './components/BackgroundEffects'
 import Home from './pages/Home'
 import About from './pages/About'
 import Skills from './pages/Skills'
@@ -22,6 +23,7 @@ function App() {
   return (
     <div className="min-h-screen bg-dark-bg noise-overlay">
       <div className="fixed inset-0 grid-background pointer-events-none" />
+      <BackgroundEffects />
       <Navbar />
       <main className="relative z-10">
         <AnimatePresence mode="wait">
