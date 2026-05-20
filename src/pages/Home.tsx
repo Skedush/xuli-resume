@@ -1,19 +1,28 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import PageTransition from '../components/PageTransition'
+import { useGenerativeDesign } from '../components/GenerativeDesignProvider'
 
 const floatingWords = ['React', 'TypeScript', 'Vite', 'AI', 'Node']
 
 export default function Home() {
+  const { layout } = useGenerativeDesign()
+  const layoutClassName =
+    layout === 'split'
+      ? 'home-layout-split'
+      : layout === 'magazine'
+        ? 'home-layout-magazine'
+        : 'home-layout-focus'
+
   return (
     <PageTransition>
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto py-20">
+      <div className="min-h-screen flex items-center justify-center px-4 py-20">
+        <div className={`relative z-10 w-full mx-auto ${layoutClassName}`}>
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0 }}
-            className="text-6xl text-[var(--xuli-accent)]/20 mb-4"
+            className="text-6xl text-[var(--xuli-accent)]/20 mb-4 home-hero-symbol"
           >
             ∞
           </motion.div>
@@ -33,7 +42,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-lg sm:text-xl text-[var(--xuli-text-secondary)] font-body mb-10 max-w-xl mx-auto"
+            className="text-lg sm:text-xl text-[var(--xuli-text-secondary)] font-body mb-10 max-w-xl home-hero-intro"
           >
             8年经验 · 专注现代化前端技术栈 · AI驱动开发实践
           </motion.p>
@@ -42,7 +51,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="mb-8"
+            className="mb-8 home-status-wrap"
           >
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[var(--xuli-border)] bg-[var(--xuli-bg-secondary)] text-[var(--xuli-text-secondary)] text-sm font-mono">
               <span className="w-2 h-2 rounded-full bg-[#4ADE80] animate-subtle-pulse" />
@@ -54,7 +63,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex flex-wrap justify-center gap-4 mb-16"
+            className="flex flex-wrap justify-center gap-4 mb-16 home-actions"
           >
             <Link
               to="/about"
@@ -74,7 +83,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
-            className="max-w-lg mx-auto"
+            className="max-w-lg home-ai-card"
           >
             <Link to="/ai-philosophy" className="block bg-[var(--xuli-bg-tertiary)] border border-[var(--xuli-border)] rounded-xl p-6 text-left hover:border-[var(--xuli-accent)]/30 transition-colors">
               <h3 className="text-[var(--xuli-text-primary)] font-display text-base mb-3">AI 时代的软件开发</h3>
@@ -99,7 +108,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="max-w-lg mx-auto mt-8"
+            className="max-w-lg mt-8 home-log-card"
           >
             <Link to="/development-log" className="block bg-[var(--xuli-bg-tertiary)] border border-[var(--xuli-border)] rounded-xl p-6 text-left hover:border-[var(--xuli-accent)]/30 transition-colors">
               <div className="flex items-center gap-3 mb-3">
@@ -128,7 +137,7 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.7 }}
-            className="flex flex-wrap justify-center gap-4 text-sm font-mono mt-12"
+            className="flex flex-wrap justify-center gap-4 text-sm font-mono mt-12 home-tag-cloud"
           >
             {floatingWords.map((word) => (
               <span
@@ -144,4 +153,3 @@ export default function Home() {
     </PageTransition>
   )
 }
-

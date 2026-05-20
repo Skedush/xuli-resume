@@ -21,22 +21,24 @@ export default function BackgroundEffects() {
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-[5]">
       {/* 主光晕 - 沿 Mobius 环路径移动 */}
       <div
-        className="absolute w-[36rem] h-[36rem] bg-[#22D3EE]/[0.12] rounded-full blur-3xl"
+        className="absolute w-[36rem] h-[36rem] rounded-full blur-3xl"
         style={{
           animation: `mobius-glow 20s linear infinite`,
           left: '50%',
           top: '50%',
           transform: 'translate(-50%, -50%)',
+          backgroundColor: 'var(--xuli-accent-muted)',
         }}
       />
       {/* 次光晕 - 反向移动形成层次感 */}
       <div
-        className="absolute w-[28rem] h-[28rem] bg-[#A78BFA]/[0.10] rounded-full blur-3xl"
+        className="absolute w-[28rem] h-[28rem] rounded-full blur-3xl"
         style={{
           animation: `mobius-glow-reverse 25s linear infinite`,
           left: '50%',
           top: '50%',
           transform: 'translate(-50%, -50%)',
+          backgroundColor: 'var(--xuli-accent-muted)',
         }}
       />
       <style>{`

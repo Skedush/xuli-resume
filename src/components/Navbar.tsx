@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import Logo from './Logo'
+import { useGenerativeDesign } from './GenerativeDesignProvider'
 
 const navItems = [
   { path: '/', label: '首页', en: 'Home' },
@@ -18,6 +19,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
+  const { regenerate } = useGenerativeDesign()
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
@@ -61,6 +63,13 @@ export default function Navbar() {
                 }`} />
               </Link>
             ))}
+            <button
+              onClick={regenerate}
+              className="ml-2 px-3 py-1.5 rounded-md text-xs font-mono border border-[var(--xuli-border)] text-secondary hover:text-accent hover:border-[var(--xuli-accent)]/40 transition-colors"
+              title="重新生成主题布局"
+            >
+              换一版
+            </button>
           </div>
 
           <button
@@ -94,6 +103,12 @@ export default function Navbar() {
             className="lg:hidden bg-surface/95 backdrop-blur-md border-t border-[#2A3441]/50"
           >
             <div className="px-4 py-4 space-y-1">
+              <button
+                onClick={regenerate}
+                className="w-full text-left px-4 py-3 rounded-lg border border-[var(--xuli-border)] text-secondary hover:text-accent transition-colors mb-2 font-mono text-xs"
+              >
+                换一版主题布局
+              </button>
               {navItems.map((item, i) => (
                 <motion.div
                   key={item.path}

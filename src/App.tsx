@@ -21,11 +21,11 @@ function App() {
   }, [location.pathname])
 
   return (
-    <div className="min-h-screen bg-dark-bg noise-overlay">
+    <div className="min-h-screen bg-bg noise-overlay layout-shell">
       <div className="fixed inset-0 grid-background pointer-events-none" />
       <BackgroundEffects />
       <Navbar />
-      <main className="relative z-10">
+      <main className="relative z-10 layout-content">
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home />} />
