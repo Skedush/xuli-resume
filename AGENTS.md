@@ -40,6 +40,13 @@ public/favicon.svg   # 抽象简历+AI logo
 - 无 ESLint / 无测试
 - 代码中无 DO NOT/NEVER 注释
 
+## AGENT PITFALLS / CHANGE SAFETY
+- **Navbar 必须保持 `fixed` 吸顶**：移动端和桌面端都依赖顶部固定定位；不要把 `Navbar` 改成 `relative` / `absolute`，否则滚动后会失去吸顶。
+- **移动端汉堡菜单图标不要用未定义的 Tailwind 颜色类**：例如 `bg-primary` 在本项目里无效；请使用 `bg-text-primary`、`bg-[var(--...)]` 或 `tailwind.config.js` 中真实存在的颜色 token。
+- **移动端菜单背景要用实底**：滚动状态下也要保持 `bg-surface` / 明确的 CSS var 背景和足够的 `z-index`，避免出现“能点但看起来透明”的问题。
+- **改主题/布局时优先改 token，不要在页面里硬编码颜色**：全局主题由 `data-theme-variant` / `data-layout-variant` + `src/styles/tokens.css` / `src/styles/index.css` 驱动。
+- **验证方式**：本项目没有 lint/test，改动后至少跑 `npm run build` 确认能过。
+
 ## COMMANDS
 ```bash
 npm run dev      # http://localhost:5173
