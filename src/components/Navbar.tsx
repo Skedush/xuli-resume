@@ -35,8 +35,10 @@ export default function Navbar() {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'backdrop-blur-xl bg-bg/40 shadow-xl shadow-black/30' : ''
+      className={`fixed top-0 left-0 right-0 z-50 relative isolate transition-all duration-300 ${
+        scrolled
+          ? 'backdrop-blur-xl bg-bg/90 shadow-xl shadow-black/30'
+          : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -104,7 +106,7 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            className="absolute left-0 right-0 top-full z-40 lg:hidden border-t border-[var(--xuli-border)]/60 bg-[var(--color-surface)]/98 shadow-2xl shadow-black/30 backdrop-blur-xl"
+            className="absolute left-0 right-0 top-full z-40 lg:hidden border-t border-[var(--xuli-border)]/60 bg-surface shadow-2xl shadow-black/30 backdrop-blur-xl"
           >
             <div className="px-4 py-4 space-y-1 max-h-[calc(100vh-4rem)] overflow-y-auto">
               <button
