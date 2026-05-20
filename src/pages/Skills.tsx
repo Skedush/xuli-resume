@@ -91,7 +91,7 @@ export default function Skills() {
             {skillCategories.map((category) => (
               <div
                 key={category.title}
-                className="bg-card rounded-lg p-4 border border-white/5"
+                className="bg-card rounded-lg p-4 border border-[var(--color-border)]/60"
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 rounded-lg bg-surface flex items-center justify-center">
@@ -128,13 +128,13 @@ export default function Skills() {
             ))}
           </div>
 
-          <div className="mt-12 bg-card rounded-lg p-6 border border-white/5">
+          <div className="mt-12 bg-card rounded-lg p-6 border border-[var(--color-border)]/60">
             <h2 className="font-display text-2xl text-primary mb-6 text-center">工具链</h2>
             <div className="flex flex-wrap justify-center gap-3">
               {tools.map((tool) => (
                 <span
                   key={tool}
-                  className="px-4 py-2 bg-surface text-secondary text-sm font-mono rounded border border-white/5"
+                  className="px-4 py-2 bg-surface text-secondary text-sm font-mono rounded border border-[var(--color-border)]/60"
                 >
                   {tool}
                 </span>

@@ -29,7 +29,7 @@ export default function About() {
           <PageHeader title="关于" subtitle="热爱技术，追求卓越，在代码中寻找美感" highlightWord="我" />
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
-            <div className="bg-[var(--xuli-bg-tertiary)] rounded-lg p-8 border border-white/5">
+            <div className="bg-[var(--xuli-bg-tertiary)] rounded-lg p-8 border border-[var(--color-border)]/60">
               <h2 className="font-display text-2xl text-[var(--xuli-text-primary)] mb-6">基本信息</h2>
               <div className="flex flex-col items-center text-center mb-8">
                 <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-[var(--xuli-accent)]/30 mb-4">
@@ -46,7 +46,7 @@ export default function About() {
               </div>
             </div>
 
-            <div className="bg-[var(--xuli-bg-tertiary)] rounded-lg p-8 border border-white/5">
+            <div className="bg-[var(--xuli-bg-tertiary)] rounded-lg p-8 border border-[var(--color-border)]/60">
               <h2 className="font-display text-2xl text-[var(--xuli-text-primary)] mb-6">核心优势</h2>
               <div className="space-y-4">
                 {highlights.map((item, i) => (
@@ -70,7 +70,7 @@ export default function About() {
             {stats.map((stat, i) => (
               <div
                 key={i}
-                className="bg-[var(--xuli-bg-tertiary)] rounded-lg p-6 text-center border border-white/5"
+                className="bg-[var(--xuli-bg-tertiary)] rounded-lg p-6 text-center border border-[var(--color-border)]/60"
               >
                 <div className="font-display text-3xl font-bold text-[var(--xuli-accent)] mb-2">{stat.value}</div>
                 <div className="text-[var(--xuli-text-tertiary)] text-sm">{stat.label}</div>

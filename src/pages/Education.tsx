@@ -43,7 +43,7 @@ export default function Education() {
           <PageHeader title="教育" subtitle="扎实的基础，持续的学习" highlightWord="背景" />
 
           <div className="space-y-6 mb-16">
-            <div className="bg-[var(--xuli-bg-tertiary)] rounded-lg p-8 border border-white/5">
+            <div className="bg-[var(--xuli-bg-tertiary)] rounded-lg p-8 border border-[var(--color-border)]/60">
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-16 h-16 rounded-xl bg-[var(--xuli-bg-secondary)] flex items-center justify-center">
                   <svg className="w-8 h-8 text-[var(--xuli-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -63,14 +63,14 @@ export default function Education() {
                   <span className="px-3 py-1 bg-[var(--xuli-bg-secondary)] text-[var(--xuli-accent)] text-sm font-mono rounded">
                     {education.period}
                   </span>
-                  <span className="px-2 py-1 bg-[#F59E0B]/20 text-[#F59E0B] text-xs rounded">
+                  <span className="px-2 py-1 bg-[var(--xuli-accent-muted)] text-[var(--xuli-accent)] text-xs rounded">
                     {education.awards[0]}
                   </span>
                 </div>
                 <p className="text-[var(--xuli-text-tertiary)] leading-relaxed">{education.description}</p>
               </div>
 
-              <div className="mt-6 pt-6 border-t border-white/5">
+              <div className="mt-6 pt-6 border-t border-[var(--color-border)]/60">
                 <h3 className="text-[var(--xuli-text-primary)] font-semibold mb-3">主修课程</h3>
                 <div className="flex flex-wrap gap-2">
                   {['数据结构', '算法设计', '操作系统', '计算机网络', '数据库原理', '软件工程', '面向对象编程'].map((course) => (
@@ -84,7 +84,7 @@ export default function Education() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="bg-[var(--xuli-bg-tertiary)] rounded-lg p-6 border border-white/5">
+            <div className="bg-[var(--xuli-bg-tertiary)] rounded-lg p-6 border border-[var(--color-border)]/60">
               <h3 className="font-display text-xl text-[var(--xuli-text-primary)] mb-4 flex items-center gap-2">
                 <svg className="w-6 h-6 text-[var(--xuli-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
@@ -104,7 +104,7 @@ export default function Education() {
               </div>
             </div>
 
-            <div className="bg-[var(--xuli-bg-tertiary)] rounded-lg p-6 border border-white/5">
+            <div className="bg-[var(--xuli-bg-tertiary)] rounded-lg p-6 border border-[var(--color-border)]/60">
               <h3 className="font-display text-xl text-[var(--xuli-text-primary)] mb-4 flex items-center gap-2">
                 <svg className="w-6 h-6 text-[var(--xuli-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -132,7 +132,7 @@ export default function Education() {
               </div>
             </div>
 
-            <div className="bg-[var(--xuli-bg-tertiary)] rounded-lg p-6 border border-white/5">
+            <div className="bg-[var(--xuli-bg-tertiary)] rounded-lg p-6 border border-[var(--color-border)]/60">
               <h3 className="font-display text-xl text-[var(--xuli-text-primary)] mb-4 flex items-center gap-2">
                 <svg className="w-6 h-6 text-[var(--xuli-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />

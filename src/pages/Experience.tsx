@@ -47,11 +47,11 @@ export default function Experience() {
             {experiences.map((exp) => (
               <div
                 key={exp.company}
-                className="relative pl-8 border-l border-white/10"
+                className="relative pl-8 border-l border-[var(--color-border)]/70"
               >
                 <div className="absolute left-0 top-0 w-3 h-3 -translate-x-[7px] bg-[var(--xuli-accent)] rounded-full" />
 
-                <div className="bg-[var(--xuli-bg-tertiary)] rounded-lg p-6 border border-white/5">
+                <div className="bg-[var(--xuli-bg-tertiary)] rounded-lg p-6 border border-[var(--color-border)]/60">
                   <div className="flex items-center gap-3 mb-3">
                     <span className="px-2 py-0.5 bg-[var(--xuli-bg-secondary)] text-[var(--xuli-accent)] text-xs font-mono rounded">
                       {exp.type}

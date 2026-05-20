@@ -165,7 +165,7 @@ function ThemeCard({ theme, index }: { theme: typeof aiThemes[0]; index: number 
       rel="noopener noreferrer"
       className={`
         block h-full bg-[var(--xuli-bg-tertiary)] rounded-lg p-6
-        border border-white/5 hover:border-white/10 transition-all duration-500
+        border border-[var(--color-border)]/60 hover:border-[var(--color-border)]/70 transition-all duration-500
         ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}
       `}
       style={{ transitionDelay: `${index * 80}ms` }}
@@ -241,7 +241,7 @@ export default function AIPhilosophy() {
             ))}
           </div>
 
-          <div className="bg-[var(--xuli-bg-tertiary)] rounded-lg p-10 border border-white/5">
+          <div className="bg-[var(--xuli-bg-tertiary)] rounded-lg p-10 border border-[var(--color-border)]/60">
             <div className="max-w-4xl mx-auto text-center">
               <h3 className="font-display text-3xl text-[var(--xuli-text-primary)] mb-6">{futureVision.title}</h3>
 
@@ -266,7 +266,7 @@ export default function AIPhilosophy() {
                     href={`${BLOG_BASE_URL}/${encodeURIComponent(item.path)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-2 bg-[var(--xuli-bg-secondary)] text-[var(--xuli-text-secondary)] text-sm font-mono rounded border border-white/5 hover:border-[var(--xuli-accent)]/30 hover:text-[var(--xuli-accent)] transition-colors"
+                    className="px-4 py-2 bg-[var(--xuli-bg-secondary)] text-[var(--xuli-text-secondary)] text-sm font-mono rounded border border-[var(--color-border)]/60 hover:border-[var(--xuli-accent)]/30 hover:text-[var(--xuli-accent)] transition-colors"
                   >
                     {item.tag}
                   </a>
@@ -277,7 +277,7 @@ export default function AIPhilosophy() {
                 href={`${BLOG_BASE_URL}/${encodeURIComponent(futureVision.blogPath)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-8 inline-flex items-center gap-2 px-6 py-3 bg-[var(--xuli-bg-secondary)] rounded text-[var(--xuli-accent)] hover:bg-[var(--xuli-bg-tertiary)] transition-colors border border-white/5"
+                className="mt-8 inline-flex items-center gap-2 px-6 py-3 bg-[var(--xuli-bg-secondary)] rounded text-[var(--xuli-accent)] hover:bg-[var(--xuli-bg-tertiary)] transition-colors border border-[var(--color-border)]/60"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />

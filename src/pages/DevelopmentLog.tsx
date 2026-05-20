@@ -141,7 +141,7 @@ export default function DevelopmentLog() {
               {developmentStages.map((stage) => (
                 <div
                   key={stage.number}
-                  className="bg-[var(--color-card)] rounded-lg p-6 border border-white/5"
+                  className="bg-[var(--color-card)] rounded-lg p-6 border border-[var(--color-border)]/60"
                 >
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 rounded-lg bg-[var(--color-bg-secondary)] flex items-center justify-center flex-shrink-0">
@@ -161,13 +161,13 @@ export default function DevelopmentLog() {
               ))}
             </div>
 
-            <div className="bg-[var(--color-card)] rounded-lg p-8 border border-white/5 mb-8">
+            <div className="bg-[var(--color-card)] rounded-lg p-8 border border-[var(--color-border)]/60 mb-8">
               <h2 className="font-display text-2xl text-[var(--xuli-text-primary)] mb-6 text-center">工具清单</h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3">
                 {tools.map((tool) => (
                   <div
                     key={tool.name}
-                    className="px-3 py-3 bg-[var(--color-bg-secondary)] rounded-lg border border-white/5 text-center hover:border-[var(--xuli-accent)]/30 transition-colors"
+                    className="px-3 py-3 bg-[var(--color-bg-secondary)] rounded-lg border border-[var(--color-border)]/60 text-center hover:border-[var(--xuli-accent)]/30 transition-colors"
                   >
                     {tool.url ? (
                       <a href={tool.url} target="_blank" rel="noopener noreferrer" className="block">
@@ -185,13 +185,13 @@ export default function DevelopmentLog() {
               </div>
             </div>
 
-            <div className="bg-[var(--color-card)] rounded-lg p-8 border border-white/5">
+            <div className="bg-[var(--color-card)] rounded-lg p-8 border border-[var(--color-border)]/60">
               <h2 className="font-display text-2xl text-[var(--xuli-text-primary)] mb-6 text-center">人类贡献</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {humanContributions.map((item) => (
                   <div
                     key={item.number}
-                    className="bg-[var(--color-bg-secondary)] rounded-lg p-4 border border-white/5"
+                    className="bg-[var(--color-bg-secondary)] rounded-lg p-4 border border-[var(--color-border)]/60"
                   >
                     <div className="flex items-start gap-3">
                       <div className="w-10 h-10 rounded-lg bg-[var(--color-card)] flex items-center justify-center flex-shrink-0">
@@ -213,7 +213,7 @@ export default function DevelopmentLog() {
             </div>
 
             <div className="mt-16 text-center">
-              <div className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--color-card)] rounded-full border border-white/5">
+              <div className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--color-card)] rounded-full border border-[var(--color-border)]/60">
                 <span className="w-2 h-2 rounded-full bg-[var(--xuli-accent)]" />
                 <span className="text-[var(--xuli-text-tertiary)] text-sm">
                   全程由 <span className="text-[var(--xuli-accent)]">AI Agents</span> 驱动开发

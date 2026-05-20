@@ -58,7 +58,7 @@ export default function Home() {
             className="mb-8 home-status-wrap"
           >
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[var(--xuli-border)] bg-[var(--xuli-bg-secondary)] text-[var(--xuli-text-secondary)] text-sm font-mono">
-              <span className="w-2 h-2 rounded-full bg-[#4ADE80] animate-subtle-pulse" />
+              <span className="w-2 h-2 rounded-full bg-[var(--color-green)] animate-subtle-pulse" />
               待业中 · 寻找机会
             </span>
           </motion.div>
@@ -123,7 +123,7 @@ export default function Home() {
               </div>
               <p className="text-[var(--xuli-text-secondary)] text-sm mb-4">
                 <span className="text-[var(--xuli-accent)] font-semibold">01:09 开始对话</span> →
-                <span className="text-[#4ADE80] font-semibold">02:15 已部署上线</span>
+                <span className="text-[var(--color-green)] font-semibold">02:15 已部署上线</span>
               </p>
               <p className="text-[var(--xuli-text-tertiary)] text-xs mb-4">
                 OpenCode + Sisyphus 工作流 + Metis/Momus 审查 · 8个页面并行构建

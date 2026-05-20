@@ -4,8 +4,8 @@ export default function Logo() {
       <svg className="w-5 h-5" viewBox="0 0 100 100">
         <defs>
           <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#22D3EE" />
-            <stop offset="100%" stopColor="#06B6D4" />
+            <stop offset="0%" stopColor="var(--xuli-accent)" />
+            <stop offset="100%" stopColor="var(--xuli-accent-hover)" />
           </linearGradient>
         </defs>
         <path d="M25 15 L65 15 L75 25 L75 85 L25 85 Z" fill="none" stroke="url(#logoGrad)" strokeWidth="4" strokeLinejoin="round"/>

@@ -66,7 +66,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 pt-6 border-t border-[#1E2530] text-center">
+        <div className="mt-8 pt-6 border-t border-[var(--xuli-border)] text-center">
           <p className="text-tertiary text-xs">
             © {new Date().getFullYear()} ResumeAI. Built with React + TypeScript.
           </p>

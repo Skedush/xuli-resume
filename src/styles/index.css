@@ -5,29 +5,27 @@
 @tailwind utilities;
 
 :root {
-  /* Refined color palette - ossinsight.io inspired */
-  --color-bg: #0B0F14;
-  --color-surface: #151A23;
-  --color-card: #1C2431;
-  --color-border: #2A3441;
-  --color-border-subtle: #1E2530;
+  /* Theme aliases - keep legacy --color-* callers adaptive */
+  --color-bg: var(--xuli-bg-primary);
+  --color-surface: var(--xuli-bg-secondary);
+  --color-card: var(--xuli-bg-tertiary);
+  --color-border: var(--xuli-border);
+  --color-border-subtle: var(--xuli-border);
 
-  /* Muted teal accent - professional, not neon */
-  --color-accent: #22D3EE;
-  --color-accent-hover: #06B6D4;
-  --color-accent-muted: rgba(34, 211, 238, 0.1);
-  --color-accent-subtle: rgba(34, 211, 238, 0.05);
+  --color-accent: var(--xuli-accent);
+  --color-accent-hover: var(--xuli-accent-hover);
+  --color-accent-muted: var(--xuli-accent-muted);
+  --color-accent-subtle: var(--xuli-accent-muted);
 
-  /* Text hierarchy */
-  --color-text-primary: #E2E8F0;
-  --color-text-secondary: #94A3B8;
-  --color-text-tertiary: #64748B;
+  --color-text-primary: var(--xuli-text-primary);
+  --color-text-secondary: var(--xuli-text-secondary);
+  --color-text-tertiary: var(--xuli-text-tertiary);
 
-  /* Code/text accents */
-  --color-cyan: #67E8F9;
-  --color-purple: #A78BFA;
-  --color-green: #4ADE80;
-  --color-orange: #FB923C;
+  /* Legacy decorative accents follow the theme accent family */
+  --color-cyan: var(--xuli-accent);
+  --color-purple: var(--xuli-accent-hover);
+  --color-green: var(--xuli-accent);
+  --color-orange: var(--xuli-accent-hover);
 }
 
 html[data-theme-variant='cyber-teal'] {
@@ -416,13 +414,21 @@ body {
   position: absolute;
   inset: 0 auto 0 0;
   width: 3px;
-  background: linear-gradient(180deg, #7170ff, rgba(113, 112, 255, 0.12));
+  background: linear-gradient(
+    180deg,
+    var(--xuli-accent),
+    color-mix(in srgb, var(--xuli-accent) 12%, transparent)
+  );
   opacity: 0.9;
 }
 
 .home-layout-magazine > .home-log-card > a::before,
 .home-layout-split > .home-log-card > a::before {
-  background: linear-gradient(180deg, rgba(148, 163, 184, 0.78), rgba(148, 163, 184, 0.12));
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--xuli-text-secondary) 78%, transparent),
+    color-mix(in srgb, var(--xuli-text-secondary) 12%, transparent)
+  );
 }
 
 .home-layout-magazine > .home-ai-card > a:hover,
