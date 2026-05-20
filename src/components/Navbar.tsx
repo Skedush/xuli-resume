@@ -74,20 +74,23 @@ export default function Navbar() {
 
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden relative w-10 h-10 flex items-center justify-center"
+            aria-label={isOpen ? '关闭导航菜单' : '打开导航菜单'}
+            aria-expanded={isOpen}
+            aria-controls="mobile-navigation"
+            className="lg:hidden relative z-50 w-11 h-11 flex items-center justify-center rounded-full border border-[var(--xuli-border)]/70 bg-[var(--color-surface)]/85 text-primary shadow-lg shadow-black/20 backdrop-blur-md"
           >
             <div className="flex flex-col gap-1.5">
               <motion.span
                 animate={isOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
-                className="w-6 h-0.5 bg-primary block"
+                className="w-6 h-0.5 bg-text-primary block rounded-full"
               />
               <motion.span
                 animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
-                className="w-6 h-0.5 bg-primary block"
+                className="w-6 h-0.5 bg-text-primary block rounded-full"
               />
               <motion.span
                 animate={isOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
-                className="w-6 h-0.5 bg-primary block"
+                className="w-6 h-0.5 bg-text-primary block rounded-full"
               />
             </div>
           </button>
@@ -97,15 +100,16 @@ export default function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-surface/95 backdrop-blur-md border-t border-[#2A3441]/50"
+            id="mobile-navigation"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            className="absolute left-0 right-0 top-full z-40 lg:hidden border-t border-[var(--xuli-border)]/60 bg-[var(--color-surface)]/98 shadow-2xl shadow-black/30 backdrop-blur-xl"
           >
-            <div className="px-4 py-4 space-y-1">
+            <div className="px-4 py-4 space-y-1 max-h-[calc(100vh-4rem)] overflow-y-auto">
               <button
                 onClick={regenerate}
-                className="w-full text-left px-4 py-3 rounded-lg border border-[var(--xuli-border)] text-secondary hover:text-accent transition-colors mb-2 font-mono text-xs"
+                className="w-full text-left px-4 py-3 rounded-lg border border-[var(--xuli-border)]/70 bg-[var(--color-card)]/70 text-secondary hover:text-accent hover:border-[var(--xuli-accent)]/50 transition-colors mb-2 font-mono text-xs"
               >
                 换一版主题布局
               </button>
