@@ -13,10 +13,14 @@ export default function Home() {
       : layout === 'magazine'
         ? 'home-layout-magazine'
         : 'home-layout-focus'
+  const shellClassName =
+    layout === 'focus'
+      ? 'min-h-screen flex items-center justify-center px-4 py-20'
+      : 'min-h-screen flex items-start justify-center px-4 pt-24 pb-20 sm:pt-28 sm:pb-24'
 
   return (
     <PageTransition>
-      <div className="min-h-screen flex items-center justify-center px-4 py-20">
+      <div className={shellClassName}>
         <div className={`relative z-10 w-full mx-auto ${layoutClassName}`}>
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
