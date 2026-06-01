@@ -620,3 +620,256 @@ body {
   border-radius: 4px;
   color: var(--color-cyan);
 }
+
+/* ============================================================== */
+/*  VibeJournal reader — scoped styles for pre-rendered HTML docs  */
+/* ============================================================== */
+
+/* The page-side host wrapper. The HTML snapshot is wrapped in
+   `<article class="vj-doc">`; we style that subtree here so the rest of
+   the site is not affected. */
+.vj-doc-host .vj-doc {
+  color: var(--xuli-text-primary);
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+
+.vj-doc-host .vj-doc > :first-child {
+  margin-top: 0;
+}
+
+.vj-doc-host .vj-doc > :last-child {
+  margin-bottom: 0;
+}
+
+.vj-doc-host .vj-doc h1,
+.vj-doc-host .vj-doc h2,
+.vj-doc-host .vj-doc h3,
+.vj-doc-host .vj-doc h4 {
+  color: var(--xuli-text-primary);
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  margin-top: 1.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.vj-doc-host .vj-doc h1 {
+  font-size: 1.6rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--xuli-border);
+}
+
+.vj-doc-host .vj-doc h2 {
+  font-size: 1.25rem;
+  color: var(--xuli-accent);
+}
+
+.vj-doc-host .vj-doc h3 {
+  font-size: 1.05rem;
+  color: var(--xuli-text-primary);
+}
+
+.vj-doc-host .vj-doc h4 {
+  font-size: 0.95rem;
+  color: var(--xuli-text-secondary);
+}
+
+.vj-doc-host .vj-doc p {
+  margin: 0.85rem 0;
+  color: var(--xuli-text-primary);
+}
+
+.vj-doc-host .vj-doc strong {
+  color: var(--xuli-accent);
+  font-weight: 600;
+}
+
+.vj-doc-host .vj-doc em {
+  color: var(--xuli-text-secondary);
+  font-style: italic;
+}
+
+.vj-doc-host .vj-doc a {
+  color: var(--xuli-accent);
+  text-decoration: none;
+  border-bottom: 1px dashed color-mix(in srgb, var(--xuli-accent) 60%, transparent);
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.vj-doc-host .vj-doc a:hover {
+  color: var(--xuli-accent-hover);
+  border-bottom-color: var(--xuli-accent-hover);
+}
+
+.vj-doc-host .vj-doc ul,
+.vj-doc-host .vj-doc ol {
+  margin: 0.85rem 0;
+  padding-left: 1.6rem;
+  color: var(--xuli-text-primary);
+}
+
+.vj-doc-host .vj-doc ul {
+  list-style: none;
+}
+
+.vj-doc-host .vj-doc ul > li {
+  position: relative;
+  margin: 0.35rem 0;
+  padding-left: 0.25rem;
+}
+
+.vj-doc-host .vj-doc ul > li::before {
+  content: '';
+  position: absolute;
+  left: -1.1rem;
+  top: 0.65em;
+  width: 0.4rem;
+  height: 0.4rem;
+  background: var(--xuli-accent);
+  border-radius: 1px;
+  opacity: 0.7;
+}
+
+.vj-doc-host .vj-doc ol > li {
+  margin: 0.35rem 0;
+  padding-left: 0.25rem;
+}
+
+.vj-doc-host .vj-doc li > ul,
+.vj-doc-host .vj-doc li > ol {
+  margin: 0.25rem 0;
+}
+
+.vj-doc-host .vj-doc blockquote {
+  margin: 1rem 0;
+  padding: 0.65rem 1rem;
+  border-left: 3px solid var(--xuli-accent);
+  background: color-mix(in srgb, var(--xuli-accent-muted) 50%, transparent);
+  color: var(--xuli-text-secondary);
+  border-radius: 0 6px 6px 0;
+  font-style: italic;
+}
+
+.vj-doc-host .vj-doc blockquote > :first-child {
+  margin-top: 0;
+}
+
+.vj-doc-host .vj-doc blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+.vj-doc-host .vj-doc hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--xuli-border) 80%, transparent),
+    transparent
+  );
+  margin: 2rem 0;
+}
+
+/* Inline code (single backticks). Scoped so it doesn't fight with
+   the .code utility class on skill pills elsewhere. */
+.vj-doc-host .vj-doc :not(pre) > code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85em;
+  padding: 0.1rem 0.4rem;
+  background: var(--xuli-bg-secondary);
+  color: var(--xuli-accent);
+  border: 1px solid var(--xuli-border);
+  border-radius: 4px;
+  word-break: break-word;
+}
+
+/* Fenced code blocks. */
+.vj-doc-host .vj-doc pre {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  background: var(--xuli-bg-secondary);
+  color: var(--xuli-text-primary);
+  border: 1px solid var(--xuli-border);
+  border-radius: 8px;
+  padding: 0.9rem 1.1rem;
+  overflow-x: auto;
+  margin: 1.1rem 0;
+}
+
+.vj-doc-host .vj-doc pre code {
+  font-family: inherit;
+  font-size: inherit;
+  background: transparent;
+  color: inherit;
+  border: none;
+  padding: 0;
+}
+
+/* Tables. Upstream deliverables use pipe-style markdown tables. */
+.vj-doc-host .vj-doc table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.1rem 0;
+  font-size: 0.88rem;
+  overflow-x: auto;
+  display: block;
+  border: 1px solid var(--xuli-border);
+  border-radius: 6px;
+}
+
+.vj-doc-host .vj-doc thead {
+  background: var(--xuli-bg-secondary);
+}
+
+.vj-doc-host .vj-doc th,
+.vj-doc-host .vj-doc td {
+  padding: 0.55rem 0.85rem;
+  border-bottom: 1px solid var(--xuli-border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.vj-doc-host .vj-doc th {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  color: var(--xuli-accent);
+  letter-spacing: 0.02em;
+}
+
+.vj-doc-host .vj-doc tr:last-child td {
+  border-bottom: none;
+}
+
+.vj-doc-host .vj-doc tbody tr:nth-child(even) td {
+  background: color-mix(in srgb, var(--xuli-bg-secondary) 50%, transparent);
+}
+
+/* Image fallback if upstream ever embeds one. */
+.vj-doc-host .vj-doc img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  border: 1px solid var(--xuli-border);
+  margin: 1rem 0;
+}
+
+/* Plain-text fallback used when a snapshot is missing. */
+.vj-doc-host .vj-fallback {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--xuli-text-secondary);
+}
+
+/* Tighten the reader's outer card on very small screens. */
+@media (max-width: 640px) {
+  .vj-doc-host .vj-doc h1 {
+    font-size: 1.35rem;
+  }
+  .vj-doc-host .vj-doc h2 {
+    font-size: 1.1rem;
+  }
+  .vj-doc-host .vj-doc pre {
+    font-size: 0.8rem;
+  }
+}

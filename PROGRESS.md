@@ -11,6 +11,9 @@
 | 2    | 2026-05 中 | 主题 / 布局 / Background Effects / 设计 token 重构 | `tokens.css` + `GenerativeDesignProvider` + `BackgroundEffects` |
 | 3    | 2026-05 末 | 移动端导航 fixed 吸顶 + 实底菜单修复 | `Navbar.tsx` 修复回归 |
 | 4    | 2026-06-01 | **vibe-coding-journal 下游消费侧接入** | `VibeJournal` 页 + 路由 + 同步 lib + 消费状态 + skills 增量 |
+| 5    | 2026-06-01 | **Skills 页面：分类细化 + 卡片等高** | skills taxonomy 拆为 8 类（ai-coding / ai-infra / devops 单独分类）；`Skills.tsx` 重写为等高卡片 + 内部滚动 |
+| 6    | 2026-06-01 | **VibeJournal 升级为 HTML 阅读器** | 同步阶段用 `marked` 预渲染 md→html 写入 `src/data/vibe-journal-html/`；`VibeJournal.tsx` 重写为左目录 + 右内容阅读器（移动端折叠面板） |
+| 7    | 2026-06-01 | **metadata-first 下游同步 + 未知技能审计** | 优先消费上游 `deliverables/*.meta.json` + `SKILLS.md` registry；保留 alias/正文 fallback；auto-register / pending 策略；CLI 输出 `metadata/fallback/autoRegistered/pending`；D6 4 个 scenario 全部验证通过 |
 
 ## 阶段 4 详情（vibe-coding-journal 下游消费侧）
 
@@ -91,3 +94,204 @@ npm run sync:vibe-journal:dry            # 仅计算 diff，不写盘
 1. 未来总 cron 可以直接以 `scripts/sync-vibe-journal.mjs` 作为下游入口；上游生成由独立的 cron 负责并写入 `vibe-coding-journal/deliverables/`。
 2. 技能面板如需更精细的"按周/月聚合"，可以在 `vibe-journal-meta.json` 加一层 `recentIncrements` 聚合视图。
 3. 监控建议：在 `consumer-state.json` 缺失或异常时，让 sync 自动重建一个空状态（已实现 `loadState()` 的容错），但生产里建议配合文件存在性告警。
+
+## 阶段 5 详情（Skills 分类细化 + 卡片等高）
+
+### 目标
+在保持下游 sync 兼容的前提下，把 Skills 页面从 7 个语义混合的大类拆成 8 个语义单一的小类，并解决同一行卡片高度不一致的问题。
+
+### 严格边界
+- **不破坏** `vibeJournalSync.ts` 的 sync 机制
+- 所有现有 skill **ID 保持不变**（向后兼容 sync 的增量写入）
+- 不引入新依赖
+- 卡片视觉保持现有深色 neon 科技风
+
+### 分类拆分（8 类）
+
+| 原分类 | 新分类 | 包含的 skills |
+|--------|--------|---------------|
+| `frontend-basics` | 不变 | html5, css3, javascript, typescript |
+| `frontend-frameworks` | 不变 | react, vue, taro, uniapp, react-native |
+| `ui-libraries` | 不变 | ant-design, element-ui, echarts |
+| `frontend-tooling` | 不变 | vite, webpack, eslint-prettier, gitlab-ci, husky |
+| `ai-tools` | 拆为 `ai-coding` | trae-cursor, claude-code, openai-codex, opencode, hermes-agent, agent-workflow |
+| `ai-tools` | 拆为 `ai-infra`（与原 ai-infra 合并） | llm-rag 加入；原 ai-infra 保留 mcp/ollama/litellm/open-webui/chromadb/pgvector/qdrant/minimax |
+| `ai-infra` | 拆为 `ai-infra` + `devops`（新增） | devops 拿走 docker/github-actions/nginx/ssh/tailscale/mihomo/vpn/vps |
+| `backend` | 改名为 `后端框架`（语义收窄） | nodejs, python, django, fastapi, pydantic, sqlalchemy, jwt, ant-design-pro, playwright, sqladmin |
+
+### 卡片等高策略
+- `grid` + `auto-rows-fr` 让同行卡片自动拉伸到等高
+- 卡片内 `flex flex-col h-full` 让 skill 列表 `flex-1 min-h-0`
+- 长分类的 skill 列表用 `max-h-[480px] overflow-y-auto`，超出时内部滚动而不是撑高整张卡
+- 短分类自然不会触发滚动，整张卡片高度等于同行最高的卡片
+
+### 改动文件
+
+| 文件 | 角色 |
+|------|------|
+| `src/data/skills.json` | 8 类 taxonomy，50 个 skill ID 全部保留 |
+| `src/lib/vibeJournalSync.ts` | 更新 `SKILL_CATEGORY_HINT` 把所有 skill 映射到新 category ID |
+| `src/pages/Skills.tsx` | 重写为等高卡片 + 内部滚动 + 提取 `SkillRow` / `CategoryCard` 子组件 |
+| `PROGRESS.md` | 追加阶段 5 |
+
+### sync 兼容性
+- 所有原 skill ID 保持 → `findSkillEntry()` 仍能命中老条目
+- `SKILL_CATEGORY_HINT` 的 value 从 `ai-tools` 改为 `ai-coding`，新增 `devops`；老 value `ai-tools` 已不再使用
+- 重复运行 sync：`newDeliverables=0 newTimelineLines=0 increments=0`（idempotent 通过）
+- 未来上游 deliverable 里提到新 skill：会按新的 `SKILL_CATEGORY_HINT` 落到正确 category
+
+### 验证（本次）
+- `npm run build`：通过（vite 5.4.21 / 410 modules / 367.13 kB JS）
+- `npm run sync:vibe-journal` 第一次：增量 0
+- `npm run sync:vibe-journal` 第二次：增量 0（idempotent 通过）
+- `npm run preview -- --host 0.0.0.0` + `curl -I /skills`：HTTP 200
+- bundle 中 4 个新 category title 全部出现；老 title（`AI工具`、`后端 / 全栈`、`AI 基础设施 / 代理`）全部消失
+
+## 阶段 6 详情（VibeJournal 升级为 HTML 阅读器）
+
+### 目标
+把 VibeJournal 从"18 行 markdown 纯文本预览"升级为"完整 md → HTML 渲染的阅读器"，并解决"页面变成无限长滚动列表"的问题。借鉴 omo-markdown-site 的"构建阶段把 md 渲染成 HTML"思路，但保持"下游消费侧"约束（不直接读上游路径）。
+
+### 严格边界
+- **不破坏** 现有 `runSync()` 幂等性
+- **不把** `src/lib/vibeJournalSync.ts` 引入浏览器（保持 server-side only）
+- **不**在浏览器运行时去解析上游 markdown
+- **不**新增运行时依赖（marked 是 devDep，浏览器 bundle 不变重）
+- **不**修改上游 `/data/projects/repos/vibe-coding-journal/`
+- **不**重写 Skills 页面（属于阶段 5，本阶段不碰）
+
+### 架构
+
+| 层 | 位置 | 角色 |
+|----|------|------|
+| 同步 lib | `src/lib/vibeJournalSync.ts` | 服务端单文件库；`runSync()` 期间用 `marked` 把每篇 deliverable 渲染成 HTML 写入 `src/data/vibe-journal-html/<file>.html` |
+| 快照目录 | `src/data/vibe-journal-html/` | 新增受管目录；存放每篇已消费 deliverable 的预渲染 HTML（`<article class="vj-doc">…</article>`） |
+| 元数据 | `src/data/vibe-journal-meta.json` | 每个 deliverable 多一个 `htmlPath` 字段（指向快照目录里的 HTML） |
+| 浏览器入口 | `src/pages/VibeJournal.tsx` | `import.meta.glob('/src/data/vibe-journal-html/*.html', { query: '?raw', eager: true })` 在构建时把所有 HTML 字符串内联进 bundle；页面渲染时按 `htmlPath` 取 HTML，用 `dangerouslySetInnerHTML` 注入 `.vj-doc-host` 容器 |
+| 样式 | `src/styles/index.css` | 新增 `.vj-doc-host .vj-doc h1/h2/h3/p/ul/ol/li/code/pre/blockquote/table/hr/a/strong/em/img` 作用域样式 |
+| 依赖 | `package.json` devDeps | 新增 `marked@^14.1.4`（仅服务端使用，不进浏览器 bundle） |
+
+### 阅读交互
+
+- **桌面端**：左侧 260px sticky 文档目录 + 右侧阅读区；`grid-cols-[260px_minmax(0,1fr)]`
+  - 目录项：编号 + 标题，当前选中项 accent 左边框 + 背景
+  - 阅读区头部：文档号 `1/3`、上游文件名、上一篇/下一篇按钮、文档标题、summary
+  - 阅读区主体：完整 HTML（无截断、无 preview）
+- **移动端**：顶部可折叠"文档选择器"按钮，点击展开后是文档列表；展开后点选 → 切换到该文档 + 自动收起
+- **键盘**：↑/↓/←/→ 或 k/j 在文档间切换（聚焦在 input/textarea 时禁用）
+- **切换时**：内容区 scrollTop 重置 + window 平滑滚回顶部
+- **侧栏**：当前选中项自动 scrollIntoView(`block: 'nearest'`) 保持可见
+
+### 完整性保证
+- 同步阶段把 deliverable 全文 md 一次性渲染为完整 HTML，**不做 preview / 截断 / 摘要**
+- 浏览器只是"从已生成的 HTML 字符串里挑一篇渲染"，不存在丢正文的可能
+- fallback：若某篇 `htmlPath` 在构建时未找到（极少见，比如 sync 跑过但 build 还没跑过），降级为 `<pre>{markdown}</pre>` 纯文本展示，且不阻塞其他文档
+
+### 安全
+- `marked` 默认会转义源 md 里的内联 HTML（`<script>`、`<style>` 不会直接执行）
+- 生成的 HTML 通过 `dangerouslySetInnerHTML` 注入；信任边界是"上游 `vibe-coding-journal` 仓库（用户自己的）"——和现有 meta `consumedDeliverables[].content` 信任级别一致
+- 渲染产物落在 `src/data/vibe-journal-html/`（被 git 跟踪，但不是手工编辑的目标）
+
+### idempotency
+- HTML 渲染在 `persist` 分支里无条件重跑所有 `consumedDeliverables`
+- 这样做的好处：未来若有人手动编辑了某篇 md，无需额外 cursor 记账就能反映
+- 渲染成本：当前 3 篇 md 总耗时 < 100ms（marked v14 性能很好）
+- `dry-run` 模式不渲染（`persist === false` 短路），符合现有"dry-run 只算 diff 不写盘"约束
+
+### 改动文件
+
+| 文件 | 角色 |
+|------|------|
+| `package.json` / `package-lock.json` | 新增 `marked` devDep |
+| `src/lib/vibeJournalSync.ts` | 新增 `HTML_SNAPSHOT_DIR` 常量 + `htmlSnapshotRelPath()` + `renderMarkdownToHtml()` + `renderAllDeliverableSnapshots()`；`DeliverableMeta.htmlPath` 字段；`writeMeta()` / `runSync()` 串联渲染 |
+| `src/data/vibe-journal-html/*.html` | 新增（git 跟踪）：3 份预渲染 HTML |
+| `src/data/vibe-journal-meta.json` | 重新生成：每篇 deliverable 多 `htmlPath` 字段 |
+| `src/pages/VibeJournal.tsx` | 重写为左目录 + 右内容阅读器（mobile 折叠面板 + 键盘导航） |
+| `src/styles/index.css` | 新增 `.vj-doc-host .vj-doc *` 作用域样式 |
+| `PROGRESS.md` | 追加阶段 6 |
+
+### 验证（本次）
+- `npm run build`：通过（vite 5.4.21 / 413 modules / 403.25 kB JS / 35.72 kB CSS）
+- `npm run sync:vibe-journal` 第一次：增量 0
+- `npm run sync:vibe-journal` 第二次：增量 0（idempotent 通过）
+- `npm run sync:vibe-journal` 第三次：增量 0（连续多次稳定）
+- `npm run sync:vibe-journal:dry`：增量 0（不写盘，不渲染 HTML）
+- `npm run preview -- --host 0.0.0.0`：
+  - `curl -I /vibe-journal`：HTTP 200
+  - `curl -I /skills`：HTTP 200（验证 Skills 阶段 5 没被破坏）
+- bundle 检查：`dist/assets/*.js` 含 3 份 HTML 快照标题（"VPN 代理项目"、"2026-05 日志汇总"、"Vibe Coding 完整经历"）
+- 完整性检查：source `daily-summary-0525-0529.md` 末尾 4 行 list items ↔ 渲染 HTML 末尾 4 行 `<li>` 完全对应（无截断）
+
+## 阶段 7 详情（metadata-first 下游同步 + 未知技能审计）
+
+### 目标
+实现"上游 LLM 产结构化 metadata + 下游脚本纯消费"链路。下游 sync 不再只是 prose alias 扫描兜底，而是 metadata 优先消费，并把未知技能可审计地落库或入待 review 队列。
+
+### 严格边界
+- **不调用 LLM**——下游是纯脚本消费方，不重新做语义判断
+- **不修改上游** `/data/projects/repos/vibe-coding-journal/`（本阶段 D6 临时 fixture 已清理）
+- **不新增/不复制同步脚本**——`scripts/sync-vibe-journal.mjs` 是唯一入口
+- **不破坏阶段 6 的 HTML 渲染管线**——HTML 快照仍在 `persist` 分支无条件重渲染
+- **不破坏现有 skill id 兼容**——`SKILL_ALIASES` 仍是合法 fallback，phase 4 之后的所有 sync 行为对老内容保持
+
+### 输入优先级（PR / `docs/downstream-contract.md` 规定）
+1. `deliverables/<file>.meta.json` —— 权威；存在且 hash 不同就应用
+2. 上游 `SKILLS.md` —— alias / category registry（`loadUpstreamSkillRegistry()`）
+3. 下游 `SKILL_ALIASES` —— 兼容旧内容和 registry 缺失
+4. deliverable / TIMELINE.md 正文 alias scan —— 仅当 1 缺失/损坏
+
+### state / meta schema 增量
+- `ConsumerState` 新增：
+  - `metadataHashes: Record<file, sha256>` —— 每个 deliverable 最近一次有效 meta 内容的 sha256；hash 一致则不重放
+  - `autoRegisteredSkills: AutoRegisteredSkillEntry[]` —— 自动注册技能审计（最近 200 条）
+  - `pendingSkillCandidates: PendingSkillCandidate[]` —— 未知技能待 review 队列
+  - `metadataParseErrors: Array<{file, error, timestamp}>` —— meta 解析/校验错误日志（最近 50 条）
+- `VibeJournalMeta` 新增（最近一次同步审计摘要）：
+  - `lastRunMetadataFiles / lastRunMetadataParseErrors / lastRunFallbackDeliverables / lastRunAutoRegisteredSkills / pendingSkillCandidates`
+- `SyncResult` 新增 `metadataFilesUsed / metadataParseErrors / fallbackDeliverables / autoRegisteredThisRun / pendingSkillCandidatesThisRun / unknownSkillPolicy`
+
+### 未知技能处理策略
+- 默认 policy = `auto-register`（常量 `UNKNOWN_SKILL_POLICY`）
+- `auto-register`：在 metadata 声明的 `category_hint` 落 `skills.json`（level 30），并写 `autoRegisteredSkills` 审计
+- `pending-review`：不写 `skills.json`，追加到 `pendingSkillCandidates` 队列
+- CLI 覆盖：`scripts/sync-vibe-journal.mjs --policy=auto-register|pending-review`
+
+### 双重计分防护
+- 同一 deliverable 走 metadata 路径时，`runSync()` 跳过 `extractSkillIdsFromLine()` 调用
+- `resolveDeclaredSkill()` 用 `seenInFile` Set 在单个文件内去重
+- `applySkillIncrements()` 自带去重
+- 增量 log 用 `(name, resolved)` 去重，pending queue 用 `(resolved, source)` 去重
+
+### D6 verification（临时 fixture，验证后清理）
+构造 4 个临时 deliverable + meta（路径 `/data/projects/repos/vibe-coding-journal/deliverables/__d6-*.{md,meta.json}`），验证后移除：
+
+| Scenario | 输入 | 期望行为 | 实际结果 |
+|----------|------|----------|----------|
+| S1 新 deliverable + 合法 meta | `__d6-s1-valid.{md,meta.json}` | 走 metadata，不二次 prose scan；docker/hermes-agent 来自 meta，nginx/ssh 不出现 | ✓ `metadataFilesUsed: [__d6-s1-valid.meta.json]`；increments: docker +1, hermes-agent +1 |
+| S2 新 deliverable + 缺失 meta | `__d6-s2-missing.md` | fallback alias scan；body 内 docker/nginx/ssh 全部命中 | ✓ `fallbackDeliverables: [..., __d6-s2-missing.md]`；increments: docker +0.5, nginx +0.5, ssh +0.5 |
+| S3 新 deliverable + 损坏 meta | `__d6-s3-corrupt.{md,meta.json}` | parse error 记录后 fallback；sync 不崩 | ✓ `metadataParseErrors: [{file: __d6-s3-corrupt.md, error: invalid JSON...}]` + fallback |
+| S4 未知技能 Webwright in meta | `__d6-s4-unknown.{md,meta.json}` | Webwright 不在 SKILLS.md / skills.json → auto-register 落 devops / level 30 + 审计 | ✓ `autoRegisteredThisRun: [Webwright->webwright (metadata-new-skill, devops)]`；skills.json 多 webwright 条目 |
+
+### 验证（本次）
+- 基线（无 fixture）：`npm run sync:vibe-journal` × 3 → 全部 `increments=0 metadata=0 fallback=3 autoRegistered=0 pending=0`（idempotent 通过）
+- 4 个 fixture 全部按上表行为通过
+- 第二次 sync 在 fixture 仍在的情况下：`newDeliverables=0 metadataFilesUsed=0 autoRegisteredThisRun=0 increments=0`（metadata hash 复用）
+- `npm run sync:vibe-journal:dry`：`sha256sum` 对 `skills.json` / `consumer-state.json` / `meta.json` 三文件零差异（dry-run 真的不写盘）
+- `npm run build`：通过（vite 5.4.21 / 420 modules / 405.23 kB JS / 35.64 kB CSS）
+- 清理后再次 `npm run sync:vibe-journal` × 2：回到 3 文件 fallback 基线，0 增量
+- fixtures 全部从上游 deliverables/ 移除（`ls` 只剩 3 个真实文件）
+
+### 改动文件
+| 文件 | 角色 |
+|------|------|
+| `src/lib/vibeJournalSync.ts` | 新增 `loadUpstreamSkillRegistry()` / `loadDeliverableMeta()` / `resolveDeclaredSkill()` / `clampMetadataDelta()` / `mergeAutoRegistered()` / `mergePendingCandidates()` / `pruneResolvedPending()` / `dedupRunAutoRegistered()` / `dedupRunPending()`；扩展 `applySkillIncrements()` 接受 `categoryHints` / `unknownSkillPolicy` / `autoRegisteredOut` / `pendingOut` / `sourceTag`；`runSync()` 改为 metadata-first；`SyncResult` / `ConsumerState` / `VibeJournalMeta` 加新字段；`UNKNOWN_SKILL_POLICY` 常量 |
+| `scripts/sync-vibe-journal.mjs` | 新增 `--policy=auto-register\|pending-review` 覆盖；CLI 输出 `metadata/fallback/autoRegistered/pending` 计数 + 明细 |
+| `src/data/vibe-journal-consumer-state.json` | schema 迁移：增加 `metadataHashes / autoRegisteredSkills / pendingSkillCandidates / metadataParseErrors`（forward-compat 缺失时回退到空） |
+| `src/data/vibe-journal-meta.json` | schema 迁移：增加 `lastRunMetadataFiles / lastRunMetadataParseErrors / lastRunFallbackDeliverables / lastRunAutoRegisteredSkills / pendingSkillCandidates` |
+| `AGENTS.md` | 状态字段补全；新增 "Metadata-first 输入优先级" / "未知技能处理" 章节 |
+| `PROGRESS.md` | 追加阶段 7 详情 |
+
+### 后续
+- 未来总 cron A 写 metadata 后，B 直接 `npm run sync:vibe-journal` 即可；不需要修改任何下游代码
+- 若想把未知技能落到更保守的"待 review"模式，cron 命令加 `--policy=pending-review` 即可
+- `metadataParseErrors` 是 review 入口：repo 出现新 error 通常意味着上游 schema 漂移或 hash 漂移

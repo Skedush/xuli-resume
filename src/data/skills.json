@@ -22,13 +22,13 @@
         {
           "id": "javascript",
           "name": "JavaScript",
-          "level": 93,
+          "level": 33,
           "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
         },
         {
           "id": "typescript",
           "name": "TypeScript",
-          "level": 95,
+          "level": 33.5,
           "url": "https://www.typescriptlang.org"
         }
       ]
@@ -41,13 +41,13 @@
         {
           "id": "react",
           "name": "React",
-          "level": 95,
+          "level": 35.5,
           "url": "https://react.dev"
         },
         {
           "id": "vue",
           "name": "Vue",
-          "level": 80,
+          "level": 31.5,
           "url": "https://vuejs.org"
         },
         {
@@ -78,7 +78,7 @@
         {
           "id": "ant-design",
           "name": "Ant Design",
-          "level": 95,
+          "level": 31,
           "url": "https://ant.design"
         },
         {
@@ -92,6 +92,11 @@
           "name": "ECharts",
           "level": 92,
           "url": "https://echarts.apache.org"
+        },
+        {
+          "id": "framer-motion",
+          "name": "Framer Motion",
+          "level": 30
         }
       ]
     },
@@ -103,7 +108,7 @@
         {
           "id": "vite",
           "name": "Vite",
-          "level": 94,
+          "level": 33.5,
           "url": "https://vitejs.dev"
         },
         {
@@ -128,23 +133,23 @@
           "name": "Husky",
           "level": 90,
           "url": "https://typicode.github.io/husky"
+        },
+        {
+          "id": "tailwind",
+          "name": "Tailwind",
+          "level": 30
         }
       ]
     },
     {
-      "id": "ai-tools",
-      "title": "AI工具",
+      "id": "ai-coding",
+      "title": "AI 辅助编程",
       "icon": "M13 10V3L4 14h7v7l9-11h-7z",
       "skills": [
         {
-          "id": "llm-rag",
-          "name": "LLM / RAG",
-          "level": 81
-        },
-        {
           "id": "agent-workflow",
-          "name": "Agent工作流",
-          "level": 95
+          "name": "Agent 工作流",
+          "level": 40
         },
         {
           "id": "trae-cursor",
@@ -154,7 +159,7 @@
         {
           "id": "claude-code",
           "name": "Claude Code",
-          "level": 76
+          "level": 32.5
         },
         {
           "id": "openai-codex",
@@ -165,32 +170,90 @@
         {
           "id": "opencode",
           "name": "OpenCode",
-          "level": 88,
+          "level": 43,
           "url": "https://opencode.ai"
         },
         {
           "id": "hermes-agent",
           "name": "Hermes Agent",
-          "level": 95,
+          "level": 64.5,
           "url": "https://hermes-agent.nousresearch.com/docs"
         }
       ]
     },
     {
+      "id": "ai-infra",
+      "title": "AI 基础设施",
+      "icon": "M9 17v-2a4 4 0 014-4h4m0 0l-3-3m3 3l-3 3M5 21h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z",
+      "skills": [
+        {
+          "id": "llm-rag",
+          "name": "LLM / RAG",
+          "level": 41
+        },
+        {
+          "id": "mcp",
+          "name": "MCP",
+          "level": 41.5,
+          "url": "https://modelcontextprotocol.io"
+        },
+        {
+          "id": "ollama",
+          "name": "Ollama",
+          "level": 35,
+          "url": "https://ollama.com"
+        },
+        {
+          "id": "litellm",
+          "name": "LiteLLM",
+          "level": 33,
+          "url": "https://litellm.vercel.app"
+        },
+        {
+          "id": "open-webui",
+          "name": "Open WebUI",
+          "level": 32,
+          "url": "https://docs.openwebui.com"
+        },
+        {
+          "id": "chromadb",
+          "name": "ChromaDB",
+          "level": 32,
+          "url": "https://www.trychroma.com"
+        },
+        {
+          "id": "pgvector",
+          "name": "pgvector",
+          "level": 31
+        },
+        {
+          "id": "qdrant",
+          "name": "Qdrant",
+          "level": 31
+        },
+        {
+          "id": "minimax",
+          "name": "MiniMax",
+          "level": 36.5,
+          "url": "https://api.minimax.chat"
+        }
+      ]
+    },
+    {
       "id": "backend",
-      "title": "后端 / 全栈",
+      "title": "后端框架",
       "icon": "M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01",
       "skills": [
         {
           "id": "nodejs",
           "name": "Node.js",
-          "level": 74,
+          "level": 33,
           "url": "https://nodejs.org"
         },
         {
           "id": "python",
           "name": "Python",
-          "level": 76,
+          "level": 31,
           "url": "https://www.python.org"
         },
         {
@@ -202,25 +265,25 @@
         {
           "id": "fastapi",
           "name": "FastAPI",
-          "level": 84,
+          "level": 34.5,
           "url": "https://fastapi.tiangolo.com"
         },
         {
           "id": "pydantic",
           "name": "Pydantic",
-          "level": 61,
+          "level": 30.5,
           "url": "https://docs.pydantic.dev"
         },
         {
           "id": "sqlalchemy",
           "name": "SQLAlchemy",
-          "level": 64,
+          "level": 31.5,
           "url": "https://www.sqlalchemy.org"
         },
         {
           "id": "jwt",
           "name": "JWT",
-          "level": 64,
+          "level": 31,
           "url": "https://jwt.io"
         },
         {
@@ -232,112 +295,71 @@
         {
           "id": "playwright",
           "name": "Playwright",
-          "level": 68,
+          "level": 33,
           "url": "https://playwright.dev"
-        },
-        {
-          "id": "nginx",
-          "name": "Nginx",
-          "level": 85,
-          "url": "https://nginx.org"
         },
         {
           "id": "sqladmin",
           "name": "SQLAdmin",
-          "level": 2,
+          "level": 30.5,
           "url": "https://github.com/aminalaee/sqladmin"
         }
       ]
     },
     {
-      "id": "ai-infra",
-      "title": "AI 基础设施 / 代理",
-      "icon": "M9 17v-2a4 4 0 014-4h4m0 0l-3-3m3 3l-3 3M5 21h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z",
+      "id": "devops",
+      "title": "DevOps / 运维",
+      "icon": "M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10",
       "skills": [
-        {
-          "id": "ollama",
-          "name": "Ollama",
-          "level": 65,
-          "url": "https://ollama.com"
-        },
-        {
-          "id": "litellm",
-          "name": "LiteLLM",
-          "level": 64,
-          "url": "https://litellm.vercel.app"
-        },
-        {
-          "id": "open-webui",
-          "name": "Open WebUI",
-          "level": 58,
-          "url": "https://docs.openwebui.com"
-        },
-        {
-          "id": "mcp",
-          "name": "MCP",
-          "level": 95,
-          "url": "https://modelcontextprotocol.io"
-        },
-        {
-          "id": "tailscale",
-          "name": "Tailscale",
-          "level": 85,
-          "url": "https://tailscale.com"
-        },
-        {
-          "id": "mihomo",
-          "name": "mihomo",
-          "level": 83,
-          "url": "https://github.com/MetaCubeX/mihomo"
-        },
-        {
-          "id": "vps",
-          "name": "VPS",
-          "level": 83
-        },
-        {
-          "id": "ssh",
-          "name": "SSH",
-          "level": 95
-        },
-        {
-          "id": "vpn",
-          "name": "VPN",
-          "level": 83
-        },
         {
           "id": "docker",
           "name": "Docker",
-          "level": 95,
+          "level": 45,
           "url": "https://www.docker.com"
         },
         {
           "id": "github-actions",
           "name": "GitHub Actions",
-          "level": 95,
+          "level": 32.5,
           "url": "https://docs.github.com/en/actions"
         },
         {
-          "id": "minimax",
-          "name": "MiniMax",
-          "level": 24,
-          "url": "https://api.minimax.chat"
+          "id": "nginx",
+          "name": "Nginx",
+          "level": 31,
+          "url": "https://nginx.org"
         },
         {
-          "id": "chromadb",
-          "name": "ChromaDB",
-          "level": 6,
-          "url": "https://www.trychroma.com"
+          "id": "ssh",
+          "name": "SSH",
+          "level": 39
         },
         {
-          "id": "pgvector",
-          "name": "Pgvector",
-          "level": 2
+          "id": "tailscale",
+          "name": "Tailscale",
+          "level": 34.5,
+          "url": "https://tailscale.com"
         },
         {
-          "id": "qdrant",
-          "name": "Qdrant",
-          "level": 3
+          "id": "mihomo",
+          "name": "mihomo",
+          "level": 34.5,
+          "url": "https://github.com/MetaCubeX/mihomo"
+        },
+        {
+          "id": "vpn",
+          "name": "VPN",
+          "level": 32.5
+        },
+        {
+          "id": "vps",
+          "name": "VPS",
+          "level": 34
+        },
+        {
+          "id": "github",
+          "name": "Github",
+          "level": 30
         }
       ]
     }
