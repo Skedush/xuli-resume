@@ -12,6 +12,7 @@ import Projects from './pages/Projects'
 import Education from './pages/Education'
 import AIPhilosophy from './pages/AIPhilosophy'
 import DevelopmentLog from './pages/DevelopmentLog'
+import VibeJournal from './pages/VibeJournal'
 
 function App() {
   const location = useLocation()
@@ -36,6 +37,7 @@ function App() {
             <Route path="/education" element={<Education />} />
             <Route path="/ai-philosophy" element={<AIPhilosophy />} />
             <Route path="/development-log" element={<DevelopmentLog />} />
+            <Route path="/vibe-journal" element={<VibeJournal />} />
           </Routes>
         </AnimatePresence>
       </main>

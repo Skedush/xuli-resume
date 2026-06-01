@@ -4,3 +4,8 @@ node_modules/
 dist/
 .env
 .env.local
+
+# Sync layer test fixtures (kept out of the production HTML bundle;
+# referenced in PROGRESS.md verification table for historical context)
+src/data/vibe-journal-html/__*
+src/data/*.json.bak
