@@ -9,10 +9,23 @@ export default function Projects() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <PageHeader title="代表" subtitle="以真实项目呈现任务组织、全栈建模、视觉推理与工程交付" highlightWord="项目" />
 
-          <div className="paper-note bg-[var(--xuli-bg-tertiary)] p-5 mb-12">
-            <p className="text-[var(--xuli-text-secondary)] text-sm text-center leading-relaxed">
-              AI 参与实现、重构、测试与文档整理；我负责目标、约束、方案取舍与最终验收。每个项目都明确当前阶段和验证边界。
-            </p>
+          <div className="illustrated-intro mb-12">
+            <div className="paper-note bg-[var(--xuli-bg-tertiary)] p-5">
+              <span className="eyebrow-note">作品蓝图</span>
+              <p className="text-[var(--xuli-text-secondary)] text-sm leading-relaxed mt-3">
+                AI 参与实现、重构、测试与文档整理；我负责目标、约束、方案取舍与最终验收。每个项目都明确当前阶段和验证边界。
+              </p>
+            </div>
+            <figure className="spot-illustration spot-illustration-projects">
+              <img
+                src="/illustrations/projects-blueprint.webp"
+                alt="桌面工作区、社区平台、视频时间线和数据管线组成的手绘项目蓝图墙"
+                width="1080"
+                height="720"
+                loading="lazy"
+              />
+              <figcaption>不同形态的项目，沿着同一条交付路径展开</figcaption>
+            </figure>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

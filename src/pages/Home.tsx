@@ -63,6 +63,21 @@ export default function Home() {
             </Link>
           </motion.div>
 
+          <motion.figure
+            initial={{ opacity: 0, x: 24, rotate: 1.5 }}
+            animate={{ opacity: 1, x: 0, rotate: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="home-illustration"
+          >
+            <img
+              src="/illustrations/hero-workbench.webp"
+              alt="从问题草稿、协作分工、代码实现到检查和交付的手绘工程工作台"
+              width="1200"
+              height="900"
+            />
+            <figcaption>把想法放上工作台，一步步做成可检查的结果</figcaption>
+          </motion.figure>
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

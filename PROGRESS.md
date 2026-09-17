@@ -14,6 +14,8 @@
 | 5    | 2026-06-01 | **Skills 页面：分类细化 + 卡片等高** | skills taxonomy 拆为 8 类（ai-coding / ai-infra / devops 单独分类）；`Skills.tsx` 重写为等高卡片 + 内部滚动 |
 | 6    | 2026-06-01 | **VibeJournal 升级为 HTML 阅读器** | 同步阶段用 `marked` 预渲染 md→html 写入 `src/data/vibe-journal-html/`；`VibeJournal.tsx` 重写为左目录 + 右内容阅读器（移动端折叠面板） |
 | 7    | 2026-06-01 | **metadata-first 下游同步 + 未知技能审计** | 优先消费上游 `deliverables/*.meta.json` + `SKILLS.md` registry；保留 alias/正文 fallback；auto-register / pending 策略；CLI 输出 `metadata/fallback/autoRegistered/pending`；D6 4 个 scenario 全部验证通过 |
+| 8    | 2026-09-18 | **全站改为工程手账设计系统** | 浅色纸张 token、手绘组件、稳定布局、9 页面统一；移除随机主题与“换一版”入口 |
+| 9    | 2026-09-18 | **加入内容型手绘插画** | 首页工作台、项目蓝图、实践日志 3 张透明 WebP 插画；完成桌面/移动端回归 |
 
 ## 阶段 4 详情（vibe-coding-journal 下游消费侧）
 
@@ -104,7 +106,7 @@ npm run sync:vibe-journal:dry            # 仅计算 diff，不写盘
 - **不破坏** `vibeJournalSync.ts` 的 sync 机制
 - 所有现有 skill **ID 保持不变**（向后兼容 sync 的增量写入）
 - 不引入新依赖
-- 卡片视觉保持现有深色 neon 科技风
+- 卡片视觉沿用当时的深色 neon 科技风（历史阶段记录；阶段 8 已整体替换为工程手账风格）
 
 ### 分类拆分（8 类）
 
@@ -304,3 +306,37 @@ npm run sync:vibe-journal:dry            # 仅计算 diff，不写盘
 - AI 页面改为当前的能力观、开放问题与工具选择方法；工程实录改为 Agent-first 的环境隔离、工程规则、辅助能力与 Skill 演变。
 - 技能页明确数值是同步层维护的“识别与使用记录”，不是主观掌握度；未手工修改 `skills.json`。
 - `npm run build` 已通过；桌面 1440×1000 与移动端 390×844 已完成首页、项目页和 Agent 工程页截图检查。
+
+## 阶段 8 详情（工程手账设计系统）
+
+### 目标与结果
+
+- 将深色 neon / AI 控制台观感改成浅色、有人味的工程师工作手账。
+- 以 `src/styles/tokens.css` 统一灰绿纸张、石墨文字、工程蓝、印章红与荧光笔黄；保留旧颜色变量作为兼容别名。
+- 9 个页面统一采用纸张卡片、手绘边框、编号、标签、时间线和低强度背景线稿。
+- 移除 `GenerativeDesignProvider`、随机 theme/layout、localStorage TTL 与导航栏“换一版”，页面视觉稳定可复现。
+- Navbar 继续保持 fixed 吸顶，移动端菜单继续使用实底背景。
+
+### 验证
+
+- `npm run build`：通过。
+- 桌面和移动端检查 9 个路由：页面均可访问，导航交互正常，控制台无报错。
+- 基线版本提交：`205db8e feat: redesign resume as an engineering notebook`。
+
+## 阶段 9 详情（手绘插画层）
+
+### 目标与结果
+
+- 在工程手账设计系统之上增加真正参与叙事的插画，不把插画当作无关装饰。
+- `hero-workbench.webp`：首页展示“想法 → 协作 → 代码 → 验证 → 交付”的工作台。
+- `projects-blueprint.webp`：项目页展示可检查的系统蓝图与交付路径。
+- `practice-journal.webp`：Vibe 日志页展示实验、失败、修复、验证的实践记录。
+- 3 张资源均为本项目生成的透明背景 WebP；CSS 提供纸张托底、标题签和响应式布局。
+- 修复移动端长代码与文章列表的换行规则，避免 Vibe 日志产生页面级横向溢出。
+
+### 验证
+
+- `npm run build`：通过。
+- 9 个路由在桌面与移动端均返回 200；3 张插画全部加载成功。
+- 首页到项目页、移动端菜单到项目页/关于页的交互通过。
+- 页面无横向溢出，浏览器控制台无错误，`git diff --check` 通过。

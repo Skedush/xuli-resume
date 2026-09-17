@@ -105,23 +105,36 @@ export default function VibeJournal() {
             highlightWord="日志"
           />
 
-          <div className="paper-note bg-[var(--color-card)]/70 p-3 mb-6 flex flex-wrap items-center justify-between gap-2">
-            <span className="text-[var(--xuli-text-tertiary)] text-xs font-mono">
-              下游同步：{formatLastRun(meta.lastRun)}
-              {meta.lastRunNewDeliverables.length > 0 && (
-                <span className="ml-2 text-[var(--xuli-accent)]">
-                  +{meta.lastRunNewDeliverables.length} 份新文档
-                </span>
-              )}
-              {meta.lastRunNewTimelineLines > 0 && (
-                <span className="ml-2 text-[var(--xuli-accent)]">
-                  +{meta.lastRunNewTimelineLines} 行新 timeline
-                </span>
-              )}
-            </span>
-            <span className="text-[var(--xuli-text-tertiary)] text-xs font-mono">
-              共 {deliverables.length} 份已消费文档
-            </span>
+          <div className="illustrated-intro illustrated-intro-journal mb-8">
+            <div className="paper-note bg-[var(--color-card)]/70 p-4 flex flex-col justify-center gap-3">
+              <span className="eyebrow-note self-start">实践现场</span>
+              <span className="text-[var(--xuli-text-tertiary)] text-xs font-mono">
+                下游同步：{formatLastRun(meta.lastRun)}
+                {meta.lastRunNewDeliverables.length > 0 && (
+                  <span className="ml-2 text-[var(--xuli-accent)]">
+                    +{meta.lastRunNewDeliverables.length} 份新文档
+                  </span>
+                )}
+                {meta.lastRunNewTimelineLines > 0 && (
+                  <span className="ml-2 text-[var(--xuli-accent)]">
+                    +{meta.lastRunNewTimelineLines} 行新 timeline
+                  </span>
+                )}
+              </span>
+              <span className="text-[var(--xuli-text-tertiary)] text-xs font-mono">
+                共 {deliverables.length} 份已消费文档
+              </span>
+            </div>
+            <figure className="spot-illustration spot-illustration-journal">
+              <img
+                src="/illustrations/practice-journal.webp"
+                alt="记录代码、实验、失败修正、时间线和验证结果的手绘工程日志本"
+                width="1080"
+                height="720"
+                loading="lazy"
+              />
+              <figcaption>保留试验、修正与验证，让方法随实践生长</figcaption>
+            </figure>
           </div>
 
           {timelinePhases.length > 0 && (

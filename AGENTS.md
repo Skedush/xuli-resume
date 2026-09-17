@@ -1,6 +1,6 @@
 # PROJECT KNOWLEDGE BASE
 
-**Generated:** 2025-05-12
+**Updated:** 2026-09-18
 **Project:** 徐力个人简历网站 (xuli-resume)
 
 ## OVERVIEW
@@ -14,17 +14,16 @@ src/
 ├── App.tsx          # 路由 + AnimatePresence
 ├── main.tsx         # 入口 (BrowserRouter)
 ├── pages/           # 9 页面 (Home, About, Skills, Experience, Projects, Education, AIPhilosophy, DevelopmentLog, VibeJournal)
-├── components/      # 7 共享组件 (Navbar, Footer, Logo, PageHeader, AnimatedItem, PageTransition, BackgroundEffects)
-├── lib/             # 工具库 (vibeJournalSync.ts — 下游同步层；scripts/sync-vibe-journal.mjs — CLI runner)
-│   ├── data/            # 数据文件
-│   │   ├── skills.json                 # 技能面板数据（被 sync 增量更新）
-│   │   ├── skills-types.ts             # 技能数据模型（共享给 browser + sync）
-│   │   ├── vibe-journal-consumer-state.json  # 下游消费状态（sync 写入）
-│   │   ├── vibe-journal-meta.json      # 浏览器可读的 sync 元数据（lastRun, 文档列表, 最近增量）
-│   │   └── vibe-journal-html/          # sync 阶段预渲染的 HTML 快照（marked；Vite import.meta.glob 内联）
-└── styles/index.css # 全局 + CSS 变量 + 自定义 utilities
-Ai/                  # 13 篇 AI 文章 MD 文件 (DevelopmentLog 页面内容)
-public/favicon.svg   # 抽象简历 + AI logo
+├── components/      # 6 个共享组件 (Navbar, Footer, Logo, PageHeader, PageTransition, BackgroundEffects)
+├── lib/             # 工具库 (vibeJournalSync.ts — 下游同步层)
+├── data/            # 简历、技能、同步状态与预渲染 HTML
+└── styles/
+    ├── tokens.css   # 工程手账设计 token
+    └── index.css    # 全局样式、手绘组件与响应式规则
+scripts/             # vibe-journal CLI runner
+public/
+├── favicon.svg      # 手绘文档 + 铅笔标志
+└── illustrations/   # 首页、项目页、Vibe 日志页的透明 WebP 插画
 ```
 
 ## WHERE TO LOOK
@@ -32,7 +31,9 @@ public/favicon.svg   # 抽象简历 + AI logo
 |------|----------|
 | 添加新页面 | `src/pages/` + `src/App.tsx` |
 | 修改导航/页脚 | `src/components/Navbar.tsx`, `Footer.tsx` |
-| 自定义 CSS | `src/styles/index.css` |
+| 修改主题 token | `src/styles/tokens.css` |
+| 修改手绘组件 / 响应式 CSS | `src/styles/index.css` |
+| 修改页面插画 | `public/illustrations/` + 对应页面组件 |
 | 页面头部统一 | `src/components/PageHeader.tsx` |
 | 同步 vibe-coding-journal 上游 | `npm run sync:vibe-journal`（实现见 `src/lib/vibeJournalSync.ts`） |
 | 修改技能面板 | `src/data/skills.json`（结构见 `src/data/skills-types.ts`） |
@@ -43,6 +44,15 @@ public/favicon.svg   # 抽象简历 + AI logo
 - **样式**: Tailwind class，拼写错误会被忽略
 - **动画**: Framer Motion + CSS GPU 加速
 - **无 ESLint**: 项目无 lint 配置
+
+## VISUAL SYSTEM
+
+- 当前唯一主题是浅色“工程师工作手账”：灰绿绘图纸背景、石墨文字、工程蓝强调色、印章红与荧光笔黄。
+- 标题使用 `LXGW WenKai`，正文使用 `Noto Sans SC`，代码与标签使用 `IBM Plex Mono`。
+- 卡片、标签、时间线和背景线稿由 CSS 构成；首页、项目页与 Vibe 日志页使用项目专属的透明 WebP 插画增强叙事。
+- 布局与主题保持稳定，不再使用随机 theme/layout、localStorage TTL 或“换一版”入口。
+- 优先修改 `tokens.css` 和共享 sketch/paper 类，避免在单页硬编码新的颜色体系。
+- 插画应保持低饱和墨线、水彩填色、透明背景；新增资源需压缩、提供准确 `alt`，并检查桌面与移动端溢出。
 
 ## SKILL LEVEL MODEL
 
@@ -194,10 +204,10 @@ npm run sync:vibe-journal:dry     # 仅计算 diff，不写盘
 ## 用户偏好 (徐力)
 
 ### 设计风格
-- **主题**: 深色 neon 风格，科技感 + AI 感
-- **配色**: 暗色背景 + 青色(#22D3EE)强调色
-- **字体**: Orbitron (标题), Rajdhani (正文), JetBrains Mono (代码)
-- **图标**: 抽象几何设计（简历 + AI 结合），非真实照片
+- **主题**: 浅色工程手账，手绘线稿与插画结合，减少模板化 AI 产品感
+- **配色**: 灰绿纸张 + 石墨黑 + 工程蓝，辅以印章红和荧光笔黄
+- **字体**: LXGW WenKai（标题）、Noto Sans SC（正文）、IBM Plex Mono（代码）
+- **图标与插画**: 手绘文档、铅笔、工作台与蓝图意象；插画服务于内容叙事，不使用真实照片
 
 ### 页面布局偏好
 - 状态 badge（如"待业中"）放在副标题行
@@ -206,7 +216,7 @@ npm run sync:vibe-journal:dry     # 仅计算 diff，不写盘
 - 需要在特定页面添加文言文风格的 disclaimer
 
 ### 代码偏好
-- 提取共享组件，避免重复代码（Logo, PageHeader, AnimatedItem）
+- 提取共享组件，避免重复代码（Logo, PageHeader, PageTransition）
 - 使用 Tailwind class，简洁为主
 - 动画使用 Framer Motion + CSS GPU 加速
 
