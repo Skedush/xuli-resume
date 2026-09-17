@@ -295,3 +295,12 @@ npm run sync:vibe-journal:dry            # 仅计算 diff，不写盘
 - 未来总 cron A 写 metadata 后，B 直接 `npm run sync:vibe-journal` 即可；不需要修改任何下游代码
 - 若想把未知技能落到更保守的"待 review"模式，cron 命令加 `--policy=pending-review` 即可
 - `metadataParseErrors` 是 review 入口：repo 出现新 error 通常意味着上游 schema 漂移或 hash 漂移
+
+## 个人简历内容升级
+
+- 新增 `徐力-个人简历.md` 作为当前个人信息、能力边界、工作经历、代表项目、教育与开源贡献的内容依据。
+- 新增 `src/data/resume.ts` 作为页面共享数据源，统一首页、关于、技能、工作经历与项目页的核心事实，减少多页面内容漂移。
+- 首页定位更新为“AI 应用构建者 / 全栈工程师”；代表项目更新为 AXMORF Studio、Luju Living、Vibe Journal Pipeline、SyringeMeter、Viselora、Hero Next 与 RAG 原型。
+- AI 页面改为当前的能力观、开放问题与工具选择方法；工程实录改为 Agent-first 的环境隔离、工程规则、辅助能力与 Skill 演变。
+- 技能页明确数值是同步层维护的“识别与使用记录”，不是主观掌握度；未手工修改 `skills.json`。
+- `npm run build` 已通过；桌面 1440×1000 与移动端 390×844 已完成首页、项目页和 Agent 工程页截图检查。

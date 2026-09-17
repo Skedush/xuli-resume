@@ -2,8 +2,9 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import PageTransition from '../components/PageTransition'
 import { useGenerativeDesign } from '../components/GenerativeDesignProvider'
+import { profile, projects } from '../data/resume'
 
-const floatingWords = ['React', 'TypeScript', 'Vite', 'AI', 'Node']
+const focusWords = ['Agent-first', 'TypeScript', 'Python', 'Full-stack', 'Delivery']
 
 export default function Home() {
   const { layout } = useGenerativeDesign()
@@ -25,8 +26,9 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0 }}
+            transition={{ duration: 0.6 }}
             className="text-6xl text-[var(--xuli-accent)]/20 mb-4 home-hero-symbol"
+            aria-hidden="true"
           >
             ∞
           </motion.div>
@@ -37,49 +39,58 @@ export default function Home() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-[var(--xuli-text-primary)]"
           >
-            Senior Frontend Engineer
+            AI 应用构建者
             <br />
-            <span className="text-[var(--xuli-accent)]">AI-Driven Development</span>
+            <span className="text-[var(--xuli-accent)]">全栈工程师</span>
           </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-lg sm:text-xl text-[var(--xuli-text-secondary)] font-body mb-10 max-w-xl home-hero-intro"
-          >
-            8年经验 · 专注现代化前端技术栈 · AI驱动开发实践
-          </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="mb-8 home-status-wrap"
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mb-10 home-hero-intro"
           >
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[var(--xuli-border)] bg-[var(--xuli-bg-secondary)] text-[var(--xuli-text-secondary)] text-sm font-mono">
+            <p className="text-lg sm:text-xl text-[var(--xuli-text-secondary)] font-body max-w-3xl leading-relaxed">
+              {profile.summary}
+            </p>
+            <span className="mt-4 inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[var(--xuli-border)] bg-[var(--xuli-bg-secondary)] text-[var(--xuli-text-secondary)] text-sm font-mono">
               <span className="w-2 h-2 rounded-full bg-[var(--color-green)] animate-subtle-pulse" />
-              待业中 · 寻找机会
+              {profile.status}
             </span>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
             className="flex flex-wrap justify-center gap-4 mb-16 home-actions"
           >
-            <Link
-              to="/about"
-              className="btn btn-primary"
-            >
-              个人介绍
+            <Link to="/projects" className="btn btn-primary">
+              查看代表项目
             </Link>
+            <Link to="/about" className="btn btn-outline">
+              了解我的方法
+            </Link>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="max-w-lg home-ai-card"
+          >
             <Link
-              to="/experience"
-              className="btn btn-outline"
+              to="/ai-philosophy"
+              className="block bg-[var(--xuli-bg-tertiary)] border border-[var(--xuli-border)] rounded-xl p-6 text-left hover:border-[var(--xuli-accent)]/40 transition-colors"
             >
-              工作经历
+              <span className="text-[var(--xuli-accent)] text-xs font-mono">AI-NATIVE / AGENT-FIRST</span>
+              <h2 className="text-[var(--xuli-text-primary)] font-display text-xl mt-2 mb-3">
+                先定义问题，再组织 AI 完成交付
+              </h2>
+              <p className="text-[var(--xuli-text-secondary)] text-sm leading-relaxed">
+                我关注的不只是工具熟练度，而是如何检索方案、明确边界、组织 Agent、检查状态，并对接口、数据、验证与最终结果负责。
+              </p>
+              <span className="mt-4 inline-flex text-[var(--xuli-accent)] text-sm">阅读我的 AI 思考 →</span>
             </Link>
           </motion.div>
 
@@ -87,67 +98,34 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
-            className="max-w-lg home-ai-card"
-          >
-            <Link to="/ai-philosophy" className="block bg-[var(--xuli-bg-tertiary)] border border-[var(--xuli-border)] rounded-xl p-6 text-left hover:border-[var(--xuli-accent)]/30 transition-colors">
-              <h3 className="text-[var(--xuli-text-primary)] font-display text-base mb-3">AI 时代的软件开发</h3>
-              <div className="text-[var(--xuli-text-secondary)] text-sm space-y-3 leading-relaxed">
-                <p>
-                  <span className="text-[var(--xuli-text-tertiary)]">近期变化：</span>认知能力自增强——AI 帮助开发 AI → 帮助优化 workflow → 帮助生成 agent。软件开发速度进入自增强循环。
-                </p>
-                <p>
-                  <span className="text-[var(--xuli-text-tertiary)]">核心转变：</span>从"程序"到"认知系统"。function/class/API → memory/reasoning/planning/orchestration。软件开始拥有认知属性。
-                </p>
-                <p>
-                  <span className="text-[var(--xuli-text-tertiary)]">长期思考：</span>AI 可以越来越擅长"如何做到"，但未必知道"为什么做"和"应该做到什么程度"。稀缺的不是实现能力，而是 <span className="text-[var(--xuli-accent)]">Goal Definition</span>（定义方向）和 <span className="text-[var(--xuli-accent)]">Governance</span>（治理复杂系统）。
-                </p>
-                <p className="text-[var(--xuli-text-tertiary)]">
-                  永恒的：定义方向、治理复杂系统、协调现实世界——这些是人类不可替代的价值。
-                </p>
-              </div>
-            </Link>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
             className="max-w-lg mt-8 home-log-card"
           >
-            <Link to="/development-log" className="block bg-[var(--xuli-bg-tertiary)] border border-[var(--xuli-border)] rounded-xl p-6 text-left hover:border-[var(--xuli-accent)]/30 transition-colors">
-              <div className="flex items-center gap-3 mb-3">
-                <h3 className="text-[var(--xuli-text-primary)] font-display text-base">关于这个网站</h3>
-                <span className="px-2 py-0.5 bg-[var(--xuli-accent)]/10 text-[var(--xuli-accent)] text-xs font-mono rounded">
-                  ~1小时完成
-                </span>
+            <Link
+              to="/projects"
+              className="block bg-[var(--xuli-bg-tertiary)] border border-[var(--xuli-border)] rounded-xl p-6 text-left hover:border-[var(--xuli-accent)]/40 transition-colors"
+            >
+              <span className="text-[var(--xuli-accent)] text-xs font-mono">SELECTED WORK</span>
+              <h2 className="text-[var(--xuli-text-primary)] font-display text-xl mt-2 mb-4">从想法到可检查的作品</h2>
+              <div className="space-y-3">
+                {projects.slice(0, 3).map((project) => (
+                  <div key={project.name} className="flex items-baseline justify-between gap-4">
+                    <span className="text-[var(--xuli-text-secondary)] text-sm">{project.name}</span>
+                    <span className="text-[var(--xuli-text-tertiary)] text-xs text-right">{project.subtitle}</span>
+                  </div>
+                ))}
               </div>
-              <p className="text-[var(--xuli-text-secondary)] text-sm mb-4">
-                <span className="text-[var(--xuli-accent)] font-semibold">01:09 开始对话</span> →
-                <span className="text-[var(--color-green)] font-semibold">02:15 已部署上线</span>
-              </p>
-              <p className="text-[var(--xuli-text-tertiary)] text-xs mb-4">
-                OpenCode + Sisyphus 工作流 + Metis/Momus 审查 · 8个页面并行构建
-              </p>
-              <span className="inline-flex items-center gap-2 text-[var(--xuli-accent)] text-sm font-medium">
-                查看完整开发过程
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </span>
+              <span className="mt-5 inline-flex text-[var(--xuli-accent)] text-sm">查看 7 个代表项目 →</span>
             </Link>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.7 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
             className="flex flex-wrap justify-center gap-4 text-sm font-mono mt-12 home-tag-cloud"
           >
-            {floatingWords.map((word) => (
-              <span
-                key={word}
-                className="text-[var(--xuli-text-tertiary)]"
-              >
+            {focusWords.map((word) => (
+              <span key={word} className="text-[var(--xuli-text-tertiary)]">
                 {word}
               </span>
             ))}

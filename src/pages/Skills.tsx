@@ -2,6 +2,7 @@ import PageTransition from '../components/PageTransition'
 import PageHeader from '../components/PageHeader'
 import skillsData from '../data/skills.json'
 import type { SkillsData, SkillCategory, SkillEntry } from '../data/skills-types'
+import { practiceAreas } from '../data/resume'
 
 const data = skillsData as SkillsData
 
@@ -84,15 +85,27 @@ export default function Skills() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <PageHeader
             title="技术"
-            subtitle="掌握现代化前端技术体系，持续学习AI驱动开发"
-            highlightWord="栈"
+            subtitle="从实际项目出发理解工具用途、使用深度与适用边界"
+            highlightWord="实践"
           />
 
           <div className="bg-card rounded-lg p-3 mb-6 border border-accent/30">
-            <p className="text-accent text-xs text-center font-medium leading-relaxed">
-              评分基于个人主观评价。「知之越多，方知未知越多」——技术认知如圆，圆的面积越大，接触的未知边界也越长
+            <p className="text-secondary text-xs text-center font-medium leading-relaxed">
+              下方数值不是“掌握度”：30 代表技能已进入实践记录，此后按项目日志中的实际使用次数增量更新，最高 95。具体熟悉程度以项目说明和验证证据为准。
             </p>
           </div>
+
+          <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
+            {practiceAreas.map((area) => (
+              <article key={area.title} className="bg-card rounded-lg p-5 border border-[var(--color-border)]/60">
+                <h2 className="font-display text-lg text-primary mb-2">{area.title}</h2>
+                <p className="text-accent text-sm mb-3 leading-relaxed">{area.tools}</p>
+                <p className="text-tertiary text-sm leading-relaxed">{area.boundary}</p>
+              </article>
+            ))}
+          </section>
+
+          <h2 className="font-display text-2xl text-primary mb-5">项目使用记录</h2>
 
           {/*
             `items-stretch` (default for grid) + each card being h-full keeps
@@ -106,7 +119,8 @@ export default function Skills() {
           </div>
 
           <div className="mt-12 bg-card rounded-lg p-6 border border-[var(--color-border)]/60">
-            <h2 className="font-display text-2xl text-primary mb-6 text-center">工具链</h2>
+            <h2 className="font-display text-2xl text-primary mb-2 text-center">当前工具索引</h2>
+            <p className="text-tertiary text-sm text-center mb-6">用于快速检索，不代表所有工具具有相同使用深度</p>
             <div className="flex flex-wrap justify-center gap-3">
               {data.tools.map((tool) => (
                 <span

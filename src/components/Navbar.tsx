@@ -11,9 +11,9 @@ const navItems = [
   { path: '/experience', label: '经历', en: 'Experience' },
   { path: '/projects', label: '项目', en: 'Projects' },
   { path: '/education', label: '教育', en: 'Education' },
-  { path: '/ai-philosophy', label: 'AI哲学', en: 'AI Philosophy' },
-  { path: '/development-log', label: '工程实录', en: 'Dev Log' },
-  { path: '/vibe-journal', label: 'Vibe日志', en: 'Vibe Journal' },
+  { path: '/ai-philosophy', label: 'AI思考', en: 'AI Thinking' },
+  { path: '/development-log', label: 'Agent工程', en: 'Agent Engineering' },
+  { path: '/vibe-journal', label: '实践日志', en: 'Practice Journal' },
 ]
 
 export default function Navbar() {

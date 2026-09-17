@@ -6,31 +6,31 @@ const education = {
   degree: '本科',
   major: '软件工程',
   period: '2014 - 2018',
-  description: '系统学习软件工程理论，参与多个校园技术项目，奠定扎实的编程基础。',
+  description: '系统学习数据结构、算法、操作系统、计算机网络、数据库与软件工程，建立计算机基础与工程思维。',
   awards: ['三等奖学金'],
 }
 
 const certificates = [
   { name: '软件设计师', issuer: '中华人民共和国人力资源和社会保障部', year: '2016' },
-  { name: '浙江省二级C语言', issuer: '浙江省教育厅', year: '2015' },
   { name: '浙江省三级数据库', issuer: '浙江省教育厅', year: '2015' },
+  { name: '浙江省二级 C 语言', issuer: '浙江省教育厅', year: '2015' },
 ]
 
 const military = {
   period: '2012.12 - 2014.12',
   unit: '解放军警卫班',
-  description: '参军入伍，磨炼意志',
+  description: '参军入伍，培养执行力、责任意识与团队协作习惯。',
 }
 
 const openSourceContributions = [
   {
-    project: '阿里 xrender',
-    description: '参与阿里跨端渲染组件库开发，贡献React组件与Bug修复',
+    project: 'Alibaba x-render',
+    description: '参与动态表单组件与问题修复',
     link: 'https://github.com/alibaba/x-render/commits?author=hsuliss',
   },
   {
-    project: '京东 nutui-react-taro',
-    description: '参与京东多端组件库开发，为React+Taro生态贡献代码',
+    project: 'JD NutUI React / Taro',
+    description: '参与多端组件生态建设',
     link: 'https://github.com/jdf2e/nutui-react/commits?author=Skedush',
   },
 ]
@@ -40,7 +40,7 @@ export default function Education() {
     <PageTransition>
       <div className="min-h-screen">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <PageHeader title="教育" subtitle="扎实的基础，持续的学习" highlightWord="背景" />
+          <PageHeader title="教育" subtitle="计算机基础、专业证书与持续的开源实践" highlightWord="经历" />
 
           <div className="space-y-6 mb-16">
             <div className="bg-[var(--xuli-bg-tertiary)] rounded-lg p-8 border border-[var(--color-border)]/60">
@@ -137,7 +137,7 @@ export default function Education() {
                 <svg className="w-6 h-6 text-[var(--xuli-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                 </svg>
-                志愿者经历
+                其他经历
               </h3>
               <div className="bg-[var(--xuli-bg-secondary)] rounded-lg p-3">
                 <div className="flex items-center justify-between mb-2">

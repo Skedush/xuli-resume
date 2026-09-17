@@ -1,24 +1,12 @@
 import PageTransition from '../components/PageTransition'
 import PageHeader from '../components/PageHeader'
+import { capabilityHighlights, profile, profileLinks } from '../data/resume'
 
 const stats = [
-  { value: '8+', label: '年开发经验' },
-  { value: '20+', label: '完成项目' },
-  { value: '4', label: '工作经历' },
-  { value: '2', label: '开源贡献' },
-]
-
-const highlights: { icon: string; title: string; desc: string | React.ReactNode }[] = [
-  { icon: 'M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4', title: '前端架构', desc: '擅长前端工程化、模块化设计与性能优化' },
-  { icon: 'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z', title: '多端开发', desc: 'Web、移动端、桌面端跨平台解决方案' },
-  { icon: 'M13 10V3L4 14h7v7l9-11h-7z', title: 'AI集成', desc: 'LLM、RAG、Agent工作流深度应用' },
-  { icon: 'M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z', title: '开源贡献', desc: (
-    <>
-      <a href="https://github.com/alibaba/x-render/commits?author=hsuliss" target="_blank" rel="noopener noreferrer" className="text-[var(--xuli-accent)] hover:underline">阿里 xrender</a>
-      {'、'}
-      <a href="https://github.com/jdf2e/nutui-react/commits?author=Skedush" target="_blank" rel="noopener noreferrer" className="text-[var(--xuli-accent)] hover:underline">京东 nutui-react-taro</a>
-    </>
-  ) },
+  { value: '8 年', label: '软件行业经验' },
+  { value: '7 个', label: '代表项目' },
+  { value: '5 段', label: '工作经历' },
+  { value: '2 项', label: '开源贡献' },
 ]
 
 export default function About() {
@@ -26,57 +14,105 @@ export default function About() {
     <PageTransition>
       <div className="min-h-screen">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <PageHeader title="关于" subtitle="热爱技术，追求卓越，在代码中寻找美感" highlightWord="我" />
+          <PageHeader title="关于" subtitle="以问题、方法、作品与验证呈现真实能力" highlightWord="我" />
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
-            <div className="bg-[var(--xuli-bg-tertiary)] rounded-lg p-8 border border-[var(--color-border)]/60">
-              <h2 className="font-display text-2xl text-[var(--xuli-text-primary)] mb-6">基本信息</h2>
+          <section className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-8 mb-10">
+            <div className="bg-[var(--xuli-bg-tertiary)] rounded-xl p-8 border border-[var(--color-border)]/60">
               <div className="flex flex-col items-center text-center mb-8">
                 <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-[var(--xuli-accent)]/30 mb-4">
                   <img src="/ai-photo.jpg" alt="徐力" className="w-full h-full object-cover" />
                 </div>
-                <p className="text-[var(--xuli-text-primary)] font-display text-2xl mb-1">徐力</p>
-                <p className="text-[var(--xuli-text-tertiary)] text-sm">软件开发工程师</p>
+                <h2 className="text-[var(--xuli-text-primary)] font-display text-2xl mb-1">{profile.name}</h2>
+                <p className="text-[var(--xuli-accent)] text-sm">{profile.title}</p>
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                <InfoRow label="年龄" value="31岁" />
-                <InfoRow label="性别" value="男" />
-                <InfoRow label="电话" value="158****8755" />
-                <InfoRow label="邮箱" value="L****@gmail.com" />
+
+              <dl className="space-y-3 mb-8">
+                <InfoRow label="所在地" value={profile.location} />
+                <InfoRow label="电话" value={profile.phone} />
+                <InfoRow label="邮箱" value={profile.email} />
+                <InfoRow label="状态" value={profile.status} />
+              </dl>
+
+              <div className="pt-6 border-t border-[var(--xuli-border)]/70">
+                <h3 className="text-[var(--xuli-text-primary)] font-semibold mb-3">求职方向</h3>
+                <div className="flex flex-wrap gap-2">
+                  {profile.directions.map((direction) => (
+                    <span key={direction} className="px-3 py-1.5 bg-[var(--xuli-bg-secondary)] text-[var(--xuli-text-secondary)] text-xs rounded">
+                      {direction}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
 
-            <div className="bg-[var(--xuli-bg-tertiary)] rounded-lg p-8 border border-[var(--color-border)]/60">
-              <h2 className="font-display text-2xl text-[var(--xuli-text-primary)] mb-6">核心优势</h2>
-              <div className="space-y-4">
-                {highlights.map((item, i) => (
-                  <div key={i} className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-[var(--xuli-bg-secondary)] flex items-center justify-center flex-shrink-0">
-                      <svg className="w-5 h-5 text-[var(--xuli-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={item.icon} />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="text-[var(--xuli-text-primary)] font-semibold mb-1">{item.title}</h3>
-                      <p className="text-[var(--xuli-text-tertiary)] text-sm">{item.desc}</p>
-                    </div>
-                  </div>
+            <div className="bg-[var(--xuli-bg-tertiary)] rounded-xl p-8 border border-[var(--color-border)]/60">
+              <span className="text-[var(--xuli-accent)] text-xs font-mono">MY POSITION</span>
+              <h2 className="font-display text-2xl text-[var(--xuli-text-primary)] mt-2 mb-5">AI 时代，能力应由过程与作品共同证明</h2>
+              <div className="space-y-4 text-[var(--xuli-text-secondary)] leading-relaxed">
+                <p>
+                  我希望通过自己提出的问题、发现和筛选工具的方法、组织 AI 完成任务的过程，以及可以检查的作品，呈现我能做什么。
+                </p>
+                <p>
+                  我不把自己描述为精通所有工具的人。不同工具的掌握程度从了解用途、动手试用，到接入实际项目各不相同。真正重要的是遇到问题时能找到可选路径，并在接口、数据、状态与验证等关键环节承担结果责任。
+                </p>
+                <p>
+                  从前端开发出发，我把实践扩展到 Agent 工作流、Python 数据处理、视觉推理、视频生产、后端服务和部署运维。工具会变化，但问题定义、工程判断与可靠交付需要持续积累。
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-8">
+                {profileLinks.slice(0, 3).map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group px-4 py-3 rounded-lg bg-[var(--xuli-bg-secondary)] border border-[var(--xuli-border)]/70 hover:border-[var(--xuli-accent)]/40 transition-colors"
+                  >
+                    <span className="block text-[var(--xuli-text-tertiary)] text-xs mb-1">{link.label}</span>
+                    <span className="text-[var(--xuli-text-primary)] text-sm group-hover:text-[var(--xuli-accent)] transition-colors">{link.value} ↗</span>
+                  </a>
                 ))}
               </div>
             </div>
-          </div>
+          </section>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {stats.map((stat, i) => (
-              <div
-                key={i}
-                className="bg-[var(--xuli-bg-tertiary)] rounded-lg p-6 text-center border border-[var(--color-border)]/60"
-              >
-                <div className="font-display text-3xl font-bold text-[var(--xuli-accent)] mb-2">{stat.value}</div>
+          <section className="mb-10">
+            <h2 className="font-display text-2xl text-[var(--xuli-text-primary)] mb-5">核心能力</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {capabilityHighlights.map((item, index) => (
+                <article key={item.title} className="bg-[var(--xuli-bg-tertiary)] rounded-xl p-6 border border-[var(--color-border)]/60">
+                  <div className="flex items-start gap-4">
+                    <span className="font-mono text-[var(--xuli-accent)] text-sm">0{index + 1}</span>
+                    <div>
+                      <h3 className="text-[var(--xuli-text-primary)] font-semibold mb-2">{item.title}</h3>
+                      <p className="text-[var(--xuli-text-tertiary)] text-sm leading-relaxed">{item.description}</p>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+            {stats.map((stat) => (
+              <div key={stat.label} className="bg-[var(--xuli-bg-tertiary)] rounded-lg p-6 text-center border border-[var(--color-border)]/60">
+                <div className="font-display text-2xl sm:text-3xl font-bold text-[var(--xuli-accent)] mb-2">{stat.value}</div>
                 <div className="text-[var(--xuli-text-tertiary)] text-sm">{stat.label}</div>
               </div>
             ))}
-          </div>
+          </section>
+
+          <section className="bg-[var(--xuli-bg-tertiary)] rounded-xl p-6 border border-[var(--color-border)]/60">
+            <h2 className="font-display text-xl text-[var(--xuli-text-primary)] mb-4">更多平台</h2>
+            <div className="flex flex-wrap gap-x-6 gap-y-3">
+              {profileLinks.slice(3).map((link) => (
+                <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer" className="text-[var(--xuli-text-secondary)] hover:text-[var(--xuli-accent)] text-sm transition-colors">
+                  {link.label} · {link.value} ↗
+                </a>
+              ))}
+            </div>
+          </section>
         </div>
       </div>
     </PageTransition>
@@ -85,9 +121,9 @@ export default function About() {
 
 function InfoRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex items-center gap-4">
-      <span className="text-[var(--xuli-text-tertiary)] text-sm w-16 flex-shrink-0">{label}</span>
-      <span className="text-[var(--xuli-text-primary)] font-medium">{value}</span>
+    <div className="flex items-center justify-between gap-4">
+      <dt className="text-[var(--xuli-text-tertiary)] text-sm">{label}</dt>
+      <dd className="text-[var(--xuli-text-primary)] text-sm font-medium text-right">{value}</dd>
     </div>
   )
 }

@@ -1,52 +1,18 @@
 import PageTransition from '../components/PageTransition'
 import PageHeader from '../components/PageHeader'
-
-const experiences = [
-  {
-    company: '浙江芝立软件有限公司',
-    position: '前端负责人',
-    period: '2022.07 - 2025.08',
-    type: '全职',
-    description: '担任前端技术负责人，负责前端团队技术选型、架构设计与项目交付。主导低代码平台与警保系统等核心项目。',
-    highlights: ['低代码平台前端架构设计', '团队技术管理与培养'],
-  },
-  {
-    company: '上海盛璨软件科技有限公司',
-    position: '前端软件开发工程师',
-    period: '2021.08 - 2022.06',
-    type: '全职',
-    description: '参与智慧高速、信息发布系统等政企项目开发，负责前端架构设计与功能实现。',
-    highlights: ['智慧高速前端开发', '信息发布系统架构', 'ECharts数据可视化'],
-  },
-  {
-    company: '浙江立地信息科技有限公司',
-    position: 'Web前端',
-    period: '2019.03 - 2021.08',
-    type: '全职',
-    description: '从事Web应用开发，参与多个政企数字化转型项目，积累丰富的前端工程化经验。',
-    highlights: ['政企数字化项目', '前端工程化实践', '持续集成搭建'],
-  },
-  {
-    company: '杭州优户通科技有限公司',
-    position: 'IT技术支持',
-    period: '2018.08 - 2019.01',
-    type: '全职',
-    description: 'IT技术支持岗位，负责内部系统维护与技术支持，为后续技术工作打下基础。',
-    highlights: ['系统维护', '技术支持', '问题解决'],
-  },
-]
+import { workExperiences } from '../data/resume'
 
 export default function Experience() {
   return (
     <PageTransition>
       <div className="min-h-screen">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <PageHeader title="工作" subtitle="8年深耕前端，从初入职场到技术负责人" highlightWord="经历" />
+          <PageHeader title="工作" subtitle="从技术支持、前端工程，到团队负责与远程协作" highlightWord="经历" />
 
           <div className="space-y-8">
-            {experiences.map((exp) => (
+            {workExperiences.map((exp) => (
               <div
-                key={exp.company}
+                key={`${exp.company}-${exp.period}`}
                 className="relative pl-8 border-l border-[var(--color-border)]/70"
               >
                 <div className="absolute left-0 top-0 w-3 h-3 -translate-x-[7px] bg-[var(--xuli-accent)] rounded-full" />
@@ -60,11 +26,11 @@ export default function Experience() {
                   </div>
                   <h3 className="font-display text-xl text-[var(--xuli-text-primary)] mb-1">{exp.position}</h3>
                   <p className="text-[var(--xuli-text-secondary)] text-sm mb-3">{exp.company}</p>
-                  <p className="text-[var(--xuli-text-tertiary)] text-sm mb-4">{exp.description}</p>
+                  <p className="text-[var(--xuli-text-tertiary)] text-sm mb-4 leading-relaxed">{exp.description}</p>
                   <div className="flex flex-wrap gap-2">
-                    {exp.highlights.map((h, i) => (
-                      <span key={i} className="px-2 py-1 bg-[var(--xuli-bg-secondary)] text-[var(--xuli-text-secondary)] text-xs rounded">
-                        {h}
+                    {exp.highlights.map((highlight) => (
+                      <span key={highlight} className="px-2 py-1 bg-[var(--xuli-bg-secondary)] text-[var(--xuli-text-secondary)] text-xs rounded">
+                        {highlight}
                       </span>
                     ))}
                   </div>
