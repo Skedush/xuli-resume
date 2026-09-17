@@ -19,14 +19,14 @@ const navLinks = [
 
 export default function Footer() {
   return (
-    <footer className="relative z-10 bg-bg border-t border-[var(--xuli-border)]">
+    <footer className="relative z-10 bg-[var(--xuli-bg-secondary)]/70 border-t-2 border-dashed border-[var(--xuli-border)]/45">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4">
             <Logo />
             <div>
-              <p className="text-primary font-body font-semibold">徐力 · ResumeAI</p>
-              <p className="text-tertiary text-sm">AI 应用构建者 / 全栈工程师</p>
+              <p className="text-primary font-display font-bold">徐力 · 工程师工作手账</p>
+              <p className="text-tertiary text-sm">把问题、过程与作品留在纸面上</p>
             </div>
           </div>
 
@@ -68,7 +68,7 @@ export default function Footer() {
 
         <div className="mt-8 pt-6 border-t border-[var(--xuli-border)] text-center">
           <p className="text-tertiary text-xs">
-            © {new Date().getFullYear()} ResumeAI. Built with React + TypeScript.
+            © {new Date().getFullYear()} 徐力 · 用 React + TypeScript 写下这本手账。
           </p>
         </div>
       </div>

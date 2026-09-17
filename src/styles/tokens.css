@@ -4,28 +4,31 @@
  */
 
 :root {
-  /* 颜色变量 - 背景层次 */
-  --xuli-bg-primary: #0B0F14;
-  --xuli-bg-secondary: #151A23;
-  --xuli-bg-tertiary: #1C2431;
+  /* 工程手账：灰绿绘图纸、便签纸与白纸卡片 */
+  --xuli-bg-primary: #E8ECE4;
+  --xuli-bg-secondary: #DDE4DA;
+  --xuli-bg-tertiary: #F7F6EE;
 
   /* 颜色变量 - 边框 */
-  --xuli-border: #2A3441;
+  --xuli-border: #697168;
 
   /* 颜色变量 - 强调色 */
-  --xuli-accent: #22D3EE;
-  --xuli-accent-hover: #06B6D4;
-  --xuli-accent-muted: rgba(34, 211, 238, 0.1);
+  --xuli-accent: #2F6873;
+  --xuli-accent-hover: #214F59;
+  --xuli-accent-muted: rgba(47, 104, 115, 0.13);
+  --xuli-mark: #C65F45;
+  --xuli-highlight: #E7C96A;
+  --xuli-paper-line: rgba(52, 78, 73, 0.09);
 
   /* 颜色变量 - 文字层次 */
-  --xuli-text-primary: #E2E8F0;
-  --xuli-text-secondary: #94A3B8;
-  --xuli-text-tertiary: #64748B;
+  --xuli-text-primary: #252A25;
+  --xuli-text-secondary: #4F574F;
+  --xuli-text-tertiary: #737B72;
 
   /* 字体变量 */
-  --xuli-font-display: 'Orbitron', sans-serif;
-  --xuli-font-body: 'Rajdhani', sans-serif;
-  --xuli-font-mono: 'JetBrains Mono', monospace;
+  --xuli-font-display: 'LXGW WenKai', 'Noto Sans SC', sans-serif;
+  --xuli-font-body: 'Noto Sans SC', sans-serif;
+  --xuli-font-mono: 'IBM Plex Mono', 'Noto Sans SC', monospace;
 
   /* 间距变量 */
   --xuli-space-xs: 0.25rem;
@@ -37,6 +40,6 @@
   /* 生成式布局变量 */
   --xuli-layout-max-width: 64rem;
   --xuli-layout-content-gap: 1.5rem;
-  --xuli-card-radius: 0.75rem;
-  --xuli-grid-opacity: 0.18;
+  --xuli-card-radius: 0.45rem 0.85rem 0.55rem 0.75rem;
+  --xuli-grid-opacity: 0.7;
 }

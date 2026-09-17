@@ -22,8 +22,8 @@ function App() {
   }, [location.pathname])
 
   return (
-    <div className="min-h-screen bg-bg noise-overlay layout-shell">
-      <div className="fixed inset-0 grid-background pointer-events-none" />
+    <div className="min-h-screen bg-bg layout-shell">
+      <div className="fixed inset-0 paper-grid pointer-events-none" aria-hidden="true" />
       <BackgroundEffects />
       <Navbar />
       <main className="relative z-10 layout-content">

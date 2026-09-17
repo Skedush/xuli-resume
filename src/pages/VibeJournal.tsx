@@ -105,7 +105,7 @@ export default function VibeJournal() {
             highlightWord="日志"
           />
 
-          <div className="bg-[var(--color-card)]/70 rounded-lg p-3 mb-6 border border-[var(--xuli-accent)]/20 flex flex-wrap items-center justify-between gap-2">
+          <div className="paper-note bg-[var(--color-card)]/70 p-3 mb-6 flex flex-wrap items-center justify-between gap-2">
             <span className="text-[var(--xuli-text-tertiary)] text-xs font-mono">
               下游同步：{formatLastRun(meta.lastRun)}
               {meta.lastRunNewDeliverables.length > 0 && (
@@ -125,11 +125,11 @@ export default function VibeJournal() {
           </div>
 
           {timelinePhases.length > 0 && (
-            <div className="overflow-x-auto pb-4 mb-8">
+            <div className="journal-timeline overflow-x-auto pb-4 mb-8">
               <div className="flex items-start justify-start gap-4 min-w-max px-4">
                 {timelinePhases.map((item) => (
-                  <div key={`${item.phase}-${item.time}`} className="flex flex-col items-center min-w-[150px] max-w-[180px]">
-                    <div className="w-3 h-3 bg-[var(--xuli-accent)] rounded-full mb-3" />
+                  <div key={`${item.phase}-${item.time}`} className="journal-milestone flex flex-col items-center min-w-[150px] max-w-[180px]">
+                    <div className="timeline-dot mb-3" aria-hidden="true">×</div>
                     <span className="text-[var(--xuli-accent)] text-xs font-mono mb-1">{item.time}</span>
                     <span className="text-[var(--xuli-text-primary)] text-xs text-center leading-tight mb-1">
                       {item.event}
@@ -144,7 +144,7 @@ export default function VibeJournal() {
           )}
 
           {deliverables.length === 0 ? (
-            <div className="bg-[var(--color-card)] rounded-lg p-8 border border-[var(--color-border)]/60 text-center">
+            <div className="sketch-card bg-[var(--color-card)] p-8 text-center">
               <p className="text-[var(--xuli-text-tertiary)] text-sm">
                 尚无已消费文档。运行 <code className="font-mono text-[var(--xuli-accent)]">npm run sync:vibe-journal</code> 触发同步。
               </p>
@@ -154,7 +154,7 @@ export default function VibeJournal() {
               {/* Mobile doc picker — collapsed by default, expands on tap. */}
               <button
                 onClick={() => setMobileTocOpen((v) => !v)}
-                className="lg:hidden w-full mb-4 flex items-center justify-between gap-2 px-4 py-3 rounded-lg border border-[var(--color-border)]/60 bg-[var(--color-card)]/80 text-left"
+                className="paper-note lg:hidden w-full mb-4 flex items-center justify-between gap-2 px-4 py-3 bg-[var(--color-card)]/80 text-left"
                 aria-expanded={mobileTocOpen}
                 aria-controls="vj-mobile-toc"
               >
@@ -174,7 +174,7 @@ export default function VibeJournal() {
               {mobileTocOpen && (
                 <div
                   id="vj-mobile-toc"
-                  className="lg:hidden mb-4 max-h-72 overflow-y-auto rounded-lg border border-[var(--color-border)]/60 bg-[var(--color-surface)]/80"
+                  className="sketch-card lg:hidden mb-4 max-h-72 overflow-y-auto bg-[var(--color-surface)]/80"
                 >
                   {deliverables.map((doc, idx) => (
                     <button
@@ -197,7 +197,7 @@ export default function VibeJournal() {
                 {/* Desktop sidebar TOC */}
                 <aside
                   ref={sidebarRef}
-                  className="hidden lg:block self-start sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto rounded-lg border border-[var(--color-border)]/60 bg-[var(--color-surface)]/60 p-2"
+                  className="sketch-card hidden lg:block self-start sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto bg-[var(--color-surface)]/60 p-2"
                 >
                   <div className="px-3 py-2 text-xs font-mono text-[var(--xuli-text-tertiary)] uppercase tracking-wider border-b border-[var(--color-border)]/40 mb-2">
                     产出文档
@@ -230,7 +230,7 @@ export default function VibeJournal() {
                 {/* Reader content area */}
                 <article
                   ref={contentRef}
-                  className="bg-[var(--color-card)] rounded-lg border border-[var(--color-border)]/60 p-6 sm:p-8 min-h-[28rem]"
+                  className="sketch-card sketch-reader bg-[var(--color-card)] p-6 sm:p-8 min-h-[28rem]"
                 >
                   <header className="mb-6 pb-4 border-b border-[var(--color-border)]/40">
                     <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
@@ -240,14 +240,14 @@ export default function VibeJournal() {
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => setSelectedIndex((i) => (i - 1 + deliverables.length) % deliverables.length)}
-                          className="px-3 py-1.5 rounded-md text-xs font-mono border border-[var(--color-border)]/70 bg-[var(--color-surface)]/60 text-[var(--xuli-text-secondary)] hover:text-[var(--xuli-accent)] hover:border-[var(--xuli-accent)]/40 transition-colors"
+                          className="paper-tag px-3 py-1.5 text-xs font-mono text-[var(--xuli-text-secondary)] hover:text-[var(--xuli-accent)] transition-colors"
                           title="上一篇（← 或 ↑）"
                         >
                           ← 上一篇
                         </button>
                         <button
                           onClick={() => setSelectedIndex((i) => (i + 1) % deliverables.length)}
-                          className="px-3 py-1.5 rounded-md text-xs font-mono border border-[var(--color-border)]/70 bg-[var(--color-surface)]/60 text-[var(--xuli-text-secondary)] hover:text-[var(--xuli-accent)] hover:border-[var(--xuli-accent)]/40 transition-colors"
+                          className="paper-tag px-3 py-1.5 text-xs font-mono text-[var(--xuli-text-secondary)] hover:text-[var(--xuli-accent)] transition-colors"
                           title="下一篇（→ 或 ↓）"
                         >
                           下一篇 →
@@ -280,7 +280,7 @@ export default function VibeJournal() {
             </>
           )}
 
-          <div className="bg-[var(--color-card)]/70 rounded-lg p-4 border border-[var(--xuli-accent)]/20">
+          <div className="paper-note bg-[var(--color-card)]/70 p-4">
             <p className="text-[var(--xuli-text-secondary)] text-sm text-center font-body leading-relaxed">
               此页面由 <code className="font-mono text-[var(--xuli-accent)]">src/lib/vibeJournalSync.ts</code> 消费上游 TIMELINE.md 与 deliverables/*.md 生成；
               同步阶段会用 <code className="font-mono text-[var(--xuli-accent)]">marked</code> 把每篇 md 预渲染成 HTML 写入 <code className="font-mono text-[var(--xuli-accent)]">src/data/vibe-journal-html/</code>，

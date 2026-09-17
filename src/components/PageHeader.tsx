@@ -7,7 +7,8 @@ interface PageHeaderProps {
 
 export default function PageHeader({ title, subtitle, highlightWord, center = true }: PageHeaderProps) {
   return (
-    <div className={`mb-16 ${center ? 'text-center' : ''}`}>
+    <div className={`page-heading mb-16 ${center ? 'text-center' : ''}`}>
+      <span className="page-heading-kicker" aria-hidden="true">FIELD NOTES</span>
       <h1 className="font-display text-4xl sm:text-5xl font-bold text-primary mb-4">
         {highlightWord ? (
           <>
@@ -20,6 +21,7 @@ export default function PageHeader({ title, subtitle, highlightWord, center = tr
           {subtitle}
         </p>
       )}
+      <span className="page-heading-line" aria-hidden="true" />
     </div>
   )
 }

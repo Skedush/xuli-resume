@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import Logo from './Logo'
-import { useGenerativeDesign } from './GenerativeDesignProvider'
 
 const navItems = [
   { path: '/', label: '首页', en: 'Home' },
@@ -20,11 +19,10 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
-  const { regenerate } = useGenerativeDesign()
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
@@ -38,8 +36,8 @@ export default function Navbar() {
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 isolate transition-all duration-300 ${
         scrolled
-          ? 'backdrop-blur-xl bg-bg/90 shadow-xl shadow-black/30'
-          : 'bg-transparent'
+          ? 'bg-[var(--xuli-bg-primary)]/95 border-b border-[var(--xuli-border)]/35 shadow-[0_3px_0_rgba(47,55,48,0.08)]'
+          : 'bg-[var(--xuli-bg-primary)]/75'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -47,7 +45,7 @@ export default function Navbar() {
           <Link to="/" className="flex items-center gap-3">
             <Logo />
             <span className="font-display text-lg font-semibold text-primary hidden sm:block">
-              Resume<span className="text-accent">AI</span>
+              徐力<span className="text-accent">·工作手账</span>
             </span>
           </Link>
 
@@ -66,13 +64,6 @@ export default function Navbar() {
                 }`} />
               </Link>
             ))}
-            <button
-              onClick={regenerate}
-              className="ml-2 px-3 py-1.5 rounded-md text-xs font-mono border border-[var(--xuli-border)] text-secondary hover:text-accent hover:border-[var(--xuli-accent)]/40 transition-colors"
-              title="重新生成主题布局"
-            >
-              换一版
-            </button>
           </div>
 
           <button
@@ -80,7 +71,7 @@ export default function Navbar() {
             aria-label={isOpen ? '关闭导航菜单' : '打开导航菜单'}
             aria-expanded={isOpen}
             aria-controls="mobile-navigation"
-            className="lg:hidden relative z-50 w-11 h-11 flex items-center justify-center rounded-full border border-[var(--xuli-border)]/70 bg-[var(--color-surface)]/85 text-primary shadow-lg shadow-black/20 backdrop-blur-md"
+            className="lg:hidden relative z-50 w-11 h-11 flex items-center justify-center rounded-[46%_54%_48%_52%] border-2 border-[var(--xuli-border)]/70 bg-[var(--xuli-bg-tertiary)] text-primary shadow-[2px_3px_0_rgba(47,55,48,0.12)]"
           >
             <div className="flex flex-col gap-1.5">
               <motion.span
@@ -107,15 +98,9 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            className="absolute left-0 right-0 top-full z-40 lg:hidden border-t border-[var(--xuli-border)]/60 bg-surface shadow-2xl shadow-black/30 backdrop-blur-xl"
+            className="absolute left-0 right-0 top-full z-40 lg:hidden border-y border-[var(--xuli-border)]/45 bg-[var(--xuli-bg-primary)] shadow-[0_8px_0_rgba(47,55,48,0.08)]"
           >
             <div className="px-4 py-4 space-y-1 max-h-[calc(100vh-4rem)] overflow-y-auto">
-              <button
-                onClick={regenerate}
-                className="w-full text-left px-4 py-3 rounded-lg border border-[var(--xuli-border)]/70 bg-[var(--color-card)]/70 text-secondary hover:text-accent hover:border-[var(--xuli-accent)]/50 transition-colors mb-2 font-mono text-xs"
-              >
-                换一版主题布局
-              </button>
               {navItems.map((item, i) => (
                 <motion.div
                   key={item.path}

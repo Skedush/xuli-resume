@@ -9,7 +9,7 @@ export default function Projects() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <PageHeader title="代表" subtitle="以真实项目呈现任务组织、全栈建模、视觉推理与工程交付" highlightWord="项目" />
 
-          <div className="bg-[var(--xuli-bg-tertiary)] rounded-lg p-5 mb-12 border border-[var(--xuli-accent)]/30">
+          <div className="paper-note bg-[var(--xuli-bg-tertiary)] p-5 mb-12">
             <p className="text-[var(--xuli-text-secondary)] text-sm text-center leading-relaxed">
               AI 参与实现、重构、测试与文档整理；我负责目标、约束、方案取舍与最终验收。每个项目都明确当前阶段和验证边界。
             </p>
@@ -19,12 +19,12 @@ export default function Projects() {
             {projects.map((project, index) => (
               <article
                 key={project.name}
-                className={`bg-[var(--xuli-bg-tertiary)] rounded-xl overflow-hidden border border-subtle flex flex-col ${index < 2 ? 'lg:min-h-[430px]' : ''}`}
+                className={`sketch-card bg-[var(--xuli-bg-tertiary)] overflow-hidden flex flex-col ${index < 2 ? 'lg:min-h-[430px]' : ''}`}
               >
                 <div className="p-6 sm:p-7 flex flex-col h-full">
                   <div className="flex items-start justify-between gap-4 mb-5">
-                    <span className="font-mono text-[var(--xuli-accent)] text-sm">0{index + 1}</span>
-                    <span className="px-3 py-1 bg-[var(--xuli-bg-secondary)] text-[var(--xuli-text-tertiary)] text-xs rounded text-right">
+                    <span className="sketch-number">0{index + 1}</span>
+                    <span className="paper-tag px-3 py-1 text-[var(--xuli-text-tertiary)] text-xs text-right">
                       {project.stage}
                     </span>
                   </div>
@@ -45,7 +45,7 @@ export default function Projects() {
 
                   <div className="flex flex-wrap gap-2 mb-6">
                     {project.tech.map((tech) => (
-                      <span key={tech} className="px-2 py-1 bg-[var(--xuli-bg-secondary)] text-[var(--xuli-text-tertiary)] text-xs font-mono rounded border border-subtle">
+                      <span key={tech} className="paper-chip px-2 py-1 text-[var(--xuli-text-tertiary)] text-xs font-mono">
                         {tech}
                       </span>
                     ))}

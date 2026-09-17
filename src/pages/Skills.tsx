@@ -35,8 +35,8 @@ function SkillRow({ skill }: { skill: SkillEntry }) {
         )}
         <span className="text-tertiary text-sm font-mono">{skill.level.toFixed(1)}%</span>
       </div>
-      <div className="h-2 bg-surface rounded-full overflow-hidden">
-        <div className="h-full bg-accent rounded-full" style={{ width: `${skill.level}%` }} />
+      <div className="skill-track h-2 bg-surface overflow-hidden">
+        <div className="skill-fill h-full bg-accent" style={{ width: `${skill.level}%` }} />
       </div>
     </div>
   )
@@ -45,10 +45,10 @@ function SkillRow({ skill }: { skill: SkillEntry }) {
 function CategoryCard({ category }: { category: SkillCategory }) {
   return (
     <div
-      className="bg-card rounded-lg p-3 border border-[var(--color-border)]/60 flex flex-col h-full"
+      className="sketch-card bg-card p-3 flex flex-col h-full"
     >
       <div className="flex items-center gap-2 mb-3 flex-shrink-0">
-        <div className="w-9 h-9 rounded-lg bg-surface flex items-center justify-center">
+        <div className="sketch-icon w-9 h-9 bg-surface flex items-center justify-center">
           <svg
             className="w-5 h-5 text-accent"
             fill="none"
@@ -89,7 +89,7 @@ export default function Skills() {
             highlightWord="实践"
           />
 
-          <div className="bg-card rounded-lg p-3 mb-6 border border-accent/30">
+          <div className="paper-note bg-card p-3 mb-6">
             <p className="text-secondary text-xs text-center font-medium leading-relaxed">
               下方数值不是“掌握度”：30 代表技能已进入实践记录，此后按项目日志中的实际使用次数增量更新，最高 95。具体熟悉程度以项目说明和验证证据为准。
             </p>
@@ -97,7 +97,7 @@ export default function Skills() {
 
           <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
             {practiceAreas.map((area) => (
-              <article key={area.title} className="bg-card rounded-lg p-5 border border-[var(--color-border)]/60">
+              <article key={area.title} className="sketch-card bg-card p-5">
                 <h2 className="font-display text-lg text-primary mb-2">{area.title}</h2>
                 <p className="text-accent text-sm mb-3 leading-relaxed">{area.tools}</p>
                 <p className="text-tertiary text-sm leading-relaxed">{area.boundary}</p>
@@ -118,14 +118,14 @@ export default function Skills() {
             ))}
           </div>
 
-          <div className="mt-12 bg-card rounded-lg p-6 border border-[var(--color-border)]/60">
+          <div className="sketch-card mt-12 bg-card p-6">
             <h2 className="font-display text-2xl text-primary mb-2 text-center">当前工具索引</h2>
             <p className="text-tertiary text-sm text-center mb-6">用于快速检索，不代表所有工具具有相同使用深度</p>
             <div className="flex flex-wrap justify-center gap-3">
               {data.tools.map((tool) => (
                 <span
                   key={tool}
-                  className="px-4 py-2 bg-surface text-secondary text-sm font-mono rounded border border-[var(--color-border)]/60"
+                  className="paper-chip px-4 py-2 text-secondary text-sm font-mono"
                 >
                   {tool}
                 </span>

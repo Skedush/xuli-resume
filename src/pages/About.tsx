@@ -17,9 +17,9 @@ export default function About() {
           <PageHeader title="关于" subtitle="以问题、方法、作品与验证呈现真实能力" highlightWord="我" />
 
           <section className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-8 mb-10">
-            <div className="bg-[var(--xuli-bg-tertiary)] rounded-xl p-8 border border-[var(--color-border)]/60">
+            <div className="sketch-card bg-[var(--xuli-bg-tertiary)] p-8">
               <div className="flex flex-col items-center text-center mb-8">
-                <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-[var(--xuli-accent)]/30 mb-4">
+                <div className="profile-sketch w-32 h-32 overflow-hidden border-2 border-[var(--xuli-accent)]/50 mb-4">
                   <img src="/ai-photo.jpg" alt="徐力" className="w-full h-full object-cover" />
                 </div>
                 <h2 className="text-[var(--xuli-text-primary)] font-display text-2xl mb-1">{profile.name}</h2>
@@ -37,7 +37,7 @@ export default function About() {
                 <h3 className="text-[var(--xuli-text-primary)] font-semibold mb-3">求职方向</h3>
                 <div className="flex flex-wrap gap-2">
                   {profile.directions.map((direction) => (
-                    <span key={direction} className="px-3 py-1.5 bg-[var(--xuli-bg-secondary)] text-[var(--xuli-text-secondary)] text-xs rounded">
+                    <span key={direction} className="paper-chip px-3 py-1.5 text-[var(--xuli-text-secondary)] text-xs">
                       {direction}
                     </span>
                   ))}
@@ -45,8 +45,8 @@ export default function About() {
               </div>
             </div>
 
-            <div className="bg-[var(--xuli-bg-tertiary)] rounded-xl p-8 border border-[var(--color-border)]/60">
-              <span className="text-[var(--xuli-accent)] text-xs font-mono">MY POSITION</span>
+            <div className="sketch-card bg-[var(--xuli-bg-tertiary)] p-8">
+              <span className="eyebrow-note">我的位置</span>
               <h2 className="font-display text-2xl text-[var(--xuli-text-primary)] mt-2 mb-5">AI 时代，能力应由过程与作品共同证明</h2>
               <div className="space-y-4 text-[var(--xuli-text-secondary)] leading-relaxed">
                 <p>
@@ -67,7 +67,7 @@ export default function About() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group px-4 py-3 rounded-lg bg-[var(--xuli-bg-secondary)] border border-[var(--xuli-border)]/70 hover:border-[var(--xuli-accent)]/40 transition-colors"
+                    className="paper-note group px-4 py-3 hover:border-[var(--xuli-accent)]/60 transition-colors"
                   >
                     <span className="block text-[var(--xuli-text-tertiary)] text-xs mb-1">{link.label}</span>
                     <span className="text-[var(--xuli-text-primary)] text-sm group-hover:text-[var(--xuli-accent)] transition-colors">{link.value} ↗</span>
@@ -81,9 +81,9 @@ export default function About() {
             <h2 className="font-display text-2xl text-[var(--xuli-text-primary)] mb-5">核心能力</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {capabilityHighlights.map((item, index) => (
-                <article key={item.title} className="bg-[var(--xuli-bg-tertiary)] rounded-xl p-6 border border-[var(--color-border)]/60">
+                <article key={item.title} className="sketch-card bg-[var(--xuli-bg-tertiary)] p-6">
                   <div className="flex items-start gap-4">
-                    <span className="font-mono text-[var(--xuli-accent)] text-sm">0{index + 1}</span>
+                    <span className="sketch-number">0{index + 1}</span>
                     <div>
                       <h3 className="text-[var(--xuli-text-primary)] font-semibold mb-2">{item.title}</h3>
                       <p className="text-[var(--xuli-text-tertiary)] text-sm leading-relaxed">{item.description}</p>
@@ -96,14 +96,14 @@ export default function About() {
 
           <section className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
             {stats.map((stat) => (
-              <div key={stat.label} className="bg-[var(--xuli-bg-tertiary)] rounded-lg p-6 text-center border border-[var(--color-border)]/60">
+              <div key={stat.label} className="sketch-card bg-[var(--xuli-bg-tertiary)] p-6 text-center">
                 <div className="font-display text-2xl sm:text-3xl font-bold text-[var(--xuli-accent)] mb-2">{stat.value}</div>
                 <div className="text-[var(--xuli-text-tertiary)] text-sm">{stat.label}</div>
               </div>
             ))}
           </section>
 
-          <section className="bg-[var(--xuli-bg-tertiary)] rounded-xl p-6 border border-[var(--color-border)]/60">
+          <section className="sketch-card bg-[var(--xuli-bg-tertiary)] p-6">
             <h2 className="font-display text-xl text-[var(--xuli-text-primary)] mb-4">更多平台</h2>
             <div className="flex flex-wrap gap-x-6 gap-y-3">
               {profileLinks.slice(3).map((link) => (

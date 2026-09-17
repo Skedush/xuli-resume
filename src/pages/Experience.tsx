@@ -13,13 +13,13 @@ export default function Experience() {
             {workExperiences.map((exp) => (
               <div
                 key={`${exp.company}-${exp.period}`}
-                className="relative pl-8 border-l border-[var(--color-border)]/70"
+                className="timeline-sketch relative pl-8 border-l-2 border-dashed border-[var(--color-border)]/55"
               >
-                <div className="absolute left-0 top-0 w-3 h-3 -translate-x-[7px] bg-[var(--xuli-accent)] rounded-full" />
+                <div className="timeline-pin absolute left-0 top-0 -translate-x-1/2" aria-hidden="true">×</div>
 
-                <div className="bg-[var(--xuli-bg-tertiary)] rounded-lg p-6 border border-[var(--color-border)]/60">
+                <div className="sketch-card bg-[var(--xuli-bg-tertiary)] p-6">
                   <div className="flex items-center gap-3 mb-3">
-                    <span className="px-2 py-0.5 bg-[var(--xuli-bg-secondary)] text-[var(--xuli-accent)] text-xs font-mono rounded">
+                    <span className="paper-tag px-2 py-0.5 text-[var(--xuli-accent)] text-xs font-mono">
                       {exp.type}
                     </span>
                     <span className="text-[var(--xuli-text-tertiary)] text-sm">{exp.period}</span>
@@ -29,7 +29,7 @@ export default function Experience() {
                   <p className="text-[var(--xuli-text-tertiary)] text-sm mb-4 leading-relaxed">{exp.description}</p>
                   <div className="flex flex-wrap gap-2">
                     {exp.highlights.map((highlight) => (
-                      <span key={highlight} className="px-2 py-1 bg-[var(--xuli-bg-secondary)] text-[var(--xuli-text-secondary)] text-xs rounded">
+                      <span key={highlight} className="paper-chip px-2 py-1 text-[var(--xuli-text-secondary)] text-xs">
                         {highlight}
                       </span>
                     ))}

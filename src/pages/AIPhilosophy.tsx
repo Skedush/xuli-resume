@@ -39,14 +39,14 @@ export default function AIPhilosophy() {
   return (
     <PageTransition>
       <div className="min-h-screen relative overflow-hidden">
-        <div className="absolute top-24 right-[8%] text-[16rem] leading-none text-[var(--xuli-accent)]/[0.025] font-display pointer-events-none" aria-hidden="true">
-          ∞
+        <div className="absolute top-24 right-[8%] text-[14rem] leading-none text-[var(--xuli-accent)]/[0.045] font-display pointer-events-none -rotate-6" aria-hidden="true">
+          思
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
           <PageHeader title="AI" subtitle="理解变化、定义问题，并对 AI 协作的结果负责" highlightWord="思考" />
 
-          <div className="bg-[var(--xuli-bg-tertiary)] rounded-lg p-4 mb-12 border border-[var(--xuli-accent)]/30">
+          <div className="paper-note bg-[var(--xuli-bg-tertiary)] p-4 mb-12">
             <p className="text-[var(--xuli-text-secondary)] text-sm text-center font-medium leading-relaxed">
               以下内容来自个人实践、持续讨论与阶段性理解，涉及仍在演化的领域；它们是工作假设，不是权威结论。
             </p>
@@ -54,7 +54,7 @@ export default function AIPhilosophy() {
 
           <section className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-8 mb-16">
             <div className="lg:sticky lg:top-24 lg:self-start">
-              <span className="text-[var(--xuli-accent)] text-xs font-mono">CAPABILITY IN THE AI ERA</span>
+              <span className="eyebrow-note">能力与责任</span>
               <h2 className="font-display text-3xl sm:text-4xl text-[var(--xuli-text-primary)] mt-3 mb-5 leading-tight">
                 能力不只是“会什么”，还包括如何找到路径与承担结果
               </h2>
@@ -75,14 +75,14 @@ export default function AIPhilosophy() {
           <section className="mb-16">
             <div className="flex items-end justify-between gap-6 mb-6">
               <div>
-                <span className="text-[var(--xuli-accent)] text-xs font-mono">OPEN QUESTIONS</span>
+                <span className="eyebrow-note">持续追问</span>
                 <h2 className="font-display text-2xl sm:text-3xl text-[var(--xuli-text-primary)] mt-2">我持续关注的三个问题</h2>
               </div>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
               {questions.map((question, index) => (
-                <article key={question.title} className="bg-[var(--xuli-bg-tertiary)] rounded-xl p-6 border border-[var(--color-border)]/60">
-                  <span className="font-mono text-[var(--xuli-accent)] text-sm">0{index + 1}</span>
+                <article key={question.title} className="sketch-card bg-[var(--xuli-bg-tertiary)] p-6">
+                  <span className="sketch-number">0{index + 1}</span>
                   <h3 className="font-display text-xl text-[var(--xuli-text-primary)] mt-4 mb-4 leading-snug">{question.title}</h3>
                   <p className="text-[var(--xuli-text-tertiary)] text-sm leading-relaxed">{question.description}</p>
                 </article>
@@ -90,13 +90,13 @@ export default function AIPhilosophy() {
             </div>
           </section>
 
-          <section className="bg-[var(--xuli-bg-tertiary)] rounded-xl p-6 sm:p-10 border border-[var(--color-border)]/60 mb-16">
-            <span className="text-[var(--xuli-accent)] text-xs font-mono">TOOL DISCOVERY LOOP</span>
+          <section className="sketch-card bg-[var(--xuli-bg-tertiary)] p-6 sm:p-10 mb-16">
+            <span className="eyebrow-note">工具发现路径</span>
             <h2 className="font-display text-2xl sm:text-3xl text-[var(--xuli-text-primary)] mt-2 mb-8">我如何发现、选择和更新工具</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8">
               {discoverySteps.map((step, index) => (
                 <div key={step.title} className="flex gap-4">
-                  <span className="w-9 h-9 rounded-full bg-[var(--xuli-bg-secondary)] text-[var(--xuli-accent)] font-mono text-sm flex items-center justify-center flex-shrink-0">
+                  <span className="sketch-number flex-shrink-0">
                     {index + 1}
                   </span>
                   <div>
@@ -108,7 +108,7 @@ export default function AIPhilosophy() {
             </div>
           </section>
 
-          <section className="text-center max-w-3xl mx-auto">
+          <section className="quote-sketch text-center max-w-3xl mx-auto">
             <blockquote className="font-display text-xl sm:text-2xl text-[var(--xuli-text-secondary)] leading-relaxed">
               “AI 可以越来越擅长如何做到；人仍需要判断为什么做、做到什么程度，以及谁为结果负责。”
             </blockquote>

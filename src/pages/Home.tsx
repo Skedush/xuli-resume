@@ -1,43 +1,33 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import PageTransition from '../components/PageTransition'
-import { useGenerativeDesign } from '../components/GenerativeDesignProvider'
 import { profile, projects } from '../data/resume'
 
-const focusWords = ['Agent-first', 'TypeScript', 'Python', 'Full-stack', 'Delivery']
+const focusWords = ['前端工程', 'Agent 协作', 'Python', '全栈实践', '可靠交付']
 
 export default function Home() {
-  const { layout } = useGenerativeDesign()
-  const layoutClassName =
-    layout === 'split'
-      ? 'home-layout-split'
-      : layout === 'magazine'
-        ? 'home-layout-magazine'
-        : 'home-layout-focus'
-  const shellClassName =
-    layout === 'focus'
-      ? 'min-h-screen flex items-center justify-center px-4 py-20'
-      : 'min-h-screen flex items-start justify-center px-4 pt-24 pb-20 sm:pt-28 sm:pb-24'
-
   return (
     <PageTransition>
-      <div className={shellClassName}>
-        <div className={`relative z-10 w-full mx-auto ${layoutClassName}`}>
+      <div className="min-h-screen flex items-start justify-center px-4 pt-24 pb-20 sm:pt-28 sm:pb-24">
+        <div className="home-layout-notebook relative z-10 w-full mx-auto">
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, rotate: -8 }}
+            animate={{ opacity: 1, rotate: -3 }}
             transition={{ duration: 0.6 }}
-            className="text-6xl text-[var(--xuli-accent)]/20 mb-4 home-hero-symbol"
+            className="home-hero-symbol"
             aria-hidden="true"
           >
-            ∞
+            <span>工作手记</span>
+            <svg viewBox="0 0 160 42" fill="none">
+              <path d="M4 27c35 11 88 9 150-12M7 32c43 7 96 3 145-12" />
+            </svg>
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-[var(--xuli-text-primary)]"
+            className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-[var(--xuli-text-primary)] home-title"
           >
             AI 应用构建者
             <br />
@@ -53,8 +43,8 @@ export default function Home() {
             <p className="text-lg sm:text-xl text-[var(--xuli-text-secondary)] font-body max-w-3xl leading-relaxed">
               {profile.summary}
             </p>
-            <span className="mt-4 inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[var(--xuli-border)] bg-[var(--xuli-bg-secondary)] text-[var(--xuli-text-secondary)] text-sm font-mono">
-              <span className="w-2 h-2 rounded-full bg-[var(--color-green)] animate-subtle-pulse" />
+            <span className="paper-tag mt-4 inline-flex items-center gap-2 px-4 py-1.5 text-[var(--xuli-text-secondary)] text-sm font-mono">
+              <span className="status-mark" aria-hidden="true">✓</span>
               {profile.status}
             </span>
           </motion.div>
@@ -81,9 +71,9 @@ export default function Home() {
           >
             <Link
               to="/ai-philosophy"
-              className="block bg-[var(--xuli-bg-tertiary)] border border-[var(--xuli-border)] rounded-xl p-6 text-left hover:border-[var(--xuli-accent)]/40 transition-colors"
+              className="sketch-card block bg-[var(--xuli-bg-tertiary)] p-6 text-left"
             >
-              <span className="text-[var(--xuli-accent)] text-xs font-mono">AI-NATIVE / AGENT-FIRST</span>
+              <span className="eyebrow-note">工作方法</span>
               <h2 className="text-[var(--xuli-text-primary)] font-display text-xl mt-2 mb-3">
                 先定义问题，再组织 AI 完成交付
               </h2>
@@ -102,9 +92,9 @@ export default function Home() {
           >
             <Link
               to="/projects"
-              className="block bg-[var(--xuli-bg-tertiary)] border border-[var(--xuli-border)] rounded-xl p-6 text-left hover:border-[var(--xuli-accent)]/40 transition-colors"
+              className="sketch-card block bg-[var(--xuli-bg-tertiary)] p-6 text-left"
             >
-              <span className="text-[var(--xuli-accent)] text-xs font-mono">SELECTED WORK</span>
+              <span className="eyebrow-note">代表作品</span>
               <h2 className="text-[var(--xuli-text-primary)] font-display text-xl mt-2 mb-4">从想法到可检查的作品</h2>
               <div className="space-y-3">
                 {projects.slice(0, 3).map((project) => (
@@ -125,7 +115,7 @@ export default function Home() {
             className="flex flex-wrap justify-center gap-4 text-sm font-mono mt-12 home-tag-cloud"
           >
             {focusWords.map((word) => (
-              <span key={word} className="text-[var(--xuli-text-tertiary)]">
+              <span key={word} className="paper-chip text-[var(--xuli-text-secondary)]">
                 {word}
               </span>
             ))}
