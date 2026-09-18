@@ -18,6 +18,12 @@ git -C "$repository_root" fetch --quiet "$remote_url" "+refs/heads/main:$remote_
 
 current_revision=$(git -C "$repository_root" rev-parse HEAD)
 target_revision=$(git -C "$repository_root" rev-parse "$remote_ref")
+current_branch=$(git -C "$repository_root" symbolic-ref --quiet --short HEAD || true)
+
+if [ "$current_branch" != "main" ]; then
+  echo "Production checkout must stay on main; found: ${current_branch:-detached HEAD}."
+  exit 1
+fi
 
 if [ -n "$(git -C "$repository_root" status --porcelain --untracked-files=no)" ]; then
   echo "Tracked working-tree changes detected; refusing to deploy."
