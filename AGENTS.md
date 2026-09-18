@@ -180,7 +180,7 @@ npm run sync:vibe-journal:dry    # 仅计算 diff，不写盘
 - **Navbar 必须保持 `fixed` 吸顶**：移动端和桌面端都依赖顶部固定定位；不要把 `Navbar` 改成 `relative` / `absolute`，否则滚动后会失去吸顶。
 - **移动端汉堡菜单图标不要用未定义的 Tailwind 颜色类**：例如 `bg-primary` 在本项目里无效；请使用 `bg-text-primary`、`bg-[var(--...)]` 或 `tailwind.config.js` 中真实存在的颜色 token。
 - **移动端菜单背景要用实底**：滚动状态下也要保持 `bg-surface` / 明确的 CSS var 背景和足够的 `z-index`，避免出现"能点但看起来透明"的问题。
-- **改主题/布局时优先改 token，不要在页面里硬编码颜色**：全局主题由 `data-theme-variant` / `data-layout-variant` + `src/styles/tokens.css` / `src/styles/index.css` 驱动。
+- **改主题/布局时优先改 token，不要在页面里硬编码颜色**：全局主题由 `src/styles/tokens.css` / `src/styles/index.css` 驱动。
 - **不要把 `src/lib/vibeJournalSync.ts` 引入浏览器**：它是 server-side only（用 fs/path）。浏览器侧用 `vibe-journal-meta.json` 拿同步元数据。
 - **不要直接读 `SUMMARY_MANIFEST.md` 当作下游消费状态**：那是上游用的清单；下游必须自己维护 `vibe-journal-consumer-state.json`。
 - **不要在浏览器侧重新实现 markdown 解析**：VibeJournal 的 HTML 渲染管线是"sync 阶段用 marked 预渲染 → 构建时 Vite import.meta.glob 内联 → 浏览器只 dangerouslySetInnerHTML 注入"。浏览器 bundle 不应引入 `marked` / `markdown-it` / `remark` / 类似运行时 parser。如果觉得"marked 渲染得不够好"，请改 sync 阶段的渲染参数（marked.parse options）或换 devDep 的 markdown 库（但**不要**在浏览器侧解析）。
@@ -197,8 +197,10 @@ npm run sync:vibe-journal:dry     # 仅计算 diff，不写盘
 ```
 
 ## DEPLOY
-- CI/CD: GitHub Actions → SSH → server → `docker compose up --build`
-- 构建在服务器执行，不在 CI
+- 生产机的 `xuli-resume-deploy.timer` 每分钟主动检查 GitHub `main`
+- `scripts/deploy-production.sh` 只允许 fast-forward，随后执行 Docker Compose build/up 并验证 `/version.txt`
+- GitHub Actions 运行独立生产构建，并等待 `/version.txt` 等于当前 commit SHA
+- 不依赖公网入站 SSH、固定公网 IP 或路由器端口映射
 - 环境: Docker + Nginx (端口 8888)
 
 ## 用户偏好 (徐力)

@@ -37,6 +37,12 @@
 - 3 张插画均加载成功；导航与移动端菜单交互通过。
 - 页面无横向溢出，控制台无错误，`git diff --check` 通过。
 
+## 生产部署
+
+- 生产机通过 systemd user timer 主动检查 GitHub `main`，不再接受 GitHub-hosted Runner 的公网 SSH 部署。
+- 部署脚本只允许 fast-forward，并在 Docker 重建后核对 `/version.txt` 中的完整 commit SHA。
+- GitHub Actions 在独立环境完成生产构建，并以线上 revision 与 `github.sha` 一致作为发布成功标准。
+
 ## 提交边界
 
 - `_site-content/` 是未跟踪的内容草稿目录，不属于本次视觉改版，不纳入提交。

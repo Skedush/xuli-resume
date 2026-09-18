@@ -49,4 +49,17 @@ npm run sync:vibe-journal:dry
 
 ## 部署
 
-推送 `main` 后，GitHub Actions 通过 SSH 更新服务器代码，并执行 `docker compose -f docker-compose.prod.yml up -d --build --remove-orphans`。Nginx 容器对外提供单页应用，生产地址为 [resume.zzzxc.com](https://resume.zzzxc.com)。
+生产机通过 `xuli-resume-deploy.timer` 每分钟主动检查 GitHub `main`。发现新提交后，`scripts/deploy-production.sh` 会验证工作区、只允许 fast-forward，然后重建 Docker Compose 服务并检查 `/version.txt`。
+
+GitHub Actions 不再通过公网 SSH 进入生产机；它负责运行 `npm ci`、`npm run build`，随后等待 `/version.txt` 返回本次 commit SHA，从而验证代码确实上线。这避免了动态公网 IP、路由器端口映射和入站 SSH 对部署稳定性的影响。
+
+安装或刷新生产机 timer：
+
+```bash
+mkdir -p ~/.config/systemd/user
+cp deploy/systemd/xuli-resume-deploy.* ~/.config/systemd/user/
+systemctl --user daemon-reload
+systemctl --user enable --now xuli-resume-deploy.timer
+```
+
+生产地址：[resume.zzzxc.com](https://resume.zzzxc.com)。

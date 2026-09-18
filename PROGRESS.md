@@ -16,6 +16,7 @@
 | 7    | 2026-06-01 | **metadata-first 下游同步 + 未知技能审计** | 优先消费上游 `deliverables/*.meta.json` + `SKILLS.md` registry；保留 alias/正文 fallback；auto-register / pending 策略；CLI 输出 `metadata/fallback/autoRegistered/pending`；D6 4 个 scenario 全部验证通过 |
 | 8    | 2026-09-18 | **全站改为工程手账设计系统** | 浅色纸张 token、手绘组件、稳定布局、9 页面统一；移除随机主题与“换一版”入口 |
 | 9    | 2026-09-18 | **加入内容型手绘插画** | 首页工作台、项目蓝图、实践日志 3 张透明 WebP 插画；完成桌面/移动端回归 |
+| 10   | 2026-09-18 | **生产部署改为主机主动拉取** | systemd user timer 轮询 main；安全 fast-forward + Docker 重建；Actions 通过 revision endpoint 验收 |
 
 ## 阶段 4 详情（vibe-coding-journal 下游消费侧）
 
@@ -340,3 +341,18 @@ npm run sync:vibe-journal:dry            # 仅计算 diff，不写盘
 - 9 个路由在桌面与移动端均返回 200；3 张插画全部加载成功。
 - 首页到项目页、移动端菜单到项目页/关于页的交互通过。
 - 页面无横向溢出，浏览器控制台无错误，`git diff --check` 通过。
+
+## 阶段 10 详情（生产部署去公网 SSH）
+
+### 根因
+
+- 原链路要求 GitHub-hosted Runner 通过公网 IPv4 和路由器端口映射 SSH 进入生产机。
+- 失败时本机 `sshd` 正常监听，但系统日志没有任何来自 Runner 的连接，说明请求未到达主机；更新动态公网 IP 后仍无法到达，入口还受端口映射或运营商网络影响。
+- 这类故障无需修改项目代码也会发生，因此不再把公网入站 SSH 作为部署前提。
+
+### 新链路
+
+- systemd user timer 每分钟在生产机执行 `scripts/deploy-production.sh`，通过 HTTPS 主动 fetch GitHub `main`。
+- 脚本拒绝 tracked dirty tree 和分支分叉，只允许 fast-forward；Docker 构建失败时不会替换现有容器，并会在下次 timer 继续重试。
+- Docker 镜像写入 `version.txt`；Nginx 对该文件禁用缓存。
+- GitHub Actions 仍运行干净环境生产构建，并等待线上 `version.txt` 等于 `github.sha`，以线上 revision 而不是“命令已执行”作为成功标准。
