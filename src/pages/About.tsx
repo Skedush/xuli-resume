@@ -19,8 +19,14 @@ export default function About() {
           <section className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-8 mb-10">
             <div className="sketch-card bg-[var(--xuli-bg-tertiary)] p-8">
               <div className="flex flex-col items-center text-center mb-8">
-                <div className="profile-sketch w-32 h-32 overflow-hidden border-2 border-[var(--xuli-accent)]/50 mb-4">
-                  <img src="/ai-photo.jpg" alt="徐力" className="w-full h-full object-cover" />
+                <div className="profile-sketch w-36 h-36 overflow-hidden border-2 border-[var(--xuli-accent)]/50 mb-5">
+                  <img
+                    src="/illustrations/profile-avatar.webp"
+                    alt="AXMORF 的手绘卡通头像"
+                    width="768"
+                    height="768"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <h2 className="text-[var(--xuli-text-primary)] font-display text-2xl mb-1">{profile.name}</h2>
                 <p className="text-[var(--xuli-accent)] text-sm">{profile.title}</p>

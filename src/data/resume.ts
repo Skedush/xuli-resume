@@ -1,5 +1,5 @@
 export const profile = {
-  name: '徐力',
+  name: 'AXMORF',
   title: 'AI 应用构建者 / 全栈工程师',
   summary: '8 年软件行业经验 · 问题定义与信息检索 · Agent 协作与自动化 · 端到端工程交付',
   status: '寻找全职机会',

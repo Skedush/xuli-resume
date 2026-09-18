@@ -345,9 +345,31 @@ body {
 }
 
 .profile-sketch {
+  position: relative;
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--xuli-bg-tertiary) 86%, white), var(--xuli-bg-secondary));
   border-radius: 48% 52% 45% 55%;
   box-shadow: 3px 4px 0 rgba(48, 56, 49, 0.12);
   transform: rotate(-1.5deg);
+}
+
+.profile-sketch::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent 0 17px,
+    color-mix(in srgb, var(--xuli-paper-line) 72%, transparent) 17px 18px
+  );
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.profile-sketch img {
+  position: relative;
+  z-index: 1;
 }
 
 .sketch-icon {

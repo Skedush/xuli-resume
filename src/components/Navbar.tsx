@@ -45,7 +45,7 @@ export default function Navbar() {
           <Link to="/" className="flex items-center gap-3">
             <Logo />
             <span className="font-display text-lg font-semibold text-primary hidden sm:block">
-              徐力<span className="text-accent">·工作手账</span>
+              AXMORF<span className="text-accent">·工作手账</span>
             </span>
           </Link>
 

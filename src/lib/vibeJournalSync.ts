@@ -44,6 +44,22 @@ export const HTML_SNAPSHOT_DIR = path.join(PROJECT_ROOT, 'src/data/vibe-journal-
 export const MAX_SKILL_LEVEL = 95
 
 /**
+ * Upstream journals can contain private identity details that should not be
+ * republished by the public resume site. Ingestion and scoring still use the
+ * original source; only browser-facing artifacts are redacted.
+ */
+const PUBLIC_CONTENT_REPLACEMENTS: ReadonlyArray<readonly [string, string]> = [
+  ['\u5F90\u529B', 'AXMORF'],
+]
+
+export function redactPublicContent(content: string): string {
+  return PUBLIC_CONTENT_REPLACEMENTS.reduce(
+    (redacted, [privateText, publicText]) => redacted.split(privateText).join(publicText),
+    content,
+  )
+}
+
+/**
  * Default policy for unknown skills surfaced by metadata (id not present in
  * skills.json AND not registered in upstream SKILLS.md). `auto-register`
  * adds the skill at the suggested category, marks it for human review, and
@@ -802,7 +818,7 @@ function parseDeliverableMeta(file: string, firstConsumed: string | null, htmlPa
   let summary = ''
   let content = ''
   try {
-    const text = fs.readFileSync(path_, 'utf-8')
+    const text = redactPublicContent(fs.readFileSync(path_, 'utf-8'))
     content = text.trim()
     const lines = text.split('\n')
     let sawTitle = false
@@ -872,7 +888,7 @@ function renderAllDeliverableSnapshots(consumed: string[]): Record<string, strin
     const srcPath = path.join(DELIVERABLES_DIR, file)
     const dstPath = path.join(HTML_SNAPSHOT_DIR, `${file}.html`)
     try {
-      const md = fs.readFileSync(srcPath, 'utf-8')
+      const md = redactPublicContent(fs.readFileSync(srcPath, 'utf-8'))
       const body = renderMarkdownToHtml(md)
       // Wrap in a minimal container so the page can target the root with a
       // single class. The full document chrome (head, body) is added by the

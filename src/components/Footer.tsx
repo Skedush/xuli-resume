@@ -25,7 +25,7 @@ export default function Footer() {
           <div className="flex items-center gap-4">
             <Logo />
             <div>
-              <p className="text-primary font-display font-bold">徐力 · 工程师工作手账</p>
+              <p className="text-primary font-display font-bold">AXMORF · 工程师工作手账</p>
               <p className="text-tertiary text-sm">把问题、过程与作品留在纸面上</p>
             </div>
           </div>
@@ -68,7 +68,7 @@ export default function Footer() {
 
         <div className="mt-8 pt-6 border-t border-[var(--xuli-border)] text-center">
           <p className="text-tertiary text-xs">
-            © {new Date().getFullYear()} 徐力 · 用 React + TypeScript 写下这本手账。
+            © {new Date().getFullYear()} AXMORF · 用 React + TypeScript 写下这本手账。
           </p>
         </div>
       </div>

@@ -1,7 +1,7 @@
 # PROJECT KNOWLEDGE BASE
 
 **Updated:** 2026-09-18
-**Project:** 徐力个人简历网站 (xuli-resume)
+**Project:** AXMORF 工程实践手账 (xuli-resume)
 
 ## OVERVIEW
 React 18 + TypeScript 5 + Vite 5 简历网站，9 页面展示技术能力、AI 哲学、开发过程、vibe coding 日志。
@@ -23,7 +23,7 @@ src/
 scripts/             # vibe-journal CLI runner
 public/
 ├── favicon.svg      # 手绘文档 + 铅笔标志
-└── illustrations/   # 首页、项目页、Vibe 日志页的透明 WebP 插画
+└── illustrations/   # 首页、关于页、项目页、Vibe 日志页的透明 WebP 插画
 ```
 
 ## WHERE TO LOOK
@@ -49,10 +49,17 @@ public/
 
 - 当前唯一主题是浅色“工程师工作手账”：灰绿绘图纸背景、石墨文字、工程蓝强调色、印章红与荧光笔黄。
 - 标题使用 `LXGW WenKai`，正文使用 `Noto Sans SC`，代码与标签使用 `IBM Plex Mono`。
-- 卡片、标签、时间线和背景线稿由 CSS 构成；首页、项目页与 Vibe 日志页使用项目专属的透明 WebP 插画增强叙事。
+- 卡片、标签、时间线和背景线稿由 CSS 构成；首页、项目页与 Vibe 日志页使用项目专属的透明 WebP 插画，关于页使用透明手绘角色头像。
 - 布局与主题保持稳定，不再使用随机 theme/layout、localStorage TTL 或“换一版”入口。
 - 优先修改 `tokens.css` 和共享 sketch/paper 类，避免在单页硬编码新的颜色体系。
 - 插画应保持低饱和墨线、水彩填色、透明背景；新增资源需压缩、提供准确 `alt`，并检查桌面与移动端溢出。
+
+## PUBLIC IDENTITY AND PRIVACY
+
+- 公开署名是 `AXMORF`；真实姓名不得出现在可见页面、SEO、打包产物或受管 Vibe Journal 快照中。
+- 关于页头像权威资源是 `public/illustrations/profile-avatar.webp`；不得将真人照片放回 `public/`。
+- `redactPublicContent()` 只作用于下游的浏览器可见元数据与 HTML 快照；不要用脱敏文本参与上游技能识别或计分。
+- 修改公开身份时，同步检查 `index.html`、`src/data/resume.ts`、Navbar、Footer、README、`AGENTS.md`、`PROGRESS.md`、`个人简历.md` 与受管 Vibe Journal 产物。
 
 ## SKILL LEVEL MODEL
 
@@ -203,7 +210,7 @@ npm run sync:vibe-journal:dry     # 仅计算 diff，不写盘
 - 不依赖公网入站 SSH、固定公网 IP 或路由器端口映射
 - 环境: Docker + Nginx (端口 8888)
 
-## 用户偏好 (徐力)
+## 用户偏好
 
 ### 设计风格
 - **主题**: 浅色工程手账，手绘线稿与插画结合，减少模板化 AI 产品感

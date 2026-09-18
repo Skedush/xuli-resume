@@ -17,6 +17,7 @@
 | 8    | 2026-09-18 | **全站改为工程手账设计系统** | 浅色纸张 token、手绘组件、稳定布局、9 页面统一；移除随机主题与“换一版”入口 |
 | 9    | 2026-09-18 | **加入内容型手绘插画** | 首页工作台、项目蓝图、实践日志 3 张透明 WebP 插画；完成桌面/移动端回归 |
 | 10   | 2026-09-18 | **生产部署改为主机主动拉取** | systemd user timer 轮询 main；安全 fast-forward + Docker 重建；Actions 通过 revision endpoint 验收 |
+| 11   | 2026-09-18 | **公开身份脱敏与手绘角色头像** | 全站统一 AXMORF；移除真人证件照；新增透明 WebP 头像与 Vibe Journal 公开快照脱敏 |
 
 ## 阶段 4 详情（vibe-coding-journal 下游消费侧）
 
@@ -301,7 +302,7 @@ npm run sync:vibe-journal:dry            # 仅计算 diff，不写盘
 
 ## 个人简历内容升级
 
-- 新增 `徐力-个人简历.md` 作为当前个人信息、能力边界、工作经历、代表项目、教育与开源贡献的内容依据。
+- 新增 `个人简历.md` 作为当前个人信息、能力边界、工作经历、代表项目、教育与开源贡献的内容依据。
 - 新增 `src/data/resume.ts` 作为页面共享数据源，统一首页、关于、技能、工作经历与项目页的核心事实，减少多页面内容漂移。
 - 首页定位更新为“AI 应用构建者 / 全栈工程师”；代表项目更新为 AXMORF Studio、Luju Living、Vibe Journal Pipeline、SyringeMeter、Viselora、Hero Next 与 RAG 原型。
 - AI 页面改为当前的能力观、开放问题与工具选择方法；工程实录改为 Agent-first 的环境隔离、工程规则、辅助能力与 Skill 演变。
@@ -356,3 +357,20 @@ npm run sync:vibe-journal:dry            # 仅计算 diff，不写盘
 - 脚本拒绝 tracked dirty tree 和分支分叉，只允许 fast-forward；Docker 构建失败时不会替换现有容器，并会在下次 timer 继续重试。
 - Docker 镜像写入 `version.txt`；Nginx 对该文件禁用缓存。
 - GitHub Actions 仍运行干净环境生产构建，并等待线上 `version.txt` 等于 `github.sha`，以线上 revision 而不是“命令已执行”作为成功标准。
+
+## 阶段 11 详情（公开身份与手绘角色）
+
+### 目标与结果
+
+- 公开页面、SEO、简历文档、导航与页脚统一使用 `AXMORF`，不再展示真实姓名。
+- 移除 `public/ai-photo.jpg` 真人证件照，新增 768×768 透明手绘角色 `public/illustrations/profile-avatar.webp`，压缩后约 96 KB。
+- 关于页头像卡使用工程蓝、灰绿纸张与墨线水彩语言，与现有工程手账设计保持一致。
+- `redactPublicContent()` 在同步时脱敏浏览器侧 `vibe-journal-meta.json` 和 HTML 快照，上游原文、消费状态和技能计分逻辑不受影响。
+- 运维相关的历史名称 `xuli-resume` 暂保留于仓库、systemd 单元和部署路径，避免为一次视觉与隐私修改引入部署迁移。
+
+### 验证
+
+- `npm run sync:vibe-journal` 连续运行两次：均为 `newDeliverables=0`、`increments=0`。
+- `npm run build`：通过。
+- 关于页完成 1440×1000 桌面端与 390×844 移动端浏览器检查；页面无溢出，控制台无错误。
+- 实际打开包含原始私有姓名的 Vibe Journal 文档，浏览器只显示 `AXMORF`；源码可见文本、生成快照和 `dist/` 均无真实姓名与旧照片引用。
